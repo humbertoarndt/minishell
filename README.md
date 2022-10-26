@@ -4,7 +4,7 @@
 * [1 - Introduction](#introduction)
 	* [1.1 - What the Shell](#what-the-shell)
 	* [1.2 - How the Shell Works](#)
-* [Allowed Functions](#allowed-function)
+<!-- * [Allowed Functions](#allowed-function) -->
 
 
 ## 1 - Introduction
@@ -16,7 +16,7 @@ This project is about recreating your very own (mini)shell, using bash as a refe
 Following the Oxford English's dictionary, `shell` (/SHel/) is <b><i>"The hard protective outer case of a mollusk or crustacean"</i></b>. When you aplly this logic into computer science it makes total sense. In that case computer shells are a protective way to guard your operational system, and allow the user to interact with it trough an interface without direct access to its kernel.
 Besides being a communication tool the shell does not need to do much, it's only need to know where to find and how the execute what the user requests, and then send it to the OS.
 
-### Allowed Functions
+<!-- ### Allowed Functions
 
 | Function | Lib | Prototype | Description |
 | --- | --- | --- | --- |
@@ -30,10 +30,10 @@ Besides being a communication tool the shell does not need to do much, it's only
 | `malloc()` | <stdlib.h> | `void *malloc(size_t size)` | Allocates size bytes and returns a pointer to the allocated memory. [man](https://www.man7.org/linux/man-pages/man3/malloc.3.html) |
 | `free()` | <stdlib.h> | `void free(void *ptr)` | Frees the memory allocated by `malloc()`, `calloc()` or `realloc()`. [man](https://www.man7.org/linux/man-pages/man3/malloc.3.html) |
 | `write()` | <unistd.h> | `ssize_t write(int fd, const void *buf, size_t count)` | Writes up to count bytes from the buffer starting at buf to referred fd. [man](https://man7.org/linux/man-pages/man2/write.2.html) |
-| `access()` |
-| `open()` |
-| `read()` |
-| `close()` |
+| `access()` | <unistd.h> | `int access(const char *pathname, int mode)` | Use to check if the calling process can access the file in <i>pathname</i>. [man](https://www.man7.org/linux/man-pages/man2/access.2.html) |
+| `open()` | <fcntl.h> | `int open(const char *pathname, int flags, mode_t mode)` | Opens a file specified by a pathname. If the file exists, than returns its fd. [man](https://www.man7.org/linux/man-pages/man2/open.2.html) |
+| `read()` | <unistd.h> | `ssize_t read(int fd, void *buf, size_t count)` | Reads to count size from a fd. [man](https://man7.org/linux/man-pages/man2/read.2.html). |
+| `close()` | <unistd.h> | `int close(int fd)` | As the name implies, it closes a fd. [man](https://www.man7.org/linux/man-pages/man2/close.2.html) |
 | `fork()` |
 | `wait()` |
 | `waitpid()` |
@@ -72,4 +72,4 @@ Besides being a communication tool the shell does not need to do much, it's only
 | `tgetnum()` |
 | `tgetstr()` |
 | `tgoto()` |
-| `tputs()` |
+| `tputs()` | -->
