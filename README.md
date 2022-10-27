@@ -13,9 +13,14 @@ This project is about recreating your very own (mini)shell, using bash as a refe
 
 ### 1.1 - What the Shell
 
-Following the Oxford English's dictionary, `shell` (/SHel/) is <b><i>"The hard protective outer case of a mollusk or crustacean"</i></b>. When you aplly this logic into computer science it makes total sense. In that case computer shells are a protective way to guard your operational system, and allow the user to interact with it trough an interface without direct access to its kernel.
+Following the Oxford English's dictionary, `shell` <i>(/SHel/)</i> is <i>"The hard protective outer case of a mollusk or crustacean"</i>. When you aplly this logic into computer science it makes total sense. In that case computer shells are a protective way to guard your operational system, and allow the user to interact with it trough an interface without direct access to its kernel.
 Besides being a communication tool the shell does not need to do much, it's only need to know where to find and how the execute what the user requests, and then send it to the OS.
 
+### 1.2 - How the Shell Works?
+
+The shell is a type of program called <i>interpreter</i>, it operates in a <b>REP loop</b>. First accepts a command (READ), interprets it (EVALUATE), executes it (PRINT), and then awaits for another one by displaying a <b>prompt</b> to notify the user that it is ready to accept a new command. The loop is interrupted only when a command is sended to the programm, e.g `exit()`, `CNTRL+C` and `CNTRL+D`.
+<allign=center>![REP_lop](./images/rep_loop.jpg)</allign
+>
 <!-- ### Allowed Functions
 
 | Function | Lib | Prototype | Description |
