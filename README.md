@@ -25,6 +25,15 @@ The shell is a type of program called <i>interpreter</i>, it operates in a <b>RE
  
 </div>
 
+```mermaid
+flowchart TB
+    A(show prompt) --> B(read command)
+    B(read command) --> C(evaluate command)
+    C(evaluate command) --> D(execute command)
+    D(execute command) --> A(show prompt)   
+    
+```
+
 <!-- ### Allowed Functions
 
 | Function | Lib | Prototype | Description |
