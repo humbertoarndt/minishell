@@ -2,7 +2,7 @@
 
 ## Table of Contents
 * [1 - Introduction](#introduction)
-	* [1.1 - What the Shell](#what-the-shell)
+	* [1.1 - What the Shell](#11---what-the-shell)
 	* [1.2 - How the Shell Works](#12---how-the-shell-works)
 <!-- * [Allowed Functions](#allowed-function) -->
 
@@ -20,7 +20,9 @@ Besides being a communication tool the shell does not need to do much, it's only
 
 The shell is a type of program called <i>interpreter</i>, it operates in a <b>REP loop</b>. First accepts a command (READ), interprets it (EVALUATE), executes it (PRINT), and then awaits for another one by displaying a <b>prompt</b> to notify the user that it is ready to accept a new command. The loop is interrupted only when a command is sended to the programm, e.g `exit()`, `CNTRL+C` and `CNTRL+D`.  
 <div align="center">
-![rep](./images/rep_loop.jpg)  
+
+[rep](./images/rep_loop.jpg)
+ 
 </div>
 
 <!-- ### Allowed Functions
