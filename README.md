@@ -5,6 +5,8 @@
 	* [1.1 - What the Shell](#11---what-the-shell)
 	* [1.2 - How the Shell Works](#12---how-the-shell-works)
 * [2 - Lexical Analysis and Tokenization](#2---lexical-analysis-and-tokenization)
+* [3 - Parser](#3---parser)
+* [4 - Expander](#4---expander)
 <!-- * [Allowed Functions](#allowed-function) -->
 
 ## 1 - Introduction
@@ -32,6 +34,13 @@ The first thing shell does is to figure out how many commands there are on the l
 | token[0] | token[1] | token[2] | token[3] | token[4] | token[5] | token[6] | token[7] | token[8] | token[9] | token[10] | token[11] | token[12] | token[13] |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |  :---: |
 | `cat` | `<<eof` | `>file1` | `&&` | `cat` | `file1` | `&&` | `abc` | `\|\|` | `wc` | `<file1` | `\|` | `cat` | `>file2` |
+
+## 3 - Parser
+
+Once the tokenization is over the shell checks the syntax of each token. Should there be a <b>syntax error</b>, the shell will not try to start any of the commands.
+
+## 4 - Expander
+
 
 
 <!-- ### Allowed Functions
