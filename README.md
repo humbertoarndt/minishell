@@ -27,7 +27,7 @@ The shell is a type of program called <i>interpreter</i>, it operates in a <b>RE
 
 ## 2 - Lexical Analysis and Tokenization
 
-The first thing shell does to execute a program is to figure out how many commands are in the input received, making use of lexer responsible for doing a <b>Lexical Analysis</b> the shell determines how many <i>tokens</i> there are on the command line. But what is a token? Token is the small unit in a command line. Passing the given the command line into a lexer `cat <<eof >file1 && cat file1 && abc || wc <file1 | cat >file2` the tokens are:
+The first thing shell does is to figure out how many commands there are on the line. Making use of a lexer responsible for doing the <b>Lexical Analysis</b> of the line the shell determines how many <i>tokens</i> exists on the command line. But what is a token? Token is the small unit in a command line. Passing the given the command line into a lexer `cat <<eof >file1 && cat file1 && abc || wc <file1 | cat >file2` the tokens are:
 
 | token[0] | token[1] | token[2] | token[3] | token[4] | token[5] | token[6] | token[7] | token[8] | token[9] | token[10] | token[11] | token[12] | token[13] |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |  :---: |
