@@ -6,12 +6,14 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/10/28 17:53:34 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/10/31 23:23:22 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+typedef unsigned int t_uint;
 
 typedef enum e_error_type
 {
@@ -47,10 +49,32 @@ typedef struct s_token
 	struct s_token	*next;
 }				t_token;
 
+typedef	struct s_hash_item
+{
+	char				*key;
+	char				*value;
+	struct s_hash_item	*next;
+	struct s_hash_item	*prev;
+} t_hash_item;
+
+typedef struct s_hash_table
+{
+	t_hash_item	**hash_items;
+	size_t		count;
+	size_t		size;
+} t_hash_table;
+
+typedef struct s_env
+{
+	char			**envp;
+	t_hash_table	*var;
+} t_env;
+
 typedef struct s_ms
 {
 	char				*buffer;
 	char				*buffer_start;
+	t_env				env;
 	t_error_type		invalid_program;
 	int					exit_code;
 	t_token				*tokens;

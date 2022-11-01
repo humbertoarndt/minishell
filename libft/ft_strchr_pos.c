@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_ms.c                                          :+:      :+:    :+:   */
+/*   ft_strchr_pos.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 21:52:41 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/10/31 18:10:22 by bbonaldi         ###   ########.fr       */
+/*   Created: 2022/10/31 23:40:31 by bbonaldi          #+#    #+#             */
+/*   Updated: 2022/10/31 23:50:34 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_free_buffer(t_ms *ms)
+int	ft_strchr_pos(const char *s, int c)
 {
-	ft_free_ptr((void **)&(ms->buffer_start));
-	ms->buffer = NULL;
-}
+	size_t	index;
 
-void	ft_free_ms(t_ms *ms)
-{
-	ft_clear_tokens(&ms->tokens);
-	ft_free_buffer(ms);
+	index = 0;
+	while (*s != (char)c)
+	{
+		if (!*s)
+			return (-1);
+		s++;
+		index++;
+	}
+	return (index);
 }

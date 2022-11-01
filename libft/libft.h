@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 21:42:28 by harndt            #+#    #+#             */
-/*   Updated: 2022/10/25 21:38:08 by harndt           ###   ########.fr       */
+/*   Updated: 2022/10/31 23:49:28 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,15 @@ char		*ft_strdup(const char *str);
  * @return NULL if the character is not found.
 **/
 char		*ft_strchr(const char *str, int c);
+
+/**
+ * @brief Searches for the first occurence of the character.
+ * @param str String to be scanned.
+ * @param c The character to be searched in str.
+ * @return index of charcter found in str.
+ * @return -1 if the character is not found.
+**/
+int		ft_strchr_pos(const char *str, int c);
 
 /**
  * @brief Searches for the last occurence of the character.
@@ -402,6 +411,13 @@ void		ft_lstiter(t_list *lst, void (*f)(void *));
  * @return The new list, or NULL if the allocation fails.
 **/
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void(*del)(void *));
+
+/**
+ * @brief free a pointer of any type.
+ * @param ptr void **ptr - pointer to a void pointer 
+ * @return void
+**/
+void		ft_free_ptr(void **ptr);
 
 // =============================================================================
 // GNL Functions

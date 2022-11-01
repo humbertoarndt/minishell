@@ -6,7 +6,7 @@
 #    By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 18:20:52 by harndt            #+#    #+#              #
-#    Updated: 2022/10/28 19:27:38 by bbonaldi         ###   ########.fr        #
+#    Updated: 2022/11/01 00:16:51 by bbonaldi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ PROMPT			:= prompt
 SIGNAL			:= signal
 ERROR_HANDLERS	:= error_handlers
 DEBUG			:= debug
+ENV				:= env
 
 # ==============================================================================
 # VARIABLES
@@ -41,8 +42,13 @@ SRCS	:=	minishell.c  \
 			$(INIT_MS)/init_ms.c \
 			$(FREE_MS)/free_ms.c \
 			$(DEBUG)/debug.c \
+			$(ENV)/hash_table.c $(ENV)/hash_table_utils.c \
+			$(ENV)/hash_table_clear.c $(ENV)/hash_table_init.c \
+			$(ENV)/hash_table_delete.c $(ENV)/hash_table_insert.c \
+			$(ENV)/env.c \
 			# $(SIGNAL)/signal.c
 OBJS	:=	$(SRCS:.c=.o)
+#VGSUPRESS	:= --suppressions=readline.supp
 
 # ==============================================================================
 # COLORS
@@ -85,8 +91,7 @@ fclean:		clean
 re:			fclean all
 
 valgrind:
-			@valgrind -s --leak-check=full --show-leak-kinds=all 	\
-			--gen-suppressions=yes --verbose --log-fd=9 			\
-			./$(NAME) 9>memcheck.log
+			@valgrind $(VGSUPRESS) -s --leak-check=full --show-leak-kinds=all \
+			 --log-fd=9 ./$(NAME) 9>memcheck.log
 
 .PHONY:		all clean fclean re
