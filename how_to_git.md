@@ -1,30 +1,30 @@
 # How to Git
 
-Create a repository.
+1# Create a repository.
 
-Fork the repository.
+2# Fork the repository.
 
-Clone the repository.
+3# Clone the repository.
 ```c
 git clone <repository>
 ```
-Create a branch
+4# Create a branch
 ```c
 git checkout -b <branch-name>
 ```
 
-Work on files.
+5# Work on files.
 
-Add files
+6# Add files
 ```c
 git add <filename>
 ```
 
-Add comments
+7# Comment files
 ```c
 git commit -m "<commentary>"
 ```
-Pushin code
+8# Pushing code
 ```c
 git push origin <branch-name>
 ```
