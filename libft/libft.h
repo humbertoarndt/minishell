@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
+/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 21:42:28 by harndt            #+#    #+#             */
-/*   Updated: 2022/10/25 21:38:08 by harndt           ###   ########.fr       */
+/*   Updated: 2022/10/31 21:48:50 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -608,5 +608,16 @@ void		ft_lstsort(t_list *list, int start, int end);
  * @return The list at the founded position.
 **/
 t_list		*ft_lstfind(t_list *list, void *data, int (*cmp)());
+
+// =============================================================================
+// MINISHELL
+// =============================================================================
+
+/**
+ * @brief free a pointer of any type.
+ * @param ptr void **ptr - pointer to a void pointer 
+
+**/
+void		ft_free_ptr(void **ptr);
 
 #endif
