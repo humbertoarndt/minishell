@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/10/28 17:53:34 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/10/31 21:44:24 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+typedef unsigned int t_uint;
 
 typedef enum e_error_type
 {
@@ -46,6 +48,21 @@ typedef struct s_token
 	struct s_token	*prev;
 	struct s_token	*next;
 }				t_token;
+
+typedef	struct s_hash_item
+{
+	char				*key;
+	char				*value;
+	struct s_hash_item	*next;
+	struct s_hash_item	*prev;
+} t_hash_item;
+
+typedef struct s_hash_table
+{
+	t_hash_item	**hash_items;
+	size_t		count;
+	size_t		size;
+} t_hash_table;
 
 typedef struct s_ms
 {
