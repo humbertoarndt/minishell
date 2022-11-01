@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 18:58:01 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/10/27 21:35:41 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/10/31 21:50:21 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	ft_delete_token(t_token *token)
 {
 	if (token && token->token)
 	{
-		free(token->token);
-		free(token);
+		ft_free_ptr((void **)&(token->token));
+		ft_free_ptr((void **)&(token));
 		token = NULL;
 	}
 }
@@ -61,13 +61,12 @@ void	ft_clear_tokens(t_token **token_head)
 {
 	t_token	*token_tmp;
 
-	
 	while (*token_head)
 	{
 		if (!(*token_head)->next)
 		{
 			ft_delete_token(*token_head);
-			return ;
+			break ;
 		}
 		token_tmp = (*token_head)->next;
 		token_tmp->prev = NULL;
