@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 18:20:52 by harndt            #+#    #+#              #
-#    Updated: 2022/10/28 19:27:38 by bbonaldi         ###   ########.fr        #
+#    Updated: 2022/10/31 22:00:11 by harndt           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ SRCS	:=	minishell.c  \
 			$(INIT_MS)/init_ms.c \
 			$(FREE_MS)/free_ms.c \
 			$(DEBUG)/debug.c \
-			# $(SIGNAL)/signal.c
+			$(SIGNAL)/signal.c
 OBJS	:=	$(SRCS:.c=.o)
 
 # ==============================================================================
