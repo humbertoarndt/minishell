@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/10/31 23:23:22 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/01 22:01:34 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_env
 {
 	char			**envp;
 	t_hash_table	*var;
+	char			**path;
 } t_env;
 
 typedef struct s_ms

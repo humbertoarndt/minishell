@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/10/31 23:33:39 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/01 23:00:00 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ char			*ft_create_token_string(t_ms *ms, size_t len);
 t_token			*ft_return_simple_token(t_ms *ms, char *token_string,
 					t_token_type token_type);
 int				ft_advance_ptr_after_white_space(char **buffer);
+// expansion
+char			*ft_extract_variable_expression(t_ms *ms, char **buffer);
 // =============================================================================
 // errors handlers
 // =============================================================================
@@ -116,11 +118,12 @@ int				ft_delete_hash_item_by_key(t_hash_table *hash_table,
 					char *key);
 t_hash_table	*ft_create_hash_table(size_t size);
 t_hash_item		*ft_create_hash_item(char *key, char *value);
-void			ft_create_env(t_ms *ms);
+void			ft_create_env(t_ms *ms, char *envp[]);
 void			ft_print_hash_item(t_hash_item *hash_item);
 // =============================================================================
 // free
 // =============================================================================
 void			ft_free_ms(t_ms *ms);
+void			ft_free_all_ms(t_ms *ms);
 // void			set_signals(void);
 #endif

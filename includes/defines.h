@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:18:19 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/10/31 23:20:10 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/01 22:12:21 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,11 @@
 # define SINGLE_QUOTE_CHAR '\''
 # define DOUBLE_QUOTE_CHAR '"'
 # define COMMA_CHAR ':' 
+# define EQUAL_CHAR '='
 # define SLASH_STRING "/"
 # define BACKSLASH_CHAR '\\'
 # define SENTINEL_CHAR -28
+# define PATH "PATH"
 
 
 # define TO_MANY_ARGUMENTS_ARG "argv"

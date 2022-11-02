@@ -6,7 +6,7 @@
 #    By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 18:20:52 by harndt            #+#    #+#              #
-#    Updated: 2022/11/01 00:16:51 by bbonaldi         ###   ########.fr        #
+#    Updated: 2022/11/01 23:04:34 by bbonaldi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ SRCS	:=	minishell.c  \
 			$(TOKENIZATION)/tokenizer.c $(TOKENIZATION)/quote_tokenizer.c \
 			$(TOKENIZATION)/token_list.c $(TOKENIZATION)/token_utils.c \
 			$(TOKENIZATION)/io_file_tokenizer.c  $(TOKENIZATION)/pipe_tokenizer.c \
-			$(TOKENIZATION)/heredoc_tokenizer.c $(TOKENIZATION)/command_tokenizer.c\
+			$(TOKENIZATION)/heredoc_tokenizer.c $(TOKENIZATION)/command_tokenizer.c \
+			$(TOKENIZATION)/expansion_handler.c \
 			$(ERROR_HANDLERS)/error_handlers.c $(ERROR_HANDLERS)/error_handlers_utils.c \
 			$(INIT_MS)/init_ms.c \
 			$(FREE_MS)/free_ms.c \

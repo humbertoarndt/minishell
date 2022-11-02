@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 22:10:43 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/10/31 22:28:32 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/01 21:22:47 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	ft_clear_hash_item2(t_hash_item **hash_item)
 {
 	ft_free_ptr((void **)&((*hash_item)->key));
 	ft_free_ptr((void **)&((*hash_item)->value));
+	(*hash_item)->next = NULL;
+	(*hash_item)->prev = NULL;
 	ft_free_ptr((void **)&(*hash_item));
 	*hash_item = NULL;
 }
