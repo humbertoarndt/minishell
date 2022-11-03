@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/10/28 19:27:13 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/01 12:56:22 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # include <readline/readline.h>	/* readline, rl_* */
 # include <readline/history.h>	/* readline, add_history, rl_* */
 
+t_status	g_status;
 typedef struct sigaction	t_sigaction;
 
 // =============================================================================
@@ -94,5 +95,9 @@ void			ft_print_tokens_list(t_token *token_head);
 // free
 // =============================================================================
 void			ft_free_ms(t_ms *ms);
-// void			set_signals(void);
+
+
+void			set_signals(void);
+void		sigint_handler(int signal);
+void		sigquit_handler(int signal);
 #endif

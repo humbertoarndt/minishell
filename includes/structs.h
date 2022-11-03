@@ -6,7 +6,7 @@
 /*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/10/31 21:44:24 by harndt           ###   ########.fr       */
+/*   Updated: 2022/11/01 13:20:53 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define STRUCTS_H
 
 typedef unsigned int t_uint;
+
+typedef struct s_status
+{
+	pid_t	pid;
+	t_bool	paused;
+	int		e_code;
+}			t_status;
 
 typedef enum e_error_type
 {
