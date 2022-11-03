@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 22:12:20 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/10/28 18:01:37 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/02 23:37:51 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ int	ft_tokenizer(t_ms *ms)
 		if (ms->buffer && *ms->buffer)
 			ms->buffer++;
 	}
+	ft_find_variable_expression_and_replace(ms);
 	return (SUCCESS_CODE);
 }

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/01 23:00:00 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/02 23:37:11 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ t_token			*ft_return_simple_token(t_ms *ms, char *token_string,
 					t_token_type token_type);
 int				ft_advance_ptr_after_white_space(char **buffer);
 // expansion
-char			*ft_extract_variable_expression(t_ms *ms, char **buffer);
+char			*ft_replace_variable_expression(t_ms *ms, char *str);
+void			ft_find_variable_expression_and_replace(t_ms *ms);
 // =============================================================================
 // errors handlers
 // =============================================================================

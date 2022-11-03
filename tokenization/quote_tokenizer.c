@@ -6,45 +6,11 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 20:37:21 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/10/27 23:38:18 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/02 23:43:29 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*ft_replace_str(char *s, char *to_find, char *to_replace)
-{
-	char	*pos;
-	size_t	len_s;
-	size_t	len_replace;
-	char	*new_str;
-	size_t	new_len;
-
-	len_replace = ft_strlen(to_replace);
-	len_s = ft_strlen(s);
-	pos = ft_strnstr(s, to_find, len_s);
-	new_str = NULL;
-	if (pos)
-	{
-		new_len = len_s + len_replace - ft_strlen(to_find) + 1;
-		new_str = (char *)malloc(sizeof(char) * new_len);
-		while (*s)
-		{
-			if (s == pos)
-			{
-				while (*to_replace)
-					*new_str++ = *to_replace++;
-				while (*to_find)
-				{
-					s++;
-					to_find++;
-				}
-			}
-			*new_str++ = *s++;
-		}
-	}
-	return (new_str - new_len);
-}
 
 void	ft_expand_dollar_sign(t_ms *ms, char **expanded_str, char quote)
 {

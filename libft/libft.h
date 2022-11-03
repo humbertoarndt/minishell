@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 21:42:28 by harndt            #+#    #+#             */
-/*   Updated: 2022/10/31 23:49:28 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/02 23:36:05 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,18 @@ char		*ft_strchr(const char *str, int c);
  * @return index of charcter found in str.
  * @return -1 if the character is not found.
 **/
-int		ft_strchr_pos(const char *str, int c);
+int			ft_strchr_pos(const char *str, int c);
+
+/**
+ * @brief create a new string that replace the
+ *  string "to_find" to "to replace" str.
+ * @param s String to be scanned.
+ * @param to_find string to be found.
+ * @param to_replace string to replace.
+ * @return  with malloc, new str with replaced value.
+ * @return NULL if to_find not found in s string.
+**/
+char		*ft_replace_str(char *s, char *to_find, char *to_replace);
 
 /**
  * @brief Searches for the last occurence of the character.
