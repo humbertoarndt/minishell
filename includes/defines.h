@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:18:19 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/01 22:12:21 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/03 22:07:26 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 # define BACKSLASH_CHAR '\\'
 # define SENTINEL_CHAR -28
 # define PATH "PATH"
+# define QUESTION_VAR_EXPRESSION_STRING "$?"
 
 
 # define TO_MANY_ARGUMENTS_ARG "argv"

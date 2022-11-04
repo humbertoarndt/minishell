@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/01 22:01:34 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/03 22:58:42 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,16 @@ typedef enum e_token_type
 	CLOSE_PARENTHESIS,
 	SINGLE_QUOTE,
 	DOUBLE_QUOTE
-}			t_token_type;
+}	t_token_type;
+
+
+typedef enum e_redir_type
+{
+	TRUNCATE,
+	APPEND,
+	INFILE,
+	HEREDOC,
+} t_redir_type;
 
 typedef struct s_token
 {
@@ -70,6 +79,22 @@ typedef struct s_env
 	t_hash_table	*var;
 	char			**path;
 } t_env;
+
+typedef struct t_file
+{
+	int				fd;
+	char			*file;
+	t_redir_type	type;
+	char			*delimeter;
+}	t_file;
+typedef struct s_cmd
+{
+	char	*cmd;
+	char	**argv;
+	t_file	in;
+	t_file	out;
+	t_file	heredoc;
+}	t_cmd;
 
 typedef struct s_ms
 {
