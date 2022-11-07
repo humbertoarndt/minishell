@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/02 23:37:11 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/07 20:34:36 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void			ft_init_env(t_ms *ms, char *env[]);
 // TOKENS
 // =============================================================================
 int				ft_tokenizer(t_ms *ms);
+void			ft_build_token_list(t_ms *ms);
 //token list
 void			ft_addback_token(t_token **head, t_token *new_token);
 t_token			*ft_create_token_node(char *token, t_token_type type);

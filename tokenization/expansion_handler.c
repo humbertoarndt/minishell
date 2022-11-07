@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 22:22:34 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/03 22:07:18 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/07 20:16:28 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_replace_variable_expression(t_ms *ms, char *str)
 
 	len = 0;
 	replace_str = NULL;
-	while (str && (!ft_strchr(WHITE_SPACE, *str) || !ft_strchr(SYMBOLS, *str)))
+	while (str && (!ft_strchr(WHITE_SPACE, *str) && !ft_strchr(SYMBOLS, *str)))
 	{	
 		str++;
 		len++;

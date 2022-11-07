@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/03 22:58:42 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/07 20:26:16 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef enum e_token_type
 
 typedef enum e_redir_type
 {
-	TRUNCATE,
+	TRUNCATE = 1,
 	APPEND,
 	INFILE,
 	HEREDOC,
@@ -91,10 +91,16 @@ typedef struct s_cmd
 {
 	char	*cmd;
 	char	**argv;
-	t_file	in;
-	t_file	out;
-	t_file	heredoc;
 }	t_cmd;
+
+typedef struct s_executor
+{
+	char				*operator;
+	t_file				*files;
+	t_cmd				cmds;
+	struct s_executor	*left;
+	struct s_executor	*right;
+}	t_executor;
 
 typedef struct s_ms
 {
@@ -103,6 +109,7 @@ typedef struct s_ms
 	t_env				env;
 	t_error_type		invalid_program;
 	int					exit_code;
+	t_executor			*executor;
 	t_token				*tokens;
 }				t_ms;
 
