@@ -6,7 +6,7 @@
 #    By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 18:20:52 by harndt            #+#    #+#              #
-#    Updated: 2022/10/31 22:00:11 by harndt           ###   ########.fr        #
+#    Updated: 2022/11/03 22:58:55 by bbonaldi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ PROMPT			:= prompt
 SIGNAL			:= signal
 ERROR_HANDLERS	:= error_handlers
 DEBUG			:= debug
+ENV				:= env
 
 # ==============================================================================
 # VARIABLES
@@ -36,13 +37,19 @@ SRCS	:=	minishell.c  \
 			$(TOKENIZATION)/tokenizer.c $(TOKENIZATION)/quote_tokenizer.c \
 			$(TOKENIZATION)/token_list.c $(TOKENIZATION)/token_utils.c \
 			$(TOKENIZATION)/io_file_tokenizer.c  $(TOKENIZATION)/pipe_tokenizer.c \
-			$(TOKENIZATION)/heredoc_tokenizer.c $(TOKENIZATION)/command_tokenizer.c\
+			$(TOKENIZATION)/heredoc_tokenizer.c $(TOKENIZATION)/command_tokenizer.c \
+			$(TOKENIZATION)/expansion_handler.c \
 			$(ERROR_HANDLERS)/error_handlers.c $(ERROR_HANDLERS)/error_handlers_utils.c \
 			$(INIT_MS)/init_ms.c \
 			$(FREE_MS)/free_ms.c \
 			$(DEBUG)/debug.c \
+			$(ENV)/hash_table.c $(ENV)/hash_table_utils.c \
+			$(ENV)/hash_table_clear.c $(ENV)/hash_table_init.c \
+			$(ENV)/hash_table_delete.c $(ENV)/hash_table_insert.c \
+			$(ENV)/env.c \
 			$(SIGNAL)/signal.c
 OBJS	:=	$(SRCS:.c=.o)
+#VGSUPRESS	:= --suppressions=readline.supp
 
 # ==============================================================================
 # COLORS
@@ -85,8 +92,7 @@ fclean:		clean
 re:			fclean all
 
 valgrind:
-			@valgrind -s --leak-check=full --show-leak-kinds=all 	\
-			--gen-suppressions=yes --verbose --log-fd=9 			\
-			./$(NAME) 9>memcheck.log
+			@valgrind $(VGSUPRESS) -s --leak-check=full --show-leak-kinds=all \
+			 --log-fd=9 ./$(NAME) 9>memcheck.log
 
 .PHONY:		all clean fclean re

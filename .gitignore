@@ -58,6 +58,7 @@ dkms.conf
 *.log
 *.txt
 *.nfs*
+*.supp
 
 # vscode
 .vscode

@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_ptr.c                                      :+:      :+:    :+:   */
+/*   ft_strchr_pos.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/31 18:08:15 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/10/31 18:09:41 by bbonaldi         ###   ########.fr       */
+/*   Created: 2022/10/31 23:40:31 by bbonaldi          #+#    #+#             */
+/*   Updated: 2022/10/31 23:50:34 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_free_ptr(void **ptr)
+int	ft_strchr_pos(const char *s, int c)
 {
-	if (*ptr)
+	size_t	index;
+
+	index = 0;
+	while (*s != (char)c)
 	{
-		free(*ptr);
-		*ptr = NULL;
+		if (!*s)
+			return (-1);
+		s++;
+		index++;
 	}
+	return (index);
 }

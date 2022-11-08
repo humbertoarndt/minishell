@@ -6,7 +6,7 @@
 /*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/01 12:56:22 by harndt           ###   ########.fr       */
+/*   Updated: 2022/11/07 20:34:36 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,12 @@ int				ft_prompt(t_ms *ms);
 // INITIALIZERS
 // =============================================================================
 void			ft_init_ms(t_ms *ms);
+void			ft_init_env(t_ms *ms, char *env[]);
 // =============================================================================
 // TOKENS
 // =============================================================================
 int				ft_tokenizer(t_ms *ms);
+void			ft_build_token_list(t_ms *ms);
 //token list
 void			ft_addback_token(t_token **head, t_token *new_token);
 t_token			*ft_create_token_node(char *token, t_token_type type);
@@ -81,6 +83,9 @@ char			*ft_create_token_string(t_ms *ms, size_t len);
 t_token			*ft_return_simple_token(t_ms *ms, char *token_string,
 					t_token_type token_type);
 int				ft_advance_ptr_after_white_space(char **buffer);
+// expansion
+char			*ft_replace_variable_expression(t_ms *ms, char *str);
+void			ft_find_variable_expression_and_replace(t_ms *ms);
 // =============================================================================
 // errors handlers
 // =============================================================================
@@ -92,9 +97,37 @@ void			print_custom_arg_error(char *arg, char *message);
 // =============================================================================
 void			ft_print_tokens_list(t_token *token_head);
 // =============================================================================
+// hash_table
+// =============================================================================
+void			ft_print_hash_table(t_hash_table *hash_table);
+int				ft_delete_hash_item_by_key(t_hash_table *hash_table,
+					char *key);
+int				ft_update_hash_item(t_hash_table *hash_table, char *key,
+					char *value);
+void			ft_insert_or_update_hash_item(t_hash_table *hash_table,
+					char *key, char *value);
+void			ft_print_hash_table(t_hash_table *hash_table);
+t_hash_item		*ft_search_item_by_key(t_hash_table *hash_table,char *key);
+void			ft_insert_hash_item(t_hash_table *hash_table, char *key,
+					char *value);
+size_t			ft_count_items_in_bucket(t_hash_item *hash_head);
+void			ft_addback_item(t_hash_item **hash_item,
+					t_hash_item *new_hash_item);
+t_hash_item		*ft_find_last_item(t_hash_item *hash_head);
+t_uint			ft_hash(char *key, size_t size);
+void			ft_clear_hash_table(t_hash_table *hash_table);
+void			ft_clear_hash_item2(t_hash_item **hash_item);
+int				ft_delete_hash_item_by_key(t_hash_table *hash_table,
+					char *key);
+t_hash_table	*ft_create_hash_table(size_t size);
+t_hash_item		*ft_create_hash_item(char *key, char *value);
+void			ft_create_env(t_ms *ms, char *envp[]);
+void			ft_print_hash_item(t_hash_item *hash_item);
+// =============================================================================
 // free
 // =============================================================================
 void			ft_free_ms(t_ms *ms);
+void			ft_free_all_ms(t_ms *ms);
 
 
 void			set_signals(void);

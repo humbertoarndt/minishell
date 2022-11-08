@@ -6,7 +6,7 @@
 /*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/01 13:20:53 by harndt           ###   ########.fr       */
+/*   Updated: 2022/11/07 20:26:16 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,16 @@ typedef enum e_token_type
 	CLOSE_PARENTHESIS,
 	SINGLE_QUOTE,
 	DOUBLE_QUOTE
-}			t_token_type;
+}	t_token_type;
+
+
+typedef enum e_redir_type
+{
+	TRUNCATE = 1,
+	APPEND,
+	INFILE,
+	HEREDOC,
+} t_redir_type;
 
 typedef struct s_token
 {
@@ -71,12 +80,44 @@ typedef struct s_hash_table
 	size_t		size;
 } t_hash_table;
 
+typedef struct s_env
+{
+	char			**envp;
+	t_hash_table	*var;
+	char			**path;
+} t_env;
+
+typedef struct t_file
+{
+	int				fd;
+	char			*file;
+	t_redir_type	type;
+	char			*delimeter;
+}	t_file;
+typedef struct s_cmd
+{
+	char	*cmd;
+	char	**argv;
+}	t_cmd;
+
+typedef struct s_executor
+{
+	char				*operator;
+	t_file				*files;
+	t_cmd				cmds;
+	struct s_executor	*left;
+	struct s_executor	*right;
+}	t_executor;
+
+
 typedef struct s_ms
 {
 	char				*buffer;
 	char				*buffer_start;
+	t_env				env;
 	t_error_type		invalid_program;
 	int					exit_code;
+	t_executor			*executor;
 	t_token				*tokens;
 }				t_ms;
 
