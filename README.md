@@ -7,6 +7,7 @@
 * [2 - Lexical Analysis and Tokenization](#2---lexical-analysis-and-tokenization)
 * [3 - Parser](#3---parser)
 * [4 - Expander](#4---expander)
+* [5 - Signals](#5---signals)
 <!-- * [Allowed Functions](#allowed-function) -->
 
 ## 1 - Introduction
@@ -40,6 +41,10 @@ The first thing shell does is to figure out how many commands there are on the l
 Once the tokenization is over the shell checks the syntax of each token. Should there be a <b>syntax error</b>, the shell will not try to start any of the commands.
 
 ## 4 - Expander
+
+## 5 - Signals
+Signals are a way of communication between process and the OS kernel, is the way the OS knows an event has occured. A signal may be sended by another process or by itself. A very common example is `SIGINT`, which is teh signal that is sent out when you hit `Ctrl-C` to exit a program.
+
 
 
 

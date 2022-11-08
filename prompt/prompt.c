@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:56:49 by bbonaldi          #+#    #+#             */
 /*   Updated: 2022/11/01 21:59:31 by bbonaldi         ###   ########.fr       */
@@ -17,10 +17,15 @@ int	ft_prompt(t_ms *ms)
 	while (TRUE)
 	{
 		ft_init_ms(ms);
-		// set_signals();
+		set_signals();
 		ms->buffer = readline(BASH_START);
-		if (ms->buffer == NULL) 
-			return (SUCCESS_CODE);
+		// if (ms->buffer == NULL) 
+		// 	return (SUCCESS_CODE);
+		if (ms->buffer == NULL) //isso aqui resolve o Cntrl+D???
+		{
+			ft_putstr("hey\n");
+			exit(0);
+		}
 		ms->buffer_start = ms->buffer;
 		add_history(ms->buffer);
 		if (ft_strncmp(ms->buffer,"quit", strlen("quit")) == 0)

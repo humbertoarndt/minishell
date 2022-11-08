@@ -636,4 +636,15 @@ void		ft_lstsort(t_list *list, int start, int end);
 **/
 t_list		*ft_lstfind(t_list *list, void *data, int (*cmp)());
 
+// =============================================================================
+// MINISHELL
+// =============================================================================
+
+/**
+ * @brief free a pointer of any type.
+ * @param ptr void **ptr - pointer to a void pointer 
+
+**/
+void		ft_free_ptr(void **ptr);
+
 #endif

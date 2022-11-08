@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 18:20:52 by harndt            #+#    #+#              #
 #    Updated: 2022/11/03 22:58:55 by bbonaldi         ###   ########.fr        #
@@ -47,7 +47,7 @@ SRCS	:=	minishell.c  \
 			$(ENV)/hash_table_clear.c $(ENV)/hash_table_init.c \
 			$(ENV)/hash_table_delete.c $(ENV)/hash_table_insert.c \
 			$(ENV)/env.c \
-			# $(SIGNAL)/signal.c
+			$(SIGNAL)/signal.c
 OBJS	:=	$(SRCS:.c=.o)
 #VGSUPRESS	:= --suppressions=readline.supp
 

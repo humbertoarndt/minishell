@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/23 20:43:56 by harndt            #+#    #+#              #
 #    Updated: 2022/11/02 22:32:58 by bbonaldi         ###   ########.fr        #
@@ -85,6 +85,12 @@ SRCS	+=	ft_isnum.c	ft_ternary.c
 
 SRCS	+=	ft_atol.c	ft_lstat.c	ft_lstdup_int.c	ft_lstsort.c				\
 			ft_lstfind.c
+
+# ==============================================================================
+# MINISHELL
+# =============================================================================
+
+SRCS	+=	ft_free_ptr.c
 
 # ==============================================================================
 # COLORS
