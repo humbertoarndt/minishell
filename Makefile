@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+         #
+#    By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 18:20:52 by harndt            #+#    #+#              #
-#    Updated: 2022/11/03 22:58:55 by bbonaldi         ###   ########.fr        #
+#    Updated: 2022/11/07 23:57:03 by bbonaldi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SIGNAL			:= signal
 ERROR_HANDLERS	:= error_handlers
 DEBUG			:= debug
 ENV				:= env
+PARSER			:= parser
 
 # ==============================================================================
 # VARIABLES
@@ -32,7 +33,7 @@ CC		:=	cc
 CFLAGS	:=	-g3 -Wall -Werror -Wextra
 HEADERS	:=	includes
 LIBFT	:=	./libft/libft.a
-SRCS	:=	minishell.c  \
+SRCS	:=	minishell.c \
 			$(PROMPT)/prompt.c \
 			$(TOKENIZATION)/tokenizer.c $(TOKENIZATION)/quote_tokenizer.c \
 			$(TOKENIZATION)/token_list.c $(TOKENIZATION)/token_utils.c \
@@ -47,7 +48,9 @@ SRCS	:=	minishell.c  \
 			$(ENV)/hash_table_clear.c $(ENV)/hash_table_init.c \
 			$(ENV)/hash_table_delete.c $(ENV)/hash_table_insert.c \
 			$(ENV)/env.c \
-			$(SIGNAL)/signal.c
+			$(PARSER)/parser.c $(PARSER)/init_tree.c $(PARSER)/ft_free_tree.c \
+			#$(SIGNAL)/signal.c \
+			
 OBJS	:=	$(SRCS:.c=.o)
 #VGSUPRESS	:= --suppressions=readline.supp
 

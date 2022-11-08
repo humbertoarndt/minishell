@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:56:49 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/01 21:59:31 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/07 23:59:25 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_prompt(t_ms *ms)
 	while (TRUE)
 	{
 		ft_init_ms(ms);
-		set_signals();
+		//set_signals();
 		ms->buffer = readline(BASH_START);
 		// if (ms->buffer == NULL) 
 		// 	return (SUCCESS_CODE);
@@ -35,6 +35,7 @@ int	ft_prompt(t_ms *ms)
 		}
 		ft_tokenizer(ms);
 		ft_print_tokens_list(ms->tokens);
+		ms->executor = ft_parser(ms);
 		printf("%s\n", ms->buffer_start);
 		ft_free_ms(ms);
 	}

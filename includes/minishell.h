@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/07 20:34:36 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/07 23:53:12 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 // =============================================================================
 
 # include "../libft/libft.h"
-# include "defines.h"
 # include "structs.h"
+# include "defines.h"
 
 // =============================================================================
 // EXTERNAL LIBRARIES
@@ -37,9 +37,6 @@
 # include <sys/stat.h>			/* stat */
 # include <readline/readline.h>	/* readline, rl_* */
 # include <readline/history.h>	/* readline, add_history, rl_* */
-
-t_status	g_status;
-typedef struct sigaction	t_sigaction;
 
 // =============================================================================
 // FUNCTIONS
@@ -124,13 +121,21 @@ t_hash_item		*ft_create_hash_item(char *key, char *value);
 void			ft_create_env(t_ms *ms, char *envp[]);
 void			ft_print_hash_item(t_hash_item *hash_item);
 // =============================================================================
+// parser
+// =============================================================================
+t_executor		*ft_init_tree();
+t_file			*ft_init_file(t_redir_type type, char *name);
+void			ft_free_tree(t_executor **exec);
+t_executor		*ft_parser(t_ms *ms);
+// =============================================================================
 // free
 // =============================================================================
 void			ft_free_ms(t_ms *ms);
 void			ft_free_all_ms(t_ms *ms);
 
 
-void			set_signals(void);
-void		sigint_handler(int signal);
-void		sigquit_handler(int signal);
+// void			set_signals(void);
+// void			sigint_handler(int sig);
+// void			sigquit_handler(int sig);
+
 #endif

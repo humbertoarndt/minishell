@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/07 20:26:16 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/07 23:45:28 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,13 @@ typedef enum e_token_type
 	OPEN_PARENTHESIS,
 	CLOSE_PARENTHESIS,
 	SINGLE_QUOTE,
-	DOUBLE_QUOTE
+	DOUBLE_QUOTE,
 }	t_token_type;
 
 
 typedef enum e_redir_type
 {
+	NOT_FOUND_REDIR,
 	TRUNCATE = 1,
 	APPEND,
 	INFILE,
@@ -93,17 +94,19 @@ typedef struct t_file
 	char			*file;
 	t_redir_type	type;
 	char			*delimeter;
+	
 }	t_file;
 typedef struct s_cmd
 {
 	char	*cmd;
+	t_list	*argv_list;
 	char	**argv;
 }	t_cmd;
 
 typedef struct s_executor
 {
 	char				*operator;
-	t_file				*files;
+	t_list				*files;
 	t_cmd				cmds;
 	struct s_executor	*left;
 	struct s_executor	*right;
@@ -120,5 +123,8 @@ typedef struct s_ms
 	t_executor			*executor;
 	t_token				*tokens;
 }				t_ms;
+
+extern t_status				g_status;
+typedef struct sigaction	t_sigaction;
 
 #endif

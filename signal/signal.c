@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 12:46:45 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/01 14:34:36 by harndt           ###   ########.fr       */
+/*   Updated: 2022/11/07 23:48:27 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	sigint_handler(int signal)
+void	sigint_handler(int sig)
 {
-	if (signal != SIGINT)
+	if (sig != SIGINT)
 		return ;
 	g_status.paused = TRUE;
 	//Se for um processo filho
@@ -33,12 +33,12 @@ void	sigint_handler(int signal)
 		rl_redisplay();
 		g_status.e_code = 1;
 	}
-	ft_printf("SIGINT |%d| capturado\n", signal);
+	ft_printf("SIGINT |%d| capturado\n", sig);
 }
 
-// void	sigquit_handler(int signal)
+// void	sigquit_handler(int sig)
 // {
-// 	if (signal != SIGQUIT)
+// 	if (sig != SIGQUIT)
 // 		return;
 // 	g_status.paused = TRUE;
 // 	if (g_status.pid)
@@ -52,7 +52,7 @@ void	sigint_handler(int signal)
 // 		ft_putstr("$ ");
 // 		ft_putstr(rl_line_buffer);
 // 	}
-// 	ft_printf("SIGQUIT |%d| capturado\n", signal);
+// 	ft_printf("SIGQUIT |%d| capturado\n", sig);
 // }
 
 void	set_signals(void)
