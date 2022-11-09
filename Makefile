@@ -6,7 +6,7 @@
 #    By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 18:20:52 by harndt            #+#    #+#              #
-#    Updated: 2022/11/07 23:57:03 by bbonaldi         ###   ########.fr        #
+#    Updated: 2022/11/08 22:15:10 by bbonaldi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,10 +49,11 @@ SRCS	:=	minishell.c \
 			$(ENV)/hash_table_delete.c $(ENV)/hash_table_insert.c \
 			$(ENV)/env.c \
 			$(PARSER)/parser.c $(PARSER)/init_tree.c $(PARSER)/ft_free_tree.c \
+			$(PARSER)/parser_utils.c \
 			#$(SIGNAL)/signal.c \
 			
 OBJS	:=	$(SRCS:.c=.o)
-#VGSUPRESS	:= --suppressions=readline.supp
+VGSUPRESS	:= --suppressions=readline.supp
 
 # ==============================================================================
 # COLORS

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/07 23:53:12 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/08 22:15:35 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void			print_custom_arg_error(char *arg, char *message);
 // debug
 // =============================================================================
 void			ft_print_tokens_list(t_token *token_head);
+void			ft_print_tree_recursive(t_executor *exec, char *leaf,
+					int level);
 // =============================================================================
 // hash_table
 // =============================================================================
@@ -123,9 +125,12 @@ void			ft_print_hash_item(t_hash_item *hash_item);
 // =============================================================================
 // parser
 // =============================================================================
-t_executor		*ft_init_tree();
+t_executor		*ft_init_tree(void);
 t_file			*ft_init_file(t_redir_type type, char *name);
 void			ft_free_tree(t_executor **exec);
+int				ft_has_operator(t_token_type type);
+int				ft_has_redirect(t_token_type type);
+t_redir_type	ft_convert_token_type_redir_type(t_token_type token_type);
 t_executor		*ft_parser(t_ms *ms);
 // =============================================================================
 // free

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 22:12:20 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/02 23:37:51 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/08 22:35:45 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_build_token_list(t_ms *ms)
 	else if (ft_found_command(ms->buffer))
 		token = ft_command_tokenizer(ms);
 	if (token)
-		ft_addback_token(&ms->tokens, token);		
+		ft_addback_token(&ms->tokens, token);
 }
 
 int	ft_tokenizer(t_ms *ms)

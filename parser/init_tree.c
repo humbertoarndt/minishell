@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:27:30 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/07 23:01:35 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/08 22:15:45 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,14 @@ t_file	*ft_init_file(t_redir_type type, char *name)
 	return (file);
 }
 
-t_executor *ft_init_tree()
+void	ft_init_cmds(t_cmd *cmds)
+{
+	cmds->cmd = NULL;
+	cmds->argv_list = NULL;
+	cmds->argv = NULL;
+}
+
+t_executor	*ft_init_tree(void)
 {
 	t_executor	*executor;
 
@@ -35,9 +42,6 @@ t_executor *ft_init_tree()
 	executor->files = NULL;
 	executor->left = NULL;
 	executor->right = NULL;
-	executor->cmds.cmd = NULL;
-	executor->cmds.argv_list = NULL;
-	executor->cmds.argv = NULL;
+	ft_init_cmds(&executor->cmds);
 	return (executor);
 }
-
