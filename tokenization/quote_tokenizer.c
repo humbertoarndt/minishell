@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 20:37:21 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/02 23:43:29 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/09 19:53:10 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,25 @@ t_token	*ft_quoting_tokenizer(t_ms *ms)
 	t_token 		*quote;
 	char			*tok;
 	t_token_type	type;
+	int				should_expand;
 
+	tok = NULL;
 	if (*ms->buffer == SINGLE_QUOTE_CHAR)
 	{
 		tok = ft_quote_handler(ms, SINGLE_QUOTE_CHAR);
 		type = SINGLE_QUOTE;
+		should_expand = FALSE;
 	}
-	else
+	else if (*ms->buffer == DOUBLE_QUOTE_CHAR)
 	{
 		tok = ft_quote_handler(ms, DOUBLE_QUOTE_CHAR);
 		type = DOUBLE_QUOTE;
+		should_expand = TRUE;
 	}
 	if (tok == NULL)
 		return (NULL);
 	quote = ft_create_token_node(tok, type);
+	quote->should_expand = should_expand;
 	return (quote);
 }
 

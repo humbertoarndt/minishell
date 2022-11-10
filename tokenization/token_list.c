@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 18:58:01 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/10/31 18:14:17 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/09 19:41:42 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_token	*ft_create_token_node(char *token, t_token_type type)
 	new_token = (t_token *)malloc(sizeof(t_token));
 	new_token->type = type;
 	new_token->token = token;
+	new_token->should_expand = TRUE;
 	new_token->prev = NULL;
 	new_token->next = NULL;
 	return (new_token);

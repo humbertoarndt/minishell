@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/08 21:54:53 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/09 21:04:44 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_token
 {
 	char			*token;
 	t_token_type	type;
+	int				should_expand;
 	struct s_token	*prev;
 	struct s_token	*next;
 }				t_token;
@@ -121,6 +122,7 @@ typedef struct s_ms
 	t_error_type		invalid_program;
 	int					exit_code;
 	t_executor			*executor;
+	t_list				*pids;
 	t_token				*tokens;
 }				t_ms;
 

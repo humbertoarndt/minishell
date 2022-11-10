@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/08 22:15:35 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/09 19:59:48 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void			ft_addback_token(t_token **head, t_token *new_token);
 t_token			*ft_create_token_node(char *token, t_token_type type);
 void			ft_clear_tokens(t_token **token_head);
 // quoting tokenizer
+char			*ft_quote_handler(t_ms *ms, char quote);
 t_token			*ft_quoting_tokenizer(t_ms *ms);
 t_token_type	ft_found_quoting(char *buffer);
 // io file tokenizer
@@ -92,9 +93,14 @@ void			print_custom_arg_error(char *arg, char *message);
 // =============================================================================
 // debug
 // =============================================================================
+void			ft_print_tabs(int tabs);
+void			ft_print_file(t_list *file);
+void			ft_print_cmds(t_cmd cmds);
+void			ft_print_tree_elements(t_executor *exec, char *leaf, int level,
+					int *ctr);
 void			ft_print_tokens_list(t_token *token_head);
 void			ft_print_tree_recursive(t_executor *exec, char *leaf,
-					int level);
+					int level, int should_reset);
 // =============================================================================
 // hash_table
 // =============================================================================

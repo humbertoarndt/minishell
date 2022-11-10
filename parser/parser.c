@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 19:29:45 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/08 23:31:26 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/09 20:36:35 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,14 @@ void	ft_add_file(t_executor *current_tree, t_token *token_head)
 	ft_lstadd_back(&current_tree->files, list_file);
 }
 
-void	ft_add_command(t_executor *current_tree, t_token *token_head)
+void	ft_add_command_list(t_executor *current_tree, t_token *token_head)
 {
 	t_list			*list_argv;
 	char			*token;
 
 	token = ft_strdup(token_head->token);
-	if (!current_tree->cmds.cmd)
-		current_tree->cmds.cmd = token;
-	else
-	{
-		list_argv = ft_lstnew(token);
-		ft_lstadd_back(&current_tree->cmds.argv_list, list_argv);
-	}
+	list_argv = ft_lstnew(token);
+	ft_lstadd_back(&current_tree->cmds.argv_list, list_argv);
 }
 
 t_executor	*ft_set_executor(t_token *tokens, t_executor **root, t_executor **current_tree)
@@ -75,7 +70,7 @@ t_executor	*ft_parser(t_ms *ms)
 			if (ft_has_redirect(token_head->type))
 				ft_add_file(current_tree, token_head);
 			else
-				ft_add_command(current_tree, token_head);
+				ft_add_command_list(current_tree, token_head);
 		}
 		token_head = token_head->next;
 	}

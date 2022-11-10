@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 20:28:38 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/10/28 00:06:33 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/09 19:53:27 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,25 @@ void	ft_advance_after_io_symbol(char **buffer, t_token_type type)
 
 int	ft_is_invalid_file(t_ms *ms)
 {
-	if (ft_strchr(SYMBOLS, *ms->buffer) || !*ms->buffer
-		|| ft_found_quoting(ms->buffer))
+	if (ft_strchr(SYMBOLS, *ms->buffer) || !*ms->buffer)
 	{
 		ms->invalid_program = MISSING_FILE_ERR;
 		return (TRUE);
 	}
 	return (FALSE);
 }
+
+t_token	*ft_create_io_file_token_with_quote(t_ms *ms, t_token_type type)
+{
+	t_token			*io_file;
+	
+	io_file = ft_quoting_tokenizer(ms);
+	if (!io_file)
+		return (NULL);
+	io_file->type = type;
+	return (io_file);
+}
+
 
 t_token	*ft_io_file_tokenizer(t_ms *ms)
 {
@@ -53,6 +64,7 @@ t_token	*ft_io_file_tokenizer(t_ms *ms)
 	char			*tok;
 	size_t			len;
 	
+	io_file = NULL;
 	len = 0;
 	type = ft_found_redirection(ms->buffer);
 	ft_advance_after_io_symbol(&ms->buffer, type);
@@ -61,6 +73,9 @@ t_token	*ft_io_file_tokenizer(t_ms *ms)
 	{
 		if (ft_is_invalid_file(ms))
 			return (NULL);
+		io_file = ft_create_io_file_token_with_quote(ms, type);
+		if (io_file)
+			return (io_file);
 		len++;
 		ms->buffer++;
 	}

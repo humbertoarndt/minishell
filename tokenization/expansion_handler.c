@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 22:22:34 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/07 20:16:28 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/09 19:43:43 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_find_variable_expression_and_replace(t_ms *ms)
 	head_token = ms->tokens;
 	while (head_token)
 	{
-		if (head_token->type != SINGLE_QUOTE)
+		if (head_token->should_expand)
 		{
 			while (TRUE)
 			{
