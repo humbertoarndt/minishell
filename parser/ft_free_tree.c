@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 22:05:39 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/08 22:44:50 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/10 23:55:32 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,15 @@
 
 void	ft_free_cmds(t_cmd *cmds)
 {
+	size_t	index;
+
+	index = 0;
 	ft_lstclear(&cmds->argv_list, free);
 	ft_free_ptr((void **)&(cmds->cmd));
+	while (cmds->argv && cmds->argv[index])
+		ft_free_ptr((void **)&(cmds->argv[index++]));
+	free(cmds->argv);
+	cmds->argv = NULL;
 }
 
 void	ft_free_tree(t_executor **exec)

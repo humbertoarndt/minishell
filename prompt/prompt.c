@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:56:49 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/09 23:29:18 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/10 22:44:03 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ int	ft_prompt(t_ms *ms)
 			exit(SUCCESS_CODE);
 		}
 		ft_tokenizer(ms);
-		ft_print_tokens_list(ms->tokens);
+		//ft_print_tokens_list(ms->tokens);
 		ms->executor = ft_parser(ms);
-		ft_print_tree_recursive(ms->executor, "root", 0, TRUE);
-		printf("%s\n", ms->buffer_start);
+		//ft_print_tree_recursive(ms->executor, "root", 0, TRUE);
+		ft_execute(ms);
+		//printf("%s\n", ms->buffer_start);
 		ft_free_ms(ms);
 	}
 	return (SUCCESS_CODE);

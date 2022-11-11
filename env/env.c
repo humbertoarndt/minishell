@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 23:09:44 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/07 22:10:23 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/10 21:08:53 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,46 @@ void	ft_add_path(t_ms *ms)
 	
 	path = ft_search_item_by_key(ms->env.var, PATH);
 	ms->env.path = ft_split(path->value, COMMA_CHAR);
+}
+
+
+void	ft_recreate_key_value_pair_env(t_hash_item *hash_item,
+			char **env_result_str)
+{
+	char	*joined_key_equal_symbol;
+
+	joined_key_equal_symbol = ft_strjoin(hash_item->key, EQUAL_STRING);
+	(*env_result_str) = ft_strjoin(joined_key_equal_symbol,
+			hash_item->value);
+	ft_free_ptr((void **)&(joined_key_equal_symbol));
+}
+
+char	**ft_rebuild_envp(t_hash_table *env)
+{
+	char		**env_result;
+	size_t		index;
+	size_t		index_env;
+	t_hash_item	*hash_item;
+
+	env_result = NULL;
+	index = 0;
+	index_env = 0;
+	if (!env || !env->hash_items)
+		return (NULL);
+	env_result = (char **)malloc(sizeof(char *) * (env->count + 1));
+	while (index < env->size)
+	{
+		hash_item = env->hash_items[index];
+		while (hash_item)
+		{
+			ft_recreate_key_value_pair_env(hash_item, &env_result[index_env]);
+			hash_item = hash_item->next;
+			index_env++;
+		}
+		index++;
+	}
+	env_result[index_env] = NULL;
+	return (env_result);
 }
 
 void	ft_create_env(t_ms *ms, char *envp[])

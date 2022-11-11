@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:18:19 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/09 20:31:31 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/10 23:49:49 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,21 @@
 # define MINISHELL "minishell: "
 # define BASH_START "$ "
 
+# define CHILD_PROCESS 0
+
 # define SPACE_CHAR ' '
 # define SINGLE_QUOTE_CHAR '\''
 # define DOUBLE_QUOTE_CHAR '"'
 # define COMMA_CHAR ':' 
 # define EQUAL_CHAR '='
+# define EQUAL_STRING "="
 # define SLASH_STRING "/"
 # define BACKSLASH_CHAR '\\'
 # define SENTINEL_CHAR -28
 # define PATH "PATH"
 # define QUESTION_VAR_EXPRESSION_STRING "$?"
 
+# define PWD "PWD"
 
 # define TO_MANY_ARGUMENTS_ARG "argv"
 # define TO_MANY_ARGUMENTS_ERROR_MSG "you cannot run minishell with arguments"
@@ -61,6 +65,7 @@
 # define FORK_CREATION_ERROR_MSG "Error on initing fork!"
 # define PERMISSION_DENIED_ERROR_CODE 126
 # define PERMISSION_DENIED_ERROR_MSG "Permission denied"
+
 
 # define FILE_DOES_NOT_EXIST -1
 # define PERMISSION_NOT_ALLOWED 1
@@ -89,6 +94,6 @@
 # define SYMBOLS "<>&|()"
 
 //HASH_TABLE
-# define HASH_TABLE_SIZE 40
+# define HASH_TABLE_SIZE 907
 
 #endif

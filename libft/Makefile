@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+         #
+#    By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/23 20:43:56 by harndt            #+#    #+#              #
-#    Updated: 2022/11/02 22:32:58 by bbonaldi         ###   ########.fr        #
+#    Updated: 2022/11/10 21:01:43 by bbonaldi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,8 @@ SRCS	:=	ft_atoi.c		ft_bzero.c		ft_calloc.c		\
 SRCS	+=	ft_substr.c		ft_strjoin.c	ft_strtrim.c	\
 			ft_split.c		ft_itoa.c		ft_strmapi.c	\
 			ft_striteri.c	ft_putchar_fd.c	ft_putstr_fd.c	\
-			ft_putendl_fd.c	ft_putnbr_fd.c	ft_free_ptr.c
+			ft_putendl_fd.c	ft_putnbr_fd.c	ft_free_ptr.c	\
+			ft_free_matrix.c
 
 # ==============================================================================
 # LIBFT BONUS
@@ -48,7 +49,8 @@ SRCS	+=	ft_substr.c		ft_strjoin.c	ft_strtrim.c	\
 
 SRCS	+=	ft_lstnew.c		ft_lstadd_front.c	ft_lstsize.c	\
 			ft_lstlast.c	ft_lstadd_back.c	ft_lstdelone.c	\
-			ft_lstclear.c	ft_lstiter.c		ft_lstmap.c
+			ft_lstclear.c	ft_lstiter.c		ft_lstmap.c \
+			ft_lstclear_not_free_content.c
 
 # ==============================================================================
 # GNL

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/09 23:29:05 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/10 23:49:45 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,11 @@ typedef struct s_executor
 	struct s_executor	*right;
 }	t_executor;
 
+typedef struct s_stdin_out
+{
+	int	stdin;
+	int	stdout;
+}	t_stdin_out;
 
 typedef struct s_ms
 {
@@ -121,6 +126,9 @@ typedef struct s_ms
 	t_env				env;
 	t_error_type		invalid_program;
 	int					exit_code;
+	int					fd_pipe[2];
+	int					should_write;
+	t_stdin_out			stdin_out;
 	t_executor			*executor;
 	t_list				*pids;
 	t_token				*tokens;

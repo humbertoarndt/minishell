@@ -6,97 +6,94 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:20:01 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/09 23:29:25 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/11 00:16:38 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "minishell.h"
 
-void	ft_build_cmds(t_cmd *cmd)
+void	ft_exec_cmds(t_ms *ms, t_executor *exec_tree)
 {
-	size_t	index_args;
+	t_list	*pid_list;
+	pid_t	pid;
+	char	**envp;
 
-	index_args = 0;
-
-	while (cmd->argv_list)
-	{
-		if (index_args == 0)
-		{
-			cmd->cmd = ft_strdup((char *)cmd->argv_list->content);
-			continue;
-		}
-		cmd->argv_list = cmd->argv_list->next;
-	}
-}
-
-void	ft_exec_cmds(t_executor *exec_tree)
-{
-	//t_list	*pid;
-
-	if (!exec_tree)
+	if (!exec_tree || !exec_tree->cmds.argv_list)
 		return ;
-	
-	
-}
-
-void	ft_execute_pipe(t_executor	*exec_tree)
-{
-
-}
-
-t_bin    *get_builtin(char *cmd_path)
-{
-	static t_bin_def	builtins[7] = {
-	{"echo", builtin_echo},
-	{"cd", builtin_cd},
-	{"pwd", builtin_pwd},
-	{"export", builtin_export},
-	{"unset", builtin_unset},
-	{"env", builtin_env},
-	{"exit", builtin_exit},
-	};
-	int	i;
-
-	i = 0;
-	while (i < 7)
+	ft_build_cmds(&exec_tree->cmds, ms->env.path);
+	pid = fork();
+	if (pid == ERROR_CODE_FUNCTION)
+		exit(1);//implementar error handler
+	pid_list = ft_lstnew(&pid);
+	ft_lstadd_back(&ms->pids, pid_list);
+	if (pid == CHILD_PROCESS)
 	{
-		if (ft_streq(cmd_path, builtins[i].name))
-			return (builtins[i].builtin);
-		i++;
-	}
-	return (NULL);
-}
-
-void	ft_execute_tree(t_ms *ms)
-{
-	t_executor	*exec_tree;
-
-	if (!ms->executor)
-		return ;
-	exec_tree = ms->executor;
-	if (ft_strncmp(exec_tree->operator, PIPE, ft_strlen(PIPE)) == 0)
-		ft_execute_pipe(exec_tree);
-	else
-	{
-		//checar se comando builtin ou não
-		if (exec_tree->cmds == builts[8])
+		if (ms->should_write == FALSE)
 		{
-			//Se builtint -> executar
+			close(ms->fd_pipe[WRITE_FD]);
+			dup2(ms->fd_pipe[READ_FD], STDIN_FILENO);
+			close(ms->fd_pipe[READ_FD]);
 		}
 		else
 		{
-			exec_path() // fork()
-			//Se não -> fork() -> executar conforme o path
+			close(ms->fd_pipe[READ_FD]);
+			dup2(ms->fd_pipe[WRITE_FD], STDOUT_FILENO);
+			close(ms->fd_pipe[WRITE_FD]);
 		}
+		ms->should_write = ms->should_write ^ 1;
+		envp = ft_rebuild_envp(ms->env.var);
+		execve(exec_tree->cmds.cmd, exec_tree->cmds.argv, envp);
+		ft_free_matrix((void ***)&(envp));
 	}
 }
 
-
-void exec_path(int i)
+void	ft_dup_stdin_out(t_ms *ms)
 {
-	pid_t	pid;
-
-	pid = fork();
-	if (pid = 0)
+	ms->stdin_out.stdin = dup(STDIN_FILENO);
+	ms->stdin_out.stdout = dup(STDOUT_FILENO);
 }
+
+void	ft_restore_stdin_out(t_ms *ms)
+{
+	dup2(ms->stdin_out.stdin, STDIN_FILENO);
+	close(ms->stdin_out.stdin);
+	dup2(ms->stdin_out.stdout, STDOUT_FILENO);
+	close(ms->stdin_out.stdin);
+}
+
+void	ft_execute_pipe(t_ms *ms, t_executor *exec_tree)
+{
+	if (pipe(ms->fd_pipe) == ERROR_CODE_FUNCTION)
+		exit(1);//implementar error handler
+	ft_dup_stdin_out(ms);
+	ft_execute_tree(ms, exec_tree->left);
+	ft_execute_tree(ms, exec_tree->right);
+}
+
+void	ft_execute_tree(t_ms *ms, t_executor *exec_tree)
+{
+	if (!exec_tree)
+		return ;
+	if (exec_tree->operator &&
+		ft_strncmp(exec_tree->operator, PIPE, ft_strlen(PIPE)) == 0)
+		ft_execute_pipe(ms, exec_tree);
+	else
+		ft_exec_cmds(ms, exec_tree);
+}
+
+void	ft_execute(t_ms *ms)
+{
+	t_list	*pids;
+
+	ft_execute_tree(ms, ms->executor);
+	pids = ms->pids;
+	while (pids)
+	{
+		waitpid(*((int*)ms->pids->content), &ms->exit_code, 0);
+		if (WIFEXITED(ms->exit_code))
+			ms->exit_code = WEXITSTATUS(ms->exit_code);
+		pids = pids->next;
+	}
+}
+ 

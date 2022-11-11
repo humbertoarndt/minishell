@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:52:41 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/09 23:29:45 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/10 19:53:29 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	ft_free_ms(t_ms *ms)
 	ft_clear_tokens(&ms->tokens);
 	ft_free_tree(&ms->executor);
 	ft_free_buffer(ms);
-	// if (ms->pids)
-	// 	ft_lstclear(&ms->pids, free);
+	if (ft_lstsize(ms->pids) > 0)
+		ft_lstclear_not_free_content(&ms->pids, free);
 }
 
 void	ft_free_path(t_ms *ms)
@@ -45,6 +45,6 @@ void	ft_free_all_ms(t_ms *ms)
 	ft_free_path(ms);
 	ft_free_tree(&ms->executor);
 	ft_free_buffer(ms);
-	// if (ms->pids)
-	// 	ft_lstclear(&ms->pids, free);
+	if (ft_lstsize(ms->pids) > 0)
+		ft_lstclear_not_free_content(&ms->pids, free);
 }

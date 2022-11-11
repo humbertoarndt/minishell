@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/09 19:59:48 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/10 22:43:44 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ int				ft_update_hash_item(t_hash_table *hash_table, char *key,
 					char *value);
 void			ft_insert_or_update_hash_item(t_hash_table *hash_table,
 					char *key, char *value);
-void			ft_print_hash_table(t_hash_table *hash_table);
 t_hash_item		*ft_search_item_by_key(t_hash_table *hash_table,char *key);
 void			ft_insert_hash_item(t_hash_table *hash_table, char *key,
 					char *value);
@@ -128,6 +127,9 @@ t_hash_table	*ft_create_hash_table(size_t size);
 t_hash_item		*ft_create_hash_item(char *key, char *value);
 void			ft_create_env(t_ms *ms, char *envp[]);
 void			ft_print_hash_item(t_hash_item *hash_item);
+void			ft_print_hash_table(t_hash_table *hash_table);
+void			ft_print_hash_table_as_env(t_hash_table *hash_table);
+char			**ft_rebuild_envp(t_hash_table *env);
 // =============================================================================
 // parser
 // =============================================================================
@@ -143,8 +145,12 @@ t_executor		*ft_parser(t_ms *ms);
 // =============================================================================
 void			ft_free_ms(t_ms *ms);
 void			ft_free_all_ms(t_ms *ms);
-
-
+// =============================================================================
+// executor
+// =============================================================================
+void			ft_build_cmds(t_cmd *cmd, char **path);
+void			ft_execute_tree(t_ms *ms, t_executor *exec_tree);
+void			ft_execute(t_ms *ms);
 // void			set_signals(void);
 // void			sigint_handler(int sig);
 // void			sigquit_handler(int sig);

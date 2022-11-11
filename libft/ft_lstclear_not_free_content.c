@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_ms.c                                          :+:      :+:    :+:   */
+/*   ft_lstclear_not_free_content.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/26 20:48:56 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/10 23:45:58 by bbonaldi         ###   ########.fr       */
+/*   Created: 2022/04/25 01:05:23 by harndt            #+#    #+#             */
+/*   Updated: 2022/11/10 19:53:22 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_init_ms(t_ms *ms)
+static void	ft_lstdelone_not_free_content(t_list *lst, void (*del)(void *))
 {
-	ms->buffer = NULL;
-	ms->buffer_start = NULL;
-	ms->tokens = NULL;
-	ms->invalid_program = FALSE;
-	ms->exit_code = SUCCESS_CODE;
-	ms->executor = NULL;
-	ms->pids = NULL;
-	ms->should_write = TRUE;
-	ms->stdin_out.stdin = STDIN_FILENO;
-	ms->stdin_out.stdout = STDOUT_FILENO;
+	if (lst && del)
+		del(lst);
 }
 
-void	ft_init_env(t_ms *ms, char *envp[])
+void	ft_lstclear_not_free_content(t_list **lst, void (*del)(void *))
 {
-	ms->env.var = NULL;
-	ms->env.envp = envp;
+	t_list	*t_node;
+
+	while (*lst)
+	{
+		t_node = *lst;
+		*lst = (*lst)->next;
+		ft_lstdelone_not_free_content(t_node, del);
+	}
 }

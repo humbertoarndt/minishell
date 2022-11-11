@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 21:42:28 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/02 23:36:05 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/10 21:01:57 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -405,6 +405,16 @@ void		ft_lstdelone(t_list *lst, void (*del)(void *));
 void		ft_lstclear(t_list **lst, void (*del)(void *));
 
 /**
+ * @brief Deletes and frees the given node and every successor,
+ * does not free content.
+ * The pointer to the list must be set to NULL.
+ * @param lst Address of a pointer to a node.
+ * @param del Address of the function used to delete node's content.
+**/
+void		ft_lstclear_not_free_content(t_list **lst, void (*del)(void *));
+
+
+/**
  * @brief Iterates the list 'lst' and applies the function 'f' in each node.
  * @param lst Address of a pointer to a node.
  * @param f Address of the function used to iterate on the list.
@@ -429,6 +439,13 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void(*del)(void *));
  * @return void
 **/
 void		ft_free_ptr(void **ptr);
+
+/**
+ * @brief free a matrix of any type.
+ * @param matrix void ***matrix - pointer to pointer to a void pointer 
+ * @return void
+**/
+void		ft_free_matrix(void ***matrix);
 
 // =============================================================================
 // GNL Functions

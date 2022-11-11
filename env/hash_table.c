@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 18:16:49 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/10/31 23:32:53 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/10 20:36:23 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,10 @@ void	ft_print_hash_table(t_hash_table *hash_table)
 		}
 		index++;
 	}
+}
+
+void	ft_print_hash_table_as_env(t_hash_table *hash_table)
+{
+	ft_print_hash_table(hash_table);
+	ft_printf("\n");
 }

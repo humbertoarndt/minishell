@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_ms.c                                          :+:      :+:    :+:   */
+/*   ft_free_matrix.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/26 20:48:56 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/10 23:45:58 by bbonaldi         ###   ########.fr       */
+/*   Created: 2022/10/31 18:08:15 by bbonaldi          #+#    #+#             */
+/*   Updated: 2022/11/10 21:00:34 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_init_ms(t_ms *ms)
+void	ft_free_matrix(void ***matrix)
 {
-	ms->buffer = NULL;
-	ms->buffer_start = NULL;
-	ms->tokens = NULL;
-	ms->invalid_program = FALSE;
-	ms->exit_code = SUCCESS_CODE;
-	ms->executor = NULL;
-	ms->pids = NULL;
-	ms->should_write = TRUE;
-	ms->stdin_out.stdin = STDIN_FILENO;
-	ms->stdin_out.stdout = STDOUT_FILENO;
-}
+	size_t	index_matrix;
 
-void	ft_init_env(t_ms *ms, char *envp[])
-{
-	ms->env.var = NULL;
-	ms->env.envp = envp;
+	index_matrix = 0;
+	if (*matrix[index_matrix])
+	{
+		while (*matrix[index_matrix])
+			ft_free_ptr(*matrix[index_matrix++]);
+		ft_free_ptr(*matrix);
+	}
 }
