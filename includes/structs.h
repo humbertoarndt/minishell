@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/10 23:49:45 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/12 00:35:04 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct s_executor
 	char				*operator;
 	t_list				*files;
 	t_cmd				cmds;
+	int					depth;
 	struct s_executor	*left;
 	struct s_executor	*right;
 }	t_executor;
@@ -118,6 +119,19 @@ typedef struct s_stdin_out
 	int	stdin;
 	int	stdout;
 }	t_stdin_out;
+
+typedef struct s_pipes_fd
+{
+	int	fd[2];
+}	t_pipes_fd;
+
+typedef struct s_counter
+{
+	int		pipe_count;
+	int		cmds_count;
+	int		index;
+
+}	t_counter;
 
 typedef struct s_ms
 {
@@ -132,6 +146,8 @@ typedef struct s_ms
 	t_executor			*executor;
 	t_list				*pids;
 	t_token				*tokens;
+	t_counter			ctr;
+	int					index;
 }				t_ms;
 
 extern t_status				g_status;

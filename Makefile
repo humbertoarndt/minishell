@@ -6,7 +6,7 @@
 #    By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 18:20:52 by harndt            #+#    #+#              #
-#    Updated: 2022/11/10 22:34:32 by bbonaldi         ###   ########.fr        #
+#    Updated: 2022/11/11 22:54:06 by bbonaldi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRCS	:=	minishell.c \
 			$(PARSER)/parser.c $(PARSER)/init_tree.c $(PARSER)/ft_free_tree.c \
 			$(PARSER)/parser_utils.c \
 			$(EXECUTOR)/executor.c $(EXECUTOR)/commands_builder.c \
+			$(EXECUTOR)/fd_handler.c \
 			#$(SIGNAL)/signal.c \
 			
 OBJS	:=	$(SRCS:.c=.o)
@@ -99,10 +100,10 @@ re:			fclean all
 
 valgrind:
 			@valgrind $(VGSUPRESS) -s --leak-check=full --show-leak-kinds=all \
-			 --trace-children=yes --log-fd=9 ./$(NAME) 9>memcheck.log
+			--trace-children=yes --log-fd=9 ./$(NAME) 9>memcheck.log
 
 valgrind_track:
 			@valgrind $(VGSUPRESS) -s --leak-check=full --show-leak-kinds=all \
-			 --trace-children=yes --track-fds=yes --log-fd=9 ./$(NAME) 9>memcheck.log
+			   --trace-children=yes --track-fds=yes --log-fd=9 ./$(NAME) 9>memcheck.log
 
 .PHONY:		all clean fclean re

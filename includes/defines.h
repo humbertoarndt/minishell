@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:18:19 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/10 23:49:49 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/11 23:34:41 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@
 # define FILE_DOES_NOT_EXIST -1
 # define PERMISSION_NOT_ALLOWED 1
 # define PERMISSION_OK 0
+
+# define INIT_FD -2
 
 //IO FILE
 # define GREAT ">"

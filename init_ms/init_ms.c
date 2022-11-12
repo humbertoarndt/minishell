@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 20:48:56 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/10 23:45:58 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/12 00:39:51 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ void	ft_init_ms(t_ms *ms)
 	ms->should_write = TRUE;
 	ms->stdin_out.stdin = STDIN_FILENO;
 	ms->stdin_out.stdout = STDOUT_FILENO;
+	ms->ctr.pipe_count = 0;
+	ms->ctr.cmds_count = 0;
+	ms->ctr.index = 0;
+	ms->fd_pipe[WRITE_FD] = INIT_FD;
+	ms->fd_pipe[READ_FD] = INIT_FD;
 }
 
 void	ft_init_env(t_ms *ms, char *envp[])
@@ -31,3 +36,17 @@ void	ft_init_env(t_ms *ms, char *envp[])
 	ms->env.var = NULL;
 	ms->env.envp = envp;
 }
+
+// void	ft_init_fd_pipes(t_ms *ms)
+// {
+// 	int	index;
+
+// 	ms->fd_pipes = (t_pipes_fd*)malloc((sizeof(t_pipes_fd))
+// 		* ms->ctr.pipe_count);
+// 	while (index < ms->ctr.pipe_count)
+// 	{
+// 		ms->fd_pipes->fd[WRITE_FD] = INIT_FD;
+// 		ms->fd_pipes->fd[READ_FD] = INIT_FD;
+// 		index++;
+// 	}
+// }

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:27:30 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/09 23:29:10 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/11 23:45:45 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_init_cmds(t_cmd *cmds)
 	cmds->argv = NULL;
 }
 
-t_executor	*ft_init_tree(void)
+t_executor	*ft_init_tree(int depth)
 {
 	t_executor	*executor;
 
@@ -42,6 +42,7 @@ t_executor	*ft_init_tree(void)
 	executor->files = NULL;
 	executor->left = NULL;
 	executor->right = NULL;
+	executor->depth = depth;
 	ft_init_cmds(&executor->cmds);
 	return (executor);
 }

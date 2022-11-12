@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.c                                         :+:      :+:    :+:   */
+/*   executor copy 2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:20:01 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/12 00:44:21 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/12 00:34:55 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,33 +19,36 @@ void	ft_exec_cmds(t_ms *ms, t_executor *exec_tree)
 	t_list	*pid_list;
 	pid_t		*pid;
 	char		**envp;
+	int			fd_index;
 
 	if (!exec_tree)
 		return ;
 	ft_build_cmds(&exec_tree->cmds, ms->env.path);
 	pid = malloc(sizeof(pid_t));
 	*pid = fork();
+	fd_index = exec_tree->depth;
 	if (*pid == ERROR_CODE_FUNCTION)
 		exit(1);//implementar error handler
 	if (*pid == CHILD_PROCESS)
 	{
 		if (ms->should_write == FALSE)
 		{
-			if (ms->fd_pipe[READ_FD] != -2)
+			if (ms->fd_pipes[fd_index].fd[READ_FD] != -2)
 			{
-				ft_close_fd(ms->fd_pipe[WRITE_FD]);
-				dup2(ms->fd_pipe[READ_FD], STDIN_FILENO);
-				ft_close_fd(ms->fd_pipe[READ_FD]);
+				ft_close_fd(ms->fd_pipes[fd_index].fd[WRITE_FD]);
+				dup2(ms->fd_pipes[fd_index].fd[READ_FD], STDIN_FILENO);
+				ft_close_fd(ms->fd_pipes[fd_index].fd[READ_FD]);
 			}
 		}
 		else
 		{
-			if (ms->fd_pipe[WRITE_FD] != -2)
+			if (ms->fd_pipes[fd_index].fd[WRITE_FD] != -2)
 			{
-				ft_close_fd(ms->fd_pipe[READ_FD]);
-				dup2(ms->fd_pipe[WRITE_FD], STDOUT_FILENO);
-				ft_close_fd(ms->fd_pipe[WRITE_FD]);
+				ft_close_fd(ms->fd_pipes[fd_index].fd[READ_FD]);
+				dup2(ms->fd_pipes[fd_index].fd[WRITE_FD], STDOUT_FILENO);
+				ft_close_fd(ms->fd_pipes[fd_index].fd[WRITE_FD]);
 			}	
+			
 		}
 		envp = ft_rebuild_envp(ms->env.var);
 		execve(exec_tree->cmds.cmd, exec_tree->cmds.argv, envp);
@@ -56,6 +59,7 @@ void	ft_exec_cmds(t_ms *ms, t_executor *exec_tree)
 		pid_list = ft_lstnew(pid);
 		ft_lstadd_back(&ms->pids, pid_list);
 	}
+	
 }
 
 void	ft_dup_stdin_out(t_ms *ms)
@@ -74,12 +78,17 @@ void	ft_restore_stdin_out(t_ms *ms)
 
 void	ft_execute_pipe(t_ms *ms, t_executor *exec_tree)
 {
-	if (pipe(ms->fd_pipe) == ERROR_CODE_FUNCTION)
+	int	fd_index;
+
+	fd_index = ms->index;
+	if (pipe(ms->fd_pipes[fd_index].fd) == ERROR_CODE_FUNCTION)
 		exit(1);//implementar error handler
-	
 	ft_execute_tree(ms, exec_tree->left);
 	ms->should_write = ms->should_write ^ 1;
 	ft_execute_tree(ms, exec_tree->right);
+	ft_close_fd(ms->fd_pipes[fd_index].fd[WRITE_FD]);
+	ft_close_fd(ms->fd_pipes[fd_index].fd[READ_FD]);
+	ms->index++;
 }
 
 void	ft_execute_tree(t_ms *ms, t_executor *exec_tree)
@@ -96,13 +105,21 @@ void	ft_execute_tree(t_ms *ms, t_executor *exec_tree)
 void	ft_execute(t_ms *ms)
 {
 	t_list			*pids;
+	int				index;
 
 	ft_dup_stdin_out(ms);
+	ft_init_fd_pipes(ms);
+	ms->index = 0;
 	ft_execute_tree(ms, ms->executor);
 	ft_restore_stdin_out(ms);
 	pids = ms->pids;
-	ft_close_fd(ms->fd_pipe[WRITE_FD]);
-	ft_close_fd(ms->fd_pipe[READ_FD]);
+	index = 0;
+	while (index < ms->ctr.pipe_count)
+	{
+		ft_close_fd(ms->fd_pipes[index].fd[WRITE_FD]);
+		ft_close_fd(ms->fd_pipes[index].fd[READ_FD]);
+		index++;
+	}
 	while (pids)
 	{
 		waitpid((*(pid_t *)pids->content), &ms->exit_code, 0);

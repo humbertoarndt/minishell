@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/10 22:43:44 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/11 23:53:26 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int				ft_prompt(t_ms *ms);
 // =============================================================================
 void			ft_init_ms(t_ms *ms);
 void			ft_init_env(t_ms *ms, char *env[]);
+void			ft_init_fd_pipes(t_ms *ms);
 // =============================================================================
 // TOKENS
 // =============================================================================
@@ -133,7 +134,7 @@ char			**ft_rebuild_envp(t_hash_table *env);
 // =============================================================================
 // parser
 // =============================================================================
-t_executor		*ft_init_tree(void);
+t_executor		*ft_init_tree(int depth);
 t_file			*ft_init_file(t_redir_type type, char *name);
 void			ft_free_tree(t_executor **exec);
 int				ft_has_operator(t_token_type type);
@@ -151,6 +152,7 @@ void			ft_free_all_ms(t_ms *ms);
 void			ft_build_cmds(t_cmd *cmd, char **path);
 void			ft_execute_tree(t_ms *ms, t_executor *exec_tree);
 void			ft_execute(t_ms *ms);
+void			ft_close_fd(int fd);
 // void			set_signals(void);
 // void			sigint_handler(int sig);
 // void			sigquit_handler(int sig);
