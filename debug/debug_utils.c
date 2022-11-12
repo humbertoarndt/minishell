@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 19:15:09 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/09 19:15:30 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/12 14:30:03 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ void	ft_print_file(t_list *file)
 	ft_printf("\n");
 }
 
-void	ft_print_cmds(t_cmd cmds)
+void	ft_print_cmds(t_cmd *cmds)
 {
-	ft_printf(RED"cmd:%s "RESET, cmds.cmd);
-	while (cmds.argv_list)
+	ft_printf(RED"cmd:%s "RESET, cmds->cmd);
+	while (cmds->argv_list)
 	{
-		ft_printf(RED"argvs:%s "RESET, (char *)cmds.argv_list->content);
-		cmds.argv_list = cmds.argv_list->next;
+		ft_printf(RED"argvs:%s "RESET, (char *)cmds->argv_list->content);
+		cmds->argv_list = cmds->argv_list->next;
 	}
 	ft_printf("\n");
 }

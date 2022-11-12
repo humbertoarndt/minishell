@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 19:29:45 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/12 00:19:52 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/12 14:51:32 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,41 +24,44 @@ void	ft_add_file(t_executor *current_tree, t_token *token_head)
 	ft_lstadd_back(&current_tree->files, list_file);
 }
 
-void	ft_add_command_list(t_executor *current_tree, t_token *token_head)
+void	ft_add_command_list(t_executor *current_tree, t_token *token_head,
+			t_ms *ms)
 {
 	t_list			*list_argv;
 	char			*token;
 
 	token = ft_strdup(token_head->token);
 	list_argv = ft_lstnew(token);
-	ft_lstadd_back(&current_tree->cmds.argv_list, list_argv);
+	ft_lstadd_back(&current_tree->cmds->argv_list, list_argv);
+	if (current_tree->cmds->argv_list && 
+		current_tree->cmds->argv_list->next == NULL)
+		current_tree->cmds->cmd_index = ms->ctr.index++;
 }
 
-t_executor	*ft_set_executor(t_token *tokens, t_executor **root, t_executor **current_tree,
-				int index)
+t_executor	*ft_set_executor(t_token *tokens, t_executor **root,
+			t_executor **current_tree)
 {
 	t_executor	*parent_tree;
 
-	parent_tree = ft_init_tree(index);
+	parent_tree = ft_init_tree();
 	if (*root)
 		parent_tree->left = *root;
 	else
 		parent_tree->left = *current_tree;
 	*root = parent_tree;
 	parent_tree->operator = ft_strdup(tokens->token);
-	parent_tree->right = ft_init_tree(index);
+	parent_tree->right = ft_init_tree();
 	*current_tree = parent_tree->right;
 	return (parent_tree);
 }
 
-void	ft_cmds_counter(t_ms *ms, t_executor *exec)
+void	ft_build_commands_and_fds_tree(t_token *token_head,
+			t_executor *current_tree, t_ms *ms)
 {
-	if (!exec)
-		return ;
-	if (exec->cmds.argv_list)
-		ms->ctr.cmds_count++;
-	ft_cmds_counter(ms, exec->left);
-	ft_cmds_counter(ms, exec->right);
+	if (ft_has_redirect(token_head->type))
+		ft_add_file(current_tree, token_head);
+	else
+		ft_add_command_list(current_tree, token_head, ms);
 }
 
 t_executor	*ft_parser(t_ms *ms)
@@ -68,24 +71,19 @@ t_executor	*ft_parser(t_ms *ms)
 	t_executor	*root;
 	t_token		*token_head;
 
-	current_tree = ft_init_tree(0);
+	current_tree = ft_init_tree();
 	final_tree = current_tree;
 	root = NULL;
+	ms->ctr.index = 0;
 	token_head = ms->tokens;
 	while (token_head)
 	{
 		if (ft_has_operator(token_head->type))
-			final_tree = ft_set_executor(token_head, &root, &current_tree, 
-							++ms->ctr.index);
+			final_tree = ft_set_executor(token_head, &root, &current_tree);
 		else
-		{
-			if (ft_has_redirect(token_head->type))
-				ft_add_file(current_tree, token_head);
-			else
-				ft_add_command_list(current_tree, token_head);
-		}
+			ft_build_commands_and_fds_tree(token_head, current_tree, ms);
 		token_head = token_head->next;
 	}
 	ft_cmds_counter(ms, final_tree);
- 	return (final_tree);
+	return (final_tree);
 }

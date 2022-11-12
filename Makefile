@@ -6,7 +6,7 @@
 #    By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 18:20:52 by harndt            #+#    #+#              #
-#    Updated: 2022/11/11 22:54:06 by bbonaldi         ###   ########.fr        #
+#    Updated: 2022/11/12 14:09:05 by bbonaldi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ SRCS	:=	minishell.c \
 			$(ENV)/hash_table_clear.c $(ENV)/hash_table_init.c \
 			$(ENV)/hash_table_delete.c $(ENV)/hash_table_insert.c \
 			$(ENV)/env.c \
-			$(PARSER)/parser.c $(PARSER)/init_tree.c $(PARSER)/ft_free_tree.c \
+			$(PARSER)/parser.c $(PARSER)/init_tree.c $(PARSER)/free_tree.c \
 			$(PARSER)/parser_utils.c \
 			$(EXECUTOR)/executor.c $(EXECUTOR)/commands_builder.c \
 			$(EXECUTOR)/fd_handler.c \
@@ -100,7 +100,7 @@ re:			fclean all
 
 valgrind:
 			@valgrind $(VGSUPRESS) -s --leak-check=full --show-leak-kinds=all \
-			--trace-children=yes --log-fd=9 ./$(NAME) 9>memcheck.log
+			--track-origins=yes --trace-children=yes --log-fd=9 ./$(NAME) 9>memcheck.log
 
 valgrind_track:
 			@valgrind $(VGSUPRESS) -s --leak-check=full --show-leak-kinds=all \

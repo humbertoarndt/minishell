@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/12 00:35:04 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/12 16:57:51 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,14 +102,14 @@ typedef struct s_cmd
 	char	*cmd;
 	t_list	*argv_list;
 	char	**argv;
+	int		cmd_index;
 }	t_cmd;
 
 typedef struct s_executor
 {
 	char				*operator;
 	t_list				*files;
-	t_cmd				cmds;
-	int					depth;
+	t_cmd				*cmds;
 	struct s_executor	*left;
 	struct s_executor	*right;
 }	t_executor;
@@ -141,13 +141,14 @@ typedef struct s_ms
 	t_error_type		invalid_program;
 	int					exit_code;
 	int					fd_pipe[2];
+	int					prev_fd_pipe[2];
 	int					should_write;
+	int					should_pipe;
 	t_stdin_out			stdin_out;
 	t_executor			*executor;
 	t_list				*pids;
 	t_token				*tokens;
 	t_counter			ctr;
-	int					index;
 }				t_ms;
 
 extern t_status				g_status;

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 20:48:56 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/12 00:39:51 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/12 17:16:42 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_init_ms(t_ms *ms)
 	ms->executor = NULL;
 	ms->pids = NULL;
 	ms->should_write = TRUE;
+	ms->should_pipe = FALSE;
 	ms->stdin_out.stdin = STDIN_FILENO;
 	ms->stdin_out.stdout = STDOUT_FILENO;
 	ms->ctr.pipe_count = 0;
@@ -29,6 +30,8 @@ void	ft_init_ms(t_ms *ms)
 	ms->ctr.index = 0;
 	ms->fd_pipe[WRITE_FD] = INIT_FD;
 	ms->fd_pipe[READ_FD] = INIT_FD;
+	ms->prev_fd_pipe[WRITE_FD] = INIT_FD;
+	ms->prev_fd_pipe[READ_FD] = INIT_FD;
 }
 
 void	ft_init_env(t_ms *ms, char *envp[])

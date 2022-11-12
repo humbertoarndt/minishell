@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/11 23:53:26 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/12 16:55:45 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void			print_custom_arg_error(char *arg, char *message);
 // =============================================================================
 void			ft_print_tabs(int tabs);
 void			ft_print_file(t_list *file);
-void			ft_print_cmds(t_cmd cmds);
+void			ft_print_cmds(t_cmd *cmds);
 void			ft_print_tree_elements(t_executor *exec, char *leaf, int level,
 					int *ctr);
 void			ft_print_tokens_list(t_token *token_head);
@@ -134,13 +134,14 @@ char			**ft_rebuild_envp(t_hash_table *env);
 // =============================================================================
 // parser
 // =============================================================================
-t_executor		*ft_init_tree(int depth);
+t_executor		*ft_init_tree();
 t_file			*ft_init_file(t_redir_type type, char *name);
 void			ft_free_tree(t_executor **exec);
 int				ft_has_operator(t_token_type type);
 int				ft_has_redirect(t_token_type type);
 t_redir_type	ft_convert_token_type_redir_type(t_token_type token_type);
 t_executor		*ft_parser(t_ms *ms);
+void			ft_cmds_counter(t_ms *ms, t_executor *exec);
 // =============================================================================
 // free
 // =============================================================================
@@ -150,9 +151,11 @@ void			ft_free_all_ms(t_ms *ms);
 // executor
 // =============================================================================
 void			ft_build_cmds(t_cmd *cmd, char **path);
-void			ft_execute_tree(t_ms *ms, t_executor *exec_tree);
 void			ft_execute(t_ms *ms);
 void			ft_close_fd(int fd);
+void			ft_dup_stdin_out(t_ms *ms);
+void			ft_restore_stdin_out(t_ms *ms);
+void			ft_handle_pipes(t_ms *ms, t_executor *exec_tree);
 // void			set_signals(void);
 // void			sigint_handler(int sig);
 // void			sigquit_handler(int sig);
