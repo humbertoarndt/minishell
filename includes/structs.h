@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/12 16:57:51 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/14 11:08:18 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,6 @@ typedef struct s_ms
 	int					exit_code;
 	int					fd_pipe[2];
 	int					prev_fd_pipe[2];
-	int					should_write;
 	int					should_pipe;
 	t_stdin_out			stdin_out;
 	t_executor			*executor;

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:18:19 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/11 23:34:41 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/14 12:19:42 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 
 # define READ_FD 0
 # define WRITE_FD 1
+# define INFILE 0
+# define OUTFILE 1
+# define HEREDOC_FILE "/tmp/heredoc_tmp"
 
 # define STDIN 0
 # define STDOUT 1
@@ -71,7 +74,7 @@
 # define PERMISSION_NOT_ALLOWED 1
 # define PERMISSION_OK 0
 
-# define INIT_FD -2
+# define NOT_FOUND_FD -2
 
 //IO FILE
 # define GREAT ">"

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:27:30 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/12 14:52:52 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/14 12:20:06 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,17 @@ t_file	*ft_init_file(t_redir_type type, char *name)
 
 	file = (t_file *)malloc(sizeof(t_file));
 	file->fd = -2;
-	file->delimeter = NULL;
 	file->type = type;
-	file->file = name;
+	if (file->type == HEREDOC)
+	{
+		file->delimeter = name;
+		file->file = HEREDOC_FILE;
+	}
+	else
+	{
+		file->delimeter = NULL;
+		file->file = name;
+	}
 	return (file);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 20:48:56 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/12 17:16:42 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/14 12:08:38 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,16 @@ void	ft_init_ms(t_ms *ms)
 	ms->exit_code = SUCCESS_CODE;
 	ms->executor = NULL;
 	ms->pids = NULL;
-	ms->should_write = TRUE;
 	ms->should_pipe = FALSE;
 	ms->stdin_out.stdin = STDIN_FILENO;
 	ms->stdin_out.stdout = STDOUT_FILENO;
 	ms->ctr.pipe_count = 0;
 	ms->ctr.cmds_count = 0;
 	ms->ctr.index = 0;
-	ms->fd_pipe[WRITE_FD] = INIT_FD;
-	ms->fd_pipe[READ_FD] = INIT_FD;
-	ms->prev_fd_pipe[WRITE_FD] = INIT_FD;
-	ms->prev_fd_pipe[READ_FD] = INIT_FD;
+	ms->fd_pipe[WRITE_FD] = NOT_FOUND_FD;
+	ms->fd_pipe[READ_FD] = NOT_FOUND_FD;
+	ms->prev_fd_pipe[WRITE_FD] = NOT_FOUND_FD;
+	ms->prev_fd_pipe[READ_FD] = NOT_FOUND_FD;
 }
 
 void	ft_init_env(t_ms *ms, char *envp[])
