@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:20:01 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/14 13:02:39 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/14 15:28:36 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,15 @@ void	ft_exec_cmds(t_ms *ms, t_executor *exec_tree)
 		envp = ft_rebuild_envp(ms->env.var);
 		ft_handle_pipes(ms, exec_tree);
 		ft_set_redirection_fds(exec_tree);
-		if (exec_tree->cmds->cmd)
-			execve(exec_tree->cmds->cmd, exec_tree->cmds->argv, envp);
+		if (!exec_tree->cmds->cmd)
+		{
+			//implementar error handling
+			ft_free_matrix((void ***)&(envp));
+			exit(1);
+			return ;
+		}
+		execve(exec_tree->cmds->cmd, exec_tree->cmds->argv, envp);
 		ft_free_matrix((void ***)&(envp));
-		//implementar error handling
-		return ;
 	}
 	else
 	{
