@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 22:53:47 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/10/27 23:51:49 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/15 22:55:21 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ t_token		*ft_heredoc_tokenizer(t_ms *ms)
 	}
 	tok = ft_create_token_string(ms, len);
 	heredoc = ft_create_token_node(tok, type);
+	ft_heredoc_handler(ms,
+		&(t_file){NOT_FOUND_FD, HEREDOC_FILE, HEREDOC, tok});
 	return (heredoc);
 }

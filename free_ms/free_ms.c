@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:52:41 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/12 00:44:46 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/15 20:21:39 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,5 @@ void	ft_free_all_ms(t_ms *ms)
 	if (ft_lstsize(ms->pids) > 0)
 		ft_lstclear(&ms->pids, free);
 	//ft_free_ptr((void **)&(ms->fd_pipes));
+	rl_clear_history();
 }

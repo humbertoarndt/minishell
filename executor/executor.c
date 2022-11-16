@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:20:01 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/14 15:28:36 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/15 20:20:18 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,28 @@
 
 void	ft_execute_tree(t_ms *ms, t_executor *exec_tree);
 
+void	ft_exec_child(t_ms *ms, t_executor *exec_tree)
+{
+	char		**envp;
+
+	envp = ft_rebuild_envp(ms->env.var);
+	ft_handle_pipes(ms, exec_tree);
+	ft_set_redirection_fds(exec_tree);
+	if (!exec_tree->cmds->cmd)
+	{
+		//implementar error handling
+		ft_free_matrix((void ***)&(envp));
+		exit(1);
+		return ;
+	}
+	execve(exec_tree->cmds->cmd, exec_tree->cmds->argv, envp);
+	ft_free_matrix((void ***)&(envp));
+}
+
 void	ft_exec_cmds(t_ms *ms, t_executor *exec_tree)
 {
 	t_list		*pid_list;
 	pid_t		*pid;
-	char		**envp;
 
 	if (!exec_tree)
 		return ;
@@ -30,20 +47,7 @@ void	ft_exec_cmds(t_ms *ms, t_executor *exec_tree)
 	if (*pid == ERROR_CODE_FUNCTION)
 		exit(1);//implementar error handler
 	if (*pid == CHILD_PROCESS)
-	{
-		envp = ft_rebuild_envp(ms->env.var);
-		ft_handle_pipes(ms, exec_tree);
-		ft_set_redirection_fds(exec_tree);
-		if (!exec_tree->cmds->cmd)
-		{
-			//implementar error handling
-			ft_free_matrix((void ***)&(envp));
-			exit(1);
-			return ;
-		}
-		execve(exec_tree->cmds->cmd, exec_tree->cmds->argv, envp);
-		ft_free_matrix((void ***)&(envp));
-	}
+		ft_exec_child(ms, exec_tree);
 	else
 	{
 		pid_list = ft_lstnew(pid);
@@ -69,9 +73,10 @@ void	ft_execute_tree(t_ms *ms, t_executor *exec_tree)
 		ft_exec_cmds(ms, exec_tree);
 }
 
-void	ft_execute(t_ms *ms)
+int	ft_execute(t_ms *ms)
 {
 	t_list			*pids;
+	int				exit_code;
 
 	ft_dup_stdin_out(ms);
 	ft_execute_tree(ms, ms->executor);
@@ -80,10 +85,10 @@ void	ft_execute(t_ms *ms)
 	pids = ms->pids;
 	while (pids)
 	{
-		waitpid((*(pid_t *)pids->content), &ms->exit_code, 0);
-		if (WIFEXITED(ms->exit_code))
-			ms->exit_code = WEXITSTATUS(ms->exit_code);
+		waitpid((*(pid_t *)pids->content), &exit_code, 0);
+		if (WIFEXITED(exit_code))
+			exit_code = WEXITSTATUS(exit_code);
 		pids = pids->next;
 	}
-	return ;
+	return (exit_code);
 }

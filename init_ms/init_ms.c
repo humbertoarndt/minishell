@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 20:48:56 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/14 12:08:38 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/15 20:16:55 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	ft_init_ms(t_ms *ms)
 	ms->buffer_start = NULL;
 	ms->tokens = NULL;
 	ms->invalid_program = FALSE;
-	ms->exit_code = SUCCESS_CODE;
 	ms->executor = NULL;
 	ms->pids = NULL;
 	ms->should_pipe = FALSE;

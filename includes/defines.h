@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:18:19 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/14 12:19:42 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/15 22:20:47 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 
 # define MINISHELL "minishell: "
 # define BASH_START "$ "
+# define HEREDOC_START "> "
 
 # define CHILD_PROCESS 0
 

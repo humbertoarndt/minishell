@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:56:49 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/12 12:44:24 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/15 20:23:59 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	ft_prompt(t_ms *ms)
 {
+	ms->exit_code = SUCCESS_CODE;
 	while (TRUE)
 	{
 		ft_init_ms(ms);
@@ -28,7 +29,7 @@ int	ft_prompt(t_ms *ms)
 		}
 		ms->buffer_start = ms->buffer;
 		add_history(ms->buffer);
-		if (ft_strncmp(ms->buffer,"quit", strlen("quit")) == 0)
+		if (ft_strncmp(ms->buffer, "quit", strlen("quit")) == 0)
 		{
 			ft_free_all_ms(ms);
 			exit(SUCCESS_CODE);
@@ -37,9 +38,9 @@ int	ft_prompt(t_ms *ms)
 		//ft_print_tokens_list(ms->tokens);
 		ms->executor = ft_parser(ms);
 		//ft_print_tree_recursive(ms->executor, "root", 0, TRUE);
-		ft_execute(ms);
+		ms->exit_code = ft_execute(ms);
 		//printf("%s\n", ms->buffer_start);
 		ft_free_ms(ms);
 	}
-	return (SUCCESS_CODE);
+	return (ms->exit_code);
 }

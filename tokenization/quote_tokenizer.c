@@ -6,17 +6,11 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 20:37:21 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/09 19:53:10 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/15 22:52:31 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ft_expand_dollar_sign(t_ms *ms, char **expanded_str, char quote)
-{
-	char *exit = ft_replace_str(ms->buffer, "$?", ft_itoa(ms->exit_code));
-	ft_printf("%s%s%c", exit ,expanded_str, quote);
-}
 
 t_token_type	ft_found_quoting(char *buffer)
 {

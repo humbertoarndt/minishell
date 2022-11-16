@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 21:42:28 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/10 21:01:57 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/15 21:22:29 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,15 @@ size_t		ft_strlen(const char *str);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 
 /**
+ * @brief Compare s1 and s2.
+ * @param s1 String to be compared.
+ * @param s2 String to be compared.
+ * @return if == 0 indicates the string are equal.
+ * @return if <> 0 indicates the value is different
+**/
+int			ft_strcmp(char *s1, char *s2);
+
+/**
  * @brief Duplicate a String.
  * @param str String to be duplicated.
  * @return Pointer to the duplicated string.
@@ -270,6 +279,15 @@ char		*ft_substr(char const *s, unsigned int start, size_t len);
  * @return Pointer to the new String, or NULL if the allocation fails.
 **/
 char		*ft_strjoin(char const *s1, char const *s2);
+
+/**
+ * @brief Allocates new String with s1 and s2, free both strings received 
+ * as args.
+ * @param s1 String preffix.
+ * @param s2 String preffix.
+ * @return Pointer to the new String, or NULL if the allocation fails.
+**/
+char		*ft_strjoin_free(char const *s1, char const *s2);
 
 /**
  * @brief Allocates a copy of s1 with characters in set removed from both ends.
@@ -412,7 +430,6 @@ void		ft_lstclear(t_list **lst, void (*del)(void *));
  * @param del Address of the function used to delete node's content.
 **/
 void		ft_lstclear_not_free_content(t_list **lst, void (*del)(void *));
-
 
 /**
  * @brief Iterates the list 'lst' and applies the function 'f' in each node.

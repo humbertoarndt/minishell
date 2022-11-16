@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 22:52:46 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/14 12:58:29 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/15 22:20:38 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ int	ft_set_file_flags(t_redir_type redir_type)
 {
 	int flags;
 
-	if (redir_type == INFILE)
+	if (redir_type == INFILE || redir_type == HEREDOC)
 		flags = O_RDONLY;
-	else if (redir_type == TRUNCATE || redir_type == HEREDOC)
+	else if (redir_type == TRUNCATE)
 		flags = O_TRUNC | O_CREAT | O_RDWR;
 	else if (redir_type == APPEND)
 		flags = O_RDWR | O_APPEND | O_CREAT;
-	return flags;
+	return (flags);
 }
 
 int	ft_check_access_file(char *file_name, t_redir_type redir_type)
@@ -83,7 +83,7 @@ int	ft_check_access_file(char *file_name, t_redir_type redir_type)
 
 int	ft_init_redirection_fds(t_file *file)
 {
-	int	file_permission;
+	int		file_permission;
 	int		flags;
 
 	file_permission = ft_check_access_file(file->file, file->type);

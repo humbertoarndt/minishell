@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 18:29:22 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/15 20:18:05 by bbonaldi         ###   ########.fr       */
+/*   Created: 2022/11/15 21:18:34 by bbonaldi          #+#    #+#             */
+/*   Updated: 2022/11/15 21:19:20 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int main(int argc, char *argv[], char *envp[])
+int	ft_strcmp(char *s1, char *s2)
 {
-	t_ms	ms;
+	int	i;
 
-
-	if (ft_check_argc_argc(argc, argv))
-		return (ERROR_CODE);
-	ft_create_env(&ms, envp);
-	return (ft_prompt(&ms));
+	if (!s1 || !s2)
+		return (-1);
+	i = 0;
+	while (s1[i] == s2[i] && s1[i] && s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

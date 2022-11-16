@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/14 12:20:23 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/15 22:55:08 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void			ft_free_all_ms(t_ms *ms);
 // executor
 // =============================================================================
 void			ft_build_cmds(t_cmd *cmd, char **path);
-void			ft_execute(t_ms *ms);
+int				ft_execute(t_ms *ms);
 void			ft_close_fd(int fd);
 void			ft_close_pipe_fds(int fd[2]);
 void			ft_dup_stdin_out(t_ms *ms);
@@ -161,6 +161,7 @@ void			ft_copy_fds_pipe_to_previous(int fd[2], int prev_fd[2]);
 void			ft_init_pipes(t_ms *ms, t_executor *exec_tree);
 void			ft_handle_pipes(t_ms *ms, t_executor *exec_tree);
 void			ft_set_redirection_fds(t_executor *exec_tree);
+void			ft_heredoc_handler(t_ms *ms, t_file *file);
 // void			set_signals(void);
 // void			sigint_handler(int sig);
 // void			sigquit_handler(int sig);

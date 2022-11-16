@@ -6,7 +6,7 @@
 #    By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/23 20:43:56 by harndt            #+#    #+#              #
-#    Updated: 2022/11/10 21:01:43 by bbonaldi         ###   ########.fr        #
+#    Updated: 2022/11/15 21:21:15 by bbonaldi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ SRCS	+=	ft_substr.c		ft_strjoin.c	ft_strtrim.c	\
 			ft_split.c		ft_itoa.c		ft_strmapi.c	\
 			ft_striteri.c	ft_putchar_fd.c	ft_putstr_fd.c	\
 			ft_putendl_fd.c	ft_putnbr_fd.c	ft_free_ptr.c	\
-			ft_free_matrix.c
+			ft_free_matrix.c ft_strjoin_free.c ft_strcmp.c 
 
 # ==============================================================================
 # LIBFT BONUS

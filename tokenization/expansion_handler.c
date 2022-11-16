@@ -6,20 +6,19 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 22:22:34 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/09 19:43:43 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/15 23:09:21 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_extract_variable_and_replace(t_ms *ms, char *str, size_t len)
+char	*ft_extract_variable_and_replace(t_ms *ms, char *str,
+			char *var_expression)
 {
 	char		*to_replace;
 	t_hash_item	*env_item;
-	char		*var_expression;
 	char		*replace_str;
 
-	var_expression = ft_substr(str - len, 0, len);
 	if (ft_strncmp(var_expression, VARIABLE_EXPRESSION,
 			ft_strlen(var_expression)) == 0)
 		replace_str = (ft_strdup(VARIABLE_EXPRESSION));
@@ -33,31 +32,43 @@ char	*ft_extract_variable_and_replace(t_ms *ms, char *str, size_t len)
 			to_replace = env_item->value;
 		else
 			to_replace = "";
-		replace_str = ft_replace_str(str - len, --var_expression, to_replace);
+		replace_str = ft_replace_str(str, --var_expression, to_replace);
 	}
-	ft_free_ptr((void **)&(var_expression));
 	return (replace_str);
 }
 
 char	*ft_replace_variable_expression(t_ms *ms, char *str)
 {
-	size_t		len;
+	size_t		len[2];
 	char		*replace_str;
+	char		*var_expression;
+	char		*start_var_expression;
 
-	len = 0;
+	len[0] = 0;
+	len[1] = 0;
 	replace_str = NULL;
+	start_var_expression = ft_strchr(str, VARIABLE_EXPRESSION[0]);
+	if (!start_var_expression)
+		return (NULL);
+	while (str != start_var_expression)
+	{
+		str++;
+		len[0]++;
+	}
 	while (str && (!ft_strchr(WHITE_SPACE, *str) && !ft_strchr(SYMBOLS, *str)))
 	{	
 		str++;
-		len++;
+		len[1]++;
 	}
-	replace_str = ft_extract_variable_and_replace(ms, str, len);
+	var_expression = ft_substr(str - len[1], 0, len[1]);
+	replace_str = ft_extract_variable_and_replace(ms, str - len[0] - len[1],
+		var_expression);
+	ft_free_ptr((void **)&(var_expression));
 	return (replace_str);
 }
 
 void	ft_find_variable_expression_and_replace(t_ms *ms)
 {
-	char	*start_var_expression;
 	char	*new_str;
 	t_token	*head_token;
 
@@ -68,11 +79,9 @@ void	ft_find_variable_expression_and_replace(t_ms *ms)
 		{
 			while (TRUE)
 			{
-				start_var_expression = ft_strchr(head_token->token,
-						VARIABLE_EXPRESSION[0]);
-				if (!start_var_expression)
-					break ;
 				new_str = ft_replace_variable_expression(ms, head_token->token);
+				if (!new_str)
+					break ;
 				ft_free_ptr((void **)&(head_token->token));
 				head_token->token = new_str;
 				if (ft_strncmp(new_str, VARIABLE_EXPRESSION,
