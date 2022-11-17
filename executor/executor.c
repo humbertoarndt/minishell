@@ -6,10 +6,9 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:20:01 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/15 20:20:18 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/16 23:13:35 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -26,7 +25,7 @@ void	ft_exec_child(t_ms *ms, t_executor *exec_tree)
 	{
 		//implementar error handling
 		ft_free_matrix((void ***)&(envp));
-		exit(1);
+		exit(127);
 		return ;
 	}
 	execve(exec_tree->cmds->cmd, exec_tree->cmds->argv, envp);
@@ -66,8 +65,8 @@ void	ft_execute_tree(t_ms *ms, t_executor *exec_tree)
 {
 	if (!exec_tree)
 		return ;
-	if (exec_tree->operator &&
-		ft_strncmp(exec_tree->operator, PIPE, ft_strlen(PIPE)) == 0)
+	if (exec_tree->operator
+		&& ft_strncmp(exec_tree->operator, PIPE, ft_strlen(PIPE)) == 0)
 		ft_execute_pipe(ms, exec_tree);
 	else
 		ft_exec_cmds(ms, exec_tree);

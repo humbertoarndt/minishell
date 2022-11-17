@@ -6,7 +6,7 @@
 #    By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/23 20:43:56 by harndt            #+#    #+#              #
-#    Updated: 2022/11/15 21:21:15 by bbonaldi         ###   ########.fr        #
+#    Updated: 2022/11/16 21:50:23 by bbonaldi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,7 @@ SRCS	:=	ft_atoi.c		ft_bzero.c		ft_calloc.c		\
 			ft_memset.c		ft_strchr.c		ft_strdup.c		\
 			ft_strlcat.c	ft_strlcpy.c	ft_strlen.c		\
 			ft_strncmp.c	ft_strnstr.c	ft_strrchr.c	\
-			ft_tolower.c	ft_toupper.c	ft_strchr_pos.c \
-			ft_replace_str.c
+			ft_tolower.c	ft_toupper.c	
 
 # ==============================================================================
 # LIBFT 2
@@ -40,8 +39,8 @@ SRCS	:=	ft_atoi.c		ft_bzero.c		ft_calloc.c		\
 SRCS	+=	ft_substr.c		ft_strjoin.c	ft_strtrim.c	\
 			ft_split.c		ft_itoa.c		ft_strmapi.c	\
 			ft_striteri.c	ft_putchar_fd.c	ft_putstr_fd.c	\
-			ft_putendl_fd.c	ft_putnbr_fd.c	ft_free_ptr.c	\
-			ft_free_matrix.c ft_strjoin_free.c ft_strcmp.c 
+			ft_putendl_fd.c	ft_putnbr_fd.c	
+			
 
 # ==============================================================================
 # LIBFT BONUS
@@ -49,8 +48,8 @@ SRCS	+=	ft_substr.c		ft_strjoin.c	ft_strtrim.c	\
 
 SRCS	+=	ft_lstnew.c		ft_lstadd_front.c	ft_lstsize.c	\
 			ft_lstlast.c	ft_lstadd_back.c	ft_lstdelone.c	\
-			ft_lstclear.c	ft_lstiter.c		ft_lstmap.c \
-			ft_lstclear_not_free_content.c
+			ft_lstclear.c	ft_lstiter.c		ft_lstmap.c 
+			
 
 # ==============================================================================
 # GNL
@@ -85,14 +84,16 @@ SRCS	+=	ft_isnum.c	ft_ternary.c
 # PUSH_SWAP
 # ==============================================================================
 
-SRCS	+=	ft_atol.c	ft_lstat.c	ft_lstdup_int.c	ft_lstsort.c				\
+SRCS	+=	ft_atol.c	ft_lstat.c	ft_lstdup_int.c	ft_lstsort.c	\
 			ft_lstfind.c
 
 # ==============================================================================
 # MINISHELL
 # =============================================================================
 
-SRCS	+=	ft_free_ptr.c
+SRCS	+=	ft_free_ptr.c	ft_lstclear_not_free_content.c	ft_free_matrix.c \
+			ft_strjoin_free.c	ft_strcmp.c	ft_strchr_pos.c	ft_replace_str.c \
+			ft_count_char.c
 
 # ==============================================================================
 # COLORS

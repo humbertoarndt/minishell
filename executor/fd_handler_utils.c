@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 22:52:46 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/14 11:11:13 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/16 23:17:51 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,3 @@ void	ft_copy_fds_pipe_to_previous(int fd[2], int prev_fd[2])
 	prev_fd[0] = fd[0];
 	prev_fd[1] = fd[1];
 }
-

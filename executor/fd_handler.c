@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 22:52:46 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/15 22:20:38 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/16 23:18:24 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_init_pipes(t_ms *ms, t_executor *exec_tree)
 
 int	ft_set_file_flags(t_redir_type redir_type)
 {
-	int flags;
+	int	flags;
 
 	if (redir_type == INFILE || redir_type == HEREDOC)
 		flags = O_RDONLY;
@@ -125,7 +125,7 @@ void	ft_handle_redirections(int fds[2])
 
 void	ft_set_redirection_fds(t_executor *exec_tree)
 {
-	int	fds[2];
+	int		fds[2];
 	t_file	*file;
 	t_list	*file_list;
 

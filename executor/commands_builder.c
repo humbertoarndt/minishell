@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 21:11:05 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/14 12:52:49 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/16 23:17:38 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@ int	ft_check_access_bin(char **cmd, int should_free)
 	if (should_free)
 		ft_free_ptr((void **)cmd);
 	return (FALSE);
+}
+
+char	*ft_check_raw_cmd(char *command)
+{
+	int		is_valid_bin;
+
+	is_valid_bin = ft_check_access_bin(&command, FALSE);
+	if (is_valid_bin)
+		return (ft_strdup(command));
+	return (NULL);
 }
 
 char	*ft_build_cmd(char *command, char **path)
@@ -47,12 +57,7 @@ char	*ft_build_cmd(char *command, char **path)
 		index++;
 	}
 	if (!command_found)
-	{
-		is_valid_bin = ft_check_access_bin(&command, FALSE);
-		if (is_valid_bin)
-			return (ft_strdup(command));
-		return (NULL);
-	}
+		return (ft_check_raw_cmd(command));
 	return (command_found);
 }
 

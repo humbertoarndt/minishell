@@ -1,42 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
+/*   ft_count_char.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/13 01:14:40 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/16 22:34:34 by bbonaldi         ###   ########.fr       */
+/*   Created: 2022/11/16 21:42:35 by bbonaldi          #+#    #+#             */
+/*   Updated: 2022/11/16 22:13:21 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin_free(char const *s1, char const *s2)
+int	ft_count_char(char *str, char c)
 {
-	size_t	i;
-	size_t	j;
-	char	*str;
+	int	count;
 
-	if (!s1 || !s2)
-		return (NULL);
-	str = (char *) malloc ((ft_strlen(s1) + ft_strlen(s2)) * sizeof(char) + 1);
+	count = 0;
 	if (!str)
-		return (NULL);
-	i = 0;
-	while (s1[i] != '\0')
+		return (count);
+	while (*str)
 	{
-		str[i] = s1[i];
-		i++;
+		if (*str == c)
+			count++;
+		str++;
 	}
-	j = 0;
-	while (s2[j] != '\0')
-	{
-		str[i + j] = s2[j];
-		j++;
-	}
-	str[i + j] = '\0';
-	ft_free_ptr((void **)&(s1));
-	ft_free_ptr((void **)&(s2));
-	return (str);
+	return (count);
 }
