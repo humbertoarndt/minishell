@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 20:28:38 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/15 22:17:34 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/17 23:38:42 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,16 @@ void	ft_advance_after_io_symbol(char **buffer, t_token_type type)
 
 int	ft_is_invalid_file(t_ms *ms)
 {
+	char	*error_message;
+
 	if (ft_strchr(SYMBOLS, *ms->buffer) || !*ms->buffer)
 	{
 		ms->invalid_program = MISSING_FILE_ERR;
+		error_message = ft_syntax_error_message(ms->buffer);
+		print_custom_arg_error(NULL, error_message);
+		ft_free_ptr((void **)&error_message);
+		ft_free_all_ms(ms);
+		exit(2);
 		return (TRUE);
 	}
 	return (FALSE);
@@ -69,6 +76,8 @@ t_token	*ft_io_file_tokenizer(t_ms *ms)
 	type = ft_found_redirection(ms->buffer);
 	ft_advance_after_io_symbol(&ms->buffer, type);
 	ft_advance_ptr_after_white_space(&ms->buffer);
+	if (ft_is_invalid_file(ms))
+			return (NULL);
 	while (!ft_strchr(WHITE_SPACE, *ms->buffer))
 	{
 		if (ft_is_invalid_file(ms))

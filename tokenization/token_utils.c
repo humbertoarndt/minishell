@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 20:16:52 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/01 23:02:34 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/17 23:19:35 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_advance_ptr_after_white_space(char **buffer)
 	size_t	len;
 
 	len = 0;
-	while (ft_strchr(WHITE_SPACE, **buffer))
+	while (ft_strchr(WHITE_SPACE, **buffer) && **buffer)
 	{
 		(*buffer)++;
 		len++;

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/15 22:55:08 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/17 23:38:42 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ void			ft_find_variable_expression_and_replace(t_ms *ms);
 void			ft_perror_formmated(char *message);
 int				ft_check_argc_argc(int argc, char *argv[]);
 void			print_custom_arg_error(char *arg, char *message);
+void			ft_print_cmd_error_and_exit(t_ms *ms, t_executor *exec_tree);
+void			ft_print_error_and_exit(t_ms *ms, char *arg_err,int exit_code);
+char			*ft_syntax_error_message(char *tok);
 // =============================================================================
 // debug
 // =============================================================================

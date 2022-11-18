@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:18:19 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/15 22:20:47 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/17 23:38:42 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 
 # define MINISHELL "minishell: "
 # define BASH_START "$ "
+# define UNCLOSED_QUOTE "> "
 # define HEREDOC_START "> "
 
 # define CHILD_PROCESS 0
@@ -58,6 +59,8 @@
 # define QUESTION_VAR_EXPRESSION_STRING "$?"
 
 # define PWD "PWD"
+
+# define SYNTAX_ERROR "syntax error near unexpected token "
 
 # define TO_MANY_ARGUMENTS_ARG "argv"
 # define TO_MANY_ARGUMENTS_ERROR_MSG "you cannot run minishell with arguments"

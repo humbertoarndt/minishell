@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/16 21:05:02 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/17 22:13:16 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,15 @@ typedef	struct s_hash_item
 	char				*value;
 	struct s_hash_item	*next;
 	struct s_hash_item	*prev;
-} t_hash_item;
+}	t_hash_item;
 
 typedef struct s_hash_table
 {
 	t_hash_item	**hash_items;
 	size_t		count;
 	size_t		size;
-} t_hash_table;
+}	t_hash_table;
+
 
 typedef struct s_env
 {

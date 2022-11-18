@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 18:08:15 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/14 11:25:04 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/17 21:40:32 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 
 void	ft_free_matrix(void ***matrix)
 {
-	size_t	index_matrix;
+	size_t	row_index;
+	size_t	col_index;
 
-	index_matrix = 0;
-	if (!matrix || *matrix[index_matrix])
+	row_index = 0;
+	col_index = 0;
+	if (!matrix || !matrix[row_index])
 		return ;
-	if (*matrix[index_matrix])
+	while (matrix[row_index][col_index])
 	{
-		while (*matrix[index_matrix])
-			ft_free_ptr(*matrix[index_matrix++]);
-		ft_free_ptr(*matrix);
+		ft_free_ptr((void **)&(matrix[row_index][col_index]));
+		col_index++;
 	}
+	free(matrix[row_index]);
+	matrix[row_index] = NULL;
 }
