@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:18:19 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/17 23:38:42 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/21 19:06:22 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define GREEN "\033[0;32m"
 # define YELLOW "\033[0;33m"
 
-# define DEFAULT_PERMISSION 0000664
+# define DEFAULT_PERMISSION 0000644
 
 # define MINISHELL "minishell: "
 # define BASH_START "$ "

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/17 23:38:42 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/21 20:31:10 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ void			ft_find_variable_expression_and_replace(t_ms *ms);
 void			ft_perror_formmated(char *message);
 int				ft_check_argc_argc(int argc, char *argv[]);
 void			print_custom_arg_error(char *arg, char *message);
-void			ft_print_cmd_error_and_exit(t_ms *ms, t_executor *exec_tree);
+void			ft_print_custom_error_and_exit(t_ms *ms, char *argv, char *message,
+					int exit_code);
 void			ft_print_error_and_exit(t_ms *ms, char *arg_err,int exit_code);
 char			*ft_syntax_error_message(char *tok);
 // =============================================================================
@@ -163,7 +164,7 @@ void			ft_dup2_and_close(int fd_to_close, int fd_to_dup);
 void			ft_copy_fds_pipe_to_previous(int fd[2], int prev_fd[2]);
 void			ft_init_pipes(t_ms *ms, t_executor *exec_tree);
 void			ft_handle_pipes(t_ms *ms, t_executor *exec_tree);
-void			ft_set_redirection_fds(t_executor *exec_tree);
+void			ft_set_redirection_fds(t_ms *ms, t_executor *exec_tree);
 void			ft_heredoc_handler(t_ms *ms, t_file *file);
 // void			set_signals(void);
 // void			sigint_handler(int sig);

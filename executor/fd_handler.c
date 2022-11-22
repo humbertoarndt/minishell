@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 22:52:46 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/16 23:18:24 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/21 22:10:38 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	ft_set_file_flags(t_redir_type redir_type)
 {
 	int	flags;
 
+	flags = O_RDONLY;
 	if (redir_type == INFILE || redir_type == HEREDOC)
 		flags = O_RDONLY;
 	else if (redir_type == TRUNCATE)
@@ -81,18 +82,17 @@ int	ft_check_access_file(char *file_name, t_redir_type redir_type)
 	return (file_permission);
 }
 
-int	ft_init_redirection_fds(t_file *file)
+int	ft_init_redirection_fds(t_ms *ms, t_file *file)
 {
-	int		file_permission;
 	int		flags;
 
-	file_permission = ft_check_access_file(file->file, file->type);
 	flags = ft_set_file_flags(file->type);
-	if (file_permission == PERMISSION_NOT_ALLOWED)
-		exit(1); //implement error handler
 	file->fd = open(file->file, flags, DEFAULT_PERMISSION);
 	if (file->fd < 0)
-		exit(1); //implement error handler
+	{
+		ms->exit_code = 1;
+		ft_print_error_and_exit(ms, file->file, errno);
+	}
 	return (file->fd);
 }
 
@@ -123,7 +123,7 @@ void	ft_handle_redirections(int fds[2])
 		ft_dup2_and_close(fds[OUTFILE], STDOUT_FILENO);
 }
 
-void	ft_set_redirection_fds(t_executor *exec_tree)
+void	ft_set_redirection_fds(t_ms *ms, t_executor *exec_tree)
 {
 	int		fds[2];
 	t_file	*file;
@@ -136,9 +136,9 @@ void	ft_set_redirection_fds(t_executor *exec_tree)
 	{
 		file = (t_file *)file_list->content;
 		if (file->type == INFILE || file->type == HEREDOC)
-			fds[INFILE] = ft_init_redirection_fds(file);
+			fds[INFILE] = ft_init_redirection_fds(ms, file);
 		else if (file->type == TRUNCATE || file->type == APPEND)
-			fds[OUTFILE] = ft_init_redirection_fds(file);
+			fds[OUTFILE] = ft_init_redirection_fds(ms, file);
 		file_list = file_list->next;
 	}
 	ft_close_unused_fds(exec_tree->files, fds);
