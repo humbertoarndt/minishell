@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 18:32:05 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/17 23:41:53 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/23 23:01:04 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,16 @@ char	*ft_syntax_error_message(char *tok)
 {
 	char	*token;
 	char	*syntax_error;
+	char	*syntax_error_quoted;
 
 	if (!*tok)
 		token = "newline";
 	else
 		token = tok;
 	syntax_error = ft_strjoin(SYNTAX_ERROR, token);
-	return (syntax_error);
+	syntax_error_quoted = ft_strjoin(syntax_error, "'");
+	ft_free_ptr((void **)&syntax_error);
+	return (syntax_error_quoted);
 }
 
 void	print_custom_arg_error(char *arg, char *message)

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/17 22:13:16 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/23 22:33:38 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ typedef struct s_ms
 {
 	char				*buffer;
 	char				*buffer_start;
+	char				*prompt_str;
 	t_env				env;
 	t_error_type		invalid_program;
 	int					exit_code;

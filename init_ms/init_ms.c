@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 20:48:56 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/15 20:16:55 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/23 22:33:38 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ft_init_ms(t_ms *ms)
 	ms->fd_pipe[READ_FD] = NOT_FOUND_FD;
 	ms->prev_fd_pipe[WRITE_FD] = NOT_FOUND_FD;
 	ms->prev_fd_pipe[READ_FD] = NOT_FOUND_FD;
+	ms->prompt_str = NULL;
 }
 
 void	ft_init_env(t_ms *ms, char *envp[])
