@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 22:12:20 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/15 20:27:15 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/26 17:54:27 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	ft_build_token_list(t_ms *ms)
 		token = ft_quoting_tokenizer(ms);
 	else if (ft_found_redirection(ms->buffer))
 		token = ft_io_file_tokenizer(ms);
-	else if (ft_found_pipe(ms->buffer))
-		token = ft_pipe_tokenizer(ms);
+	else if (ft_found_operator(ms->buffer))
+		token = ft_operator_tokenizer(ms);
 	else if (ft_found_heredoc(ms->buffer))
 		token = ft_heredoc_tokenizer(ms);
 	else if (ft_found_command(ms->buffer))

@@ -6,7 +6,7 @@
 #    By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 18:20:52 by harndt            #+#    #+#              #
-#    Updated: 2022/11/15 20:51:31 by bbonaldi         ###   ########.fr        #
+#    Updated: 2022/11/26 18:39:26 by bbonaldi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SRCS	:=	minishell.c \
 			$(PROMPT)/prompt.c \
 			$(TOKENIZATION)/tokenizer.c $(TOKENIZATION)/quote_tokenizer.c \
 			$(TOKENIZATION)/token_list.c $(TOKENIZATION)/token_utils.c \
-			$(TOKENIZATION)/io_file_tokenizer.c  $(TOKENIZATION)/pipe_tokenizer.c \
+			$(TOKENIZATION)/io_file_tokenizer.c  $(TOKENIZATION)/operator_tokenizer.c \
 			$(TOKENIZATION)/heredoc_tokenizer.c $(TOKENIZATION)/command_tokenizer.c \
 			$(TOKENIZATION)/expansion_handler.c \
 			$(ERROR_HANDLERS)/error_handlers.c $(ERROR_HANDLERS)/error_handlers_utils.c \
@@ -104,7 +104,7 @@ valgrind:
 			--track-origins=yes --trace-children=yes --log-fd=9 ./$(NAME) 9>memcheck.log
 
 valgrind_track:
-			@valgrind $(VGSUPRESS) -s --leak-check=full --show-leak-kinds=all \
-			   --trace-children=yes --track-fds=yes --log-fd=9 ./$(NAME) 9>memcheck.log
+			@valgrind $(VGSUPRESS) -s  --quiet --leak-check=full --show-leak-kinds=all \
+			--track-origins=yes --trace-children=yes --track-fds=yes --log-fd=9 ./$(NAME) 9>memcheck.log
 
 .PHONY:		all clean fclean re

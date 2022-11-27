@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 20:16:52 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/17 23:19:35 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/26 17:51:14 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ char	*ft_create_token_string(t_ms *ms, size_t len)
 t_token		*ft_return_simple_token(t_ms *ms, char *token_string,
 				t_token_type token_type)
 {
-	t_token			*token;
+	t_token	*token;
+	size_t	index;		
 	
-	ms->buffer++;
+	index = ft_strlen(token_string);
+	ms->buffer = ms->buffer + index;
 	token = ft_create_token_node(token_string, token_type);
 	return (token);
 }

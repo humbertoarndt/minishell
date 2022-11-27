@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/23 23:06:03 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/26 17:54:16 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ t_token_type	ft_found_quoting(char *buffer);
 // io file tokenizer
 t_token_type	ft_found_redirection(char	*buffer);
 t_token			*ft_io_file_tokenizer(t_ms *ms);
-// pipe tokenizer
-t_token_type	ft_found_pipe(char *buffer);
-t_token			*ft_pipe_tokenizer(t_ms *ms);
+// operator tokenizer
+t_token_type	ft_found_operator(char *buffer);
+t_token			*ft_operator_tokenizer(t_ms *ms);
 // heredoc tokenizer
 t_token_type	ft_found_heredoc(char *buffer);
 t_token			*ft_heredoc_tokenizer(t_ms *ms);
