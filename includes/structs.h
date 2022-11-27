@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/23 22:33:38 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/27 19:26:46 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ typedef enum e_token_type
 	DOUBLE_QUOTE,
 }	t_token_type;
 
+typedef	enum e_conditional_op
+{
+	AND_OP = 1,
+	OR_OP = 2,
+} t_conditional_op;
 
 typedef enum e_redir_type
 {
@@ -113,6 +118,7 @@ typedef struct s_executor
 	t_cmd				*cmds;
 	struct s_executor	*left;
 	struct s_executor	*right;
+	struct s_executor	*root;
 }	t_executor;
 
 typedef struct s_stdin_out
@@ -129,6 +135,7 @@ typedef struct s_pipes_fd
 typedef struct s_counter
 {
 	int		pipe_count;
+	int		pipe_start;
 	int		cmds_count;
 	int		index;
 
@@ -145,6 +152,8 @@ typedef struct s_ms
 	int					fd_pipe[2];
 	int					prev_fd_pipe[2];
 	int					should_pipe;
+	t_conditional_op	conditional_operator;
+	int					should_exec_next;
 	t_stdin_out			stdin_out;
 	t_executor			*executor;
 	t_list				*pids;

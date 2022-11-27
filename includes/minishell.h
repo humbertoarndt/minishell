@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/26 17:54:16 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/27 19:30:42 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,9 +164,12 @@ void			ft_restore_stdin_out(t_ms *ms);
 void			ft_dup2_and_close(int fd_to_close, int fd_to_dup);
 void			ft_copy_fds_pipe_to_previous(int fd[2], int prev_fd[2]);
 void			ft_init_pipes(t_ms *ms, t_executor *exec_tree);
-void			ft_handle_pipes(t_ms *ms, t_executor *exec_tree);
+void			ft_handle_pipes(t_ms *ms);
 void			ft_set_redirection_fds(t_ms *ms, t_executor *exec_tree);
 void			ft_heredoc_handler(t_ms *ms, t_file *file);
+int				ft_wait_child(pid_t pid);
+int				ft_wait_childs(t_list *pids);
+void			ft_parent_wait(t_ms *ms, pid_t *pid);
 // void			set_signals(void);
 // void			sigint_handler(int sig);
 // void			sigquit_handler(int sig);

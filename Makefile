@@ -6,7 +6,7 @@
 #    By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 18:20:52 by harndt            #+#    #+#              #
-#    Updated: 2022/11/26 18:39:26 by bbonaldi         ###   ########.fr        #
+#    Updated: 2022/11/27 17:29:10 by bbonaldi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ SRCS	:=	minishell.c \
 			$(PARSER)/parser_utils.c \
 			$(EXECUTOR)/executor.c $(EXECUTOR)/commands_builder.c \
 			$(EXECUTOR)/fd_handler.c $(EXECUTOR)/fd_handler_utils.c \
-			$(EXECUTOR)/heredoc_handler.c \
+			$(EXECUTOR)/heredoc_handler.c $(EXECUTOR)/wait.c \
 			#$(SIGNAL)/signal.c \
 			
 OBJS	:=	$(SRCS:.c=.o)

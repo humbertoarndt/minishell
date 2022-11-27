@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 19:29:45 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/12 14:51:32 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/27 19:20:30 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,26 @@ void	ft_add_command_list(t_executor *current_tree, t_token *token_head,
 		current_tree->cmds->cmd_index = ms->ctr.index++;
 }
 
-t_executor	*ft_set_executor(t_token *tokens, t_executor **root,
+t_executor	*ft_set_executor(t_token *tokens,
 			t_executor **current_tree)
 {
 	t_executor	*parent_tree;
 
 	parent_tree = ft_init_tree();
-	if (*root)
-		parent_tree->left = *root;
+	if ((*current_tree)->root)
+	{
+		parent_tree->left = (*current_tree)->root;
+		(*current_tree)->root->root = parent_tree;
+	}
 	else
+	{
+		(*current_tree)->root = parent_tree;
 		parent_tree->left = *current_tree;
-	*root = parent_tree;
+	}
+	(*current_tree)->root = parent_tree;
 	parent_tree->operator = ft_strdup(tokens->token);
 	parent_tree->right = ft_init_tree();
+	parent_tree->right->root = parent_tree;
 	*current_tree = parent_tree->right;
 	return (parent_tree);
 }
@@ -68,18 +75,16 @@ t_executor	*ft_parser(t_ms *ms)
 {
 	t_executor	*current_tree;
 	t_executor	*final_tree;
-	t_executor	*root;
 	t_token		*token_head;
 
 	current_tree = ft_init_tree();
 	final_tree = current_tree;
-	root = NULL;
 	ms->ctr.index = 0;
 	token_head = ms->tokens;
 	while (token_head)
 	{
 		if (ft_has_operator(token_head->type))
-			final_tree = ft_set_executor(token_head, &root, &current_tree);
+			final_tree = ft_set_executor(token_head, &current_tree);
 		else
 			ft_build_commands_and_fds_tree(token_head, current_tree, ms);
 		token_head = token_head->next;

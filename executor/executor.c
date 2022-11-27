@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:20:01 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/27 14:40:41 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/27 19:30:24 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,11 @@
 
 void	ft_execute_tree(t_ms *ms, t_executor *exec_tree);
 
-int	ft_wait_child(pid_t pid)
-{
-	int	exit_code;
-
-	exit_code = SUCCESS_CODE;
-	waitpid(pid, &exit_code, 0);
-	if (WIFEXITED(exit_code))
-		exit_code = WEXITSTATUS(exit_code);
-	return (exit_code);
-}
-
-int	ft_wait_childs(t_list *pids)
-{
-	int	exit_code;
-
-	while (pids)
-	{
-		exit_code = ft_wait_child((*(pid_t *)pids->content));
-		pids = pids->next;
-	}
-	return (exit_code);
-}
-
 void	ft_exec_child(t_ms *ms, t_executor *exec_tree)
 {
 	char		**envp;
 
-	ft_handle_pipes(ms, exec_tree);
+	ft_handle_pipes(ms);
 	ft_set_redirection_fds(ms, exec_tree);
 	envp = ft_rebuild_envp(ms->env.var);
 	if (!exec_tree->cmds->cmd)
@@ -56,10 +33,9 @@ void	ft_exec_child(t_ms *ms, t_executor *exec_tree)
 
 void	ft_exec_cmds(t_ms *ms, t_executor *exec_tree)
 {
-	t_list		*pid_list;
 	pid_t		*pid;
 
-	if (!exec_tree)
+	if (!exec_tree || ms->should_exec_next == FALSE)
 		return ;
 	ft_build_cmds(exec_tree->cmds, ms->env.path);
 	ft_init_pipes(ms, exec_tree);
@@ -73,10 +49,7 @@ void	ft_exec_cmds(t_ms *ms, t_executor *exec_tree)
 		ft_exec_child(ms, exec_tree);
 	}
 	else
-	{
-		pid_list = ft_lstnew(pid);
-		ft_lstadd_back(&ms->pids, pid_list);
-	}
+		ft_parent_wait(ms, pid);
 }
 
 void	ft_execute_pipe(t_ms *ms, t_executor *exec_tree)
@@ -86,13 +59,27 @@ void	ft_execute_pipe(t_ms *ms, t_executor *exec_tree)
 	ft_execute_tree(ms, exec_tree->right);
 }
 
+void	ft_execute_and_or(t_ms *ms, t_executor *exec_tree, t_conditional_op op)
+{
+	ms->conditional_operator = op;
+	ft_execute_tree(ms, exec_tree->left);
+	ft_execute_tree(ms, exec_tree->right);
+}
+
+
 void	ft_execute_tree(t_ms *ms, t_executor *exec_tree)
 {
 	if (!exec_tree)
 		return ;
 	if (exec_tree->operator
-		&& ft_strncmp(exec_tree->operator, PIPE, ft_strlen(PIPE)) == 0)
+		&& ft_strcmp(exec_tree->operator, PIPE) == 0)
 		ft_execute_pipe(ms, exec_tree);
+	else if (exec_tree->operator && 
+		ft_strcmp(exec_tree->operator, AND_IF_OP) == 0)
+		ft_execute_and_or(ms, exec_tree, AND_OP);
+	else if (exec_tree->operator && 
+		ft_strcmp(exec_tree->operator, AND_OR_OP) == 0)
+		ft_execute_and_or(ms, exec_tree, OR_OP);
 	else
 		ft_exec_cmds(ms, exec_tree);
 }
