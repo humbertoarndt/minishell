@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/23 22:33:38 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/27 19:43:32 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef struct s_pipes_fd
 typedef struct s_counter
 {
 	int		pipe_count;
+	int		pipe_start;
 	int		cmds_count;
 	int		index;
 

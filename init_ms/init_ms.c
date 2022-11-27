@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 20:48:56 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/23 22:33:38 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/27 19:44:14 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_init_ms(t_ms *ms)
 	ms->ctr.pipe_count = 0;
 	ms->ctr.cmds_count = 0;
 	ms->ctr.index = 0;
+	ms->ctr.pipe_start = -1;
 	ms->fd_pipe[WRITE_FD] = NOT_FOUND_FD;
 	ms->fd_pipe[READ_FD] = NOT_FOUND_FD;
 	ms->prev_fd_pipe[WRITE_FD] = NOT_FOUND_FD;

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:20:01 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/27 14:42:51 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/27 19:46:50 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,11 @@
 
 void	ft_execute_tree(t_ms *ms, t_executor *exec_tree);
 
-int	ft_wait_child(pid_t pid)
-{
-	int	exit_code;
-
-	exit_code = SUCCESS_CODE;
-	waitpid(pid, &exit_code, 0);
-	if (WIFEXITED(exit_code))
-		exit_code = WEXITSTATUS(exit_code);
-	return (exit_code);
-}
-
-int	ft_wait_childs(t_list *pids)
-{
-	int	exit_code;
-
-	while (pids)
-	{
-		exit_code = ft_wait_child((*(pid_t *)pids->content));
-		pids = pids->next;
-	}
-	return (exit_code);
-}
-
 void	ft_exec_child(t_ms *ms, t_executor *exec_tree)
 {
 	char		**envp;
 
-	ft_handle_pipes(ms, exec_tree);
+	ft_handle_pipes(ms);
 	ft_set_redirection_fds(ms, exec_tree);
 	envp = ft_rebuild_envp(ms->env.var);
 	if (!exec_tree->cmds->cmd)
@@ -62,7 +39,7 @@ void	ft_exec_cmds(t_ms *ms, t_executor *exec_tree)
 	if (!exec_tree)
 		return ;
 	ft_build_cmds(exec_tree->cmds, ms->env.path);
-	ft_init_pipes(ms, exec_tree);
+	ft_init_pipes(ms);
 	pid = (pid_t *)malloc(sizeof(pid_t));
 	*pid = fork();
 	if (*pid == ERROR_CODE_FUNCTION)
