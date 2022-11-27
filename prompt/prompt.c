@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:56:49 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/23 23:05:14 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/27 14:47:27 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char	*ft_get_hostname()
 		index++;
 	hostname_no_nl = ft_substr(hostname, 0, index);
 	ft_free_ptr((void **)&hostname);
+	ft_close_fd(fd);
 	return (hostname_no_nl);
 }
 

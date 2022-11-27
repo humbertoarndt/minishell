@@ -6,13 +6,36 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:20:01 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/21 20:58:42 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/27 14:42:51 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 void	ft_execute_tree(t_ms *ms, t_executor *exec_tree);
+
+int	ft_wait_child(pid_t pid)
+{
+	int	exit_code;
+
+	exit_code = SUCCESS_CODE;
+	waitpid(pid, &exit_code, 0);
+	if (WIFEXITED(exit_code))
+		exit_code = WEXITSTATUS(exit_code);
+	return (exit_code);
+}
+
+int	ft_wait_childs(t_list *pids)
+{
+	int	exit_code;
+
+	while (pids)
+	{
+		exit_code = ft_wait_child((*(pid_t *)pids->content));
+		pids = pids->next;
+	}
+	return (exit_code);
+}
 
 void	ft_exec_child(t_ms *ms, t_executor *exec_tree)
 {
@@ -72,21 +95,6 @@ void	ft_execute_tree(t_ms *ms, t_executor *exec_tree)
 		ft_execute_pipe(ms, exec_tree);
 	else
 		ft_exec_cmds(ms, exec_tree);
-}
-
-
-int	ft_wait_childs(t_list *pids)
-{
-	int	exit_code;
-
-	while (pids)
-	{
-		waitpid((*(pid_t *)pids->content), &exit_code, 0);
-		if (WIFEXITED(exit_code))
-			exit_code = WEXITSTATUS(exit_code);
-		pids = pids->next;
-	}
-	return (exit_code);
 }
 
 int	ft_execute(t_ms *ms)
