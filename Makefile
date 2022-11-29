@@ -6,7 +6,7 @@
 #    By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 18:20:52 by harndt            #+#    #+#              #
-#    Updated: 2022/11/27 17:29:10 by bbonaldi         ###   ########.fr        #
+#    Updated: 2022/11/28 21:58:48 by bbonaldi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ HEADERS	:=	includes
 LIBFT	:=	./libft/libft.a
 SRCS	:=	minishell.c \
 			$(PROMPT)/prompt.c \
-			$(TOKENIZATION)/tokenizer.c $(TOKENIZATION)/quote_tokenizer.c \
+			$(TOKENIZATION)/tokenizer.c $(TOKENIZATION)/open_close_parenthesis_tokenizer.c \
 			$(TOKENIZATION)/token_list.c $(TOKENIZATION)/token_utils.c \
 			$(TOKENIZATION)/io_file_tokenizer.c  $(TOKENIZATION)/operator_tokenizer.c \
 			$(TOKENIZATION)/heredoc_tokenizer.c $(TOKENIZATION)/command_tokenizer.c \

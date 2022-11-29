@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/27 19:30:42 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/28 22:47:27 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,17 @@ void			ft_init_fd_pipes(t_ms *ms);
 // TOKENS
 // =============================================================================
 int				ft_tokenizer(t_ms *ms);
-void			ft_build_token_list(t_ms *ms);
+t_token			*ft_find_last_token(t_token *head);
+void			ft_build_token_list(t_ms *ms, t_token **head);
 //token list
 void			ft_addback_token(t_token **head, t_token *new_token);
 t_token			*ft_create_token_node(char *token, t_token_type type);
 void			ft_clear_tokens(t_token **token_head);
 // quoting tokenizer
-char			*ft_quote_handler(t_ms *ms, char quote);
-t_token			*ft_quoting_tokenizer(t_ms *ms);
-t_token_type	ft_found_quoting(char *buffer);
+char			*ft_open_close_token_handler(t_ms *ms, char open_char,
+					char close_char);
+t_token			*ft_open_close_parenthesis_tokenizer(t_ms *ms);
+t_token_type	ft_open_close_parenthesis_quoting(char *buffer);
 // io file tokenizer
 t_token_type	ft_found_redirection(char	*buffer);
 t_token			*ft_io_file_tokenizer(t_ms *ms);
@@ -77,11 +79,14 @@ t_token			*ft_heredoc_tokenizer(t_ms *ms);
 t_token			*ft_command_tokenizer(t_ms *ms);
 t_token_type	ft_found_command(char *buffer);
 // token utils
-int				has_closing_char(t_ms *ms, char quote);
+int				has_closing_char(t_ms *ms, char open, char close);
+size_t			ft_advance_ptr_until_char(char **buf, char ch);
 char			*ft_create_token_string(t_ms *ms, size_t len);
 t_token			*ft_return_simple_token(t_ms *ms, char *token_string,
 					t_token_type token_type);
 int				ft_advance_ptr_after_white_space(char **buffer);
+char			*ft_open_close_token_handler(t_ms *ms, char open_char,
+					char close_char);
 // expansion
 char			*ft_replace_variable_expression(t_ms *ms, char *str);
 void			ft_find_variable_expression_and_replace(t_ms *ms);

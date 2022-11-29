@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:18:19 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/23 22:58:43 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/28 21:57:30 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@
 # define SPACE_CHAR ' '
 # define SINGLE_QUOTE_CHAR '\''
 # define DOUBLE_QUOTE_CHAR '"'
+# define OPEN_PARENTHESIS_CHAR '('
+# define CLOSE_PARENTHESIS_CHAR ')'
 # define COMMA_CHAR ':' 
 # define EQUAL_CHAR '='
 # define EQUAL_STRING "="

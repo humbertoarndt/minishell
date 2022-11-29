@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 20:28:38 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/23 23:06:31 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/28 22:10:11 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_token	*ft_create_io_file_token_with_quote(t_ms *ms, t_token_type type)
 {
 	t_token			*io_file;
 	
-	io_file = ft_quoting_tokenizer(ms);
+	io_file = ft_open_close_parenthesis_tokenizer(ms);
 	if (!io_file)
 		return (NULL);
 	io_file->type = type;

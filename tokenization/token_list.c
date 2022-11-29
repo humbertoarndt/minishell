@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 18:58:01 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/09 19:41:42 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/28 21:46:12 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_token	*ft_create_token_node(char *token, t_token_type type)
 	new_token->should_expand = TRUE;
 	new_token->prev = NULL;
 	new_token->next = NULL;
+	new_token->subshell = NULL;
 	return (new_token);
 }
 

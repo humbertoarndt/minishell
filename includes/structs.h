@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/27 19:26:46 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/28 23:36:35 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ typedef enum e_token_type
 	VAR_EXPRESSION,
 	WILDCARD,
 	PIPELINE,
-	OPEN_PARENTHESIS,
-	CLOSE_PARENTHESIS,
+	PARENTHESIS,
 	SINGLE_QUOTE,
 	DOUBLE_QUOTE,
 }	t_token_type;
@@ -70,6 +69,7 @@ typedef struct s_token
 	int				should_expand;
 	struct s_token	*prev;
 	struct s_token	*next;
+	struct s_token	*subshell;
 }				t_token;
 
 typedef	struct s_hash_item
@@ -152,6 +152,7 @@ typedef struct s_ms
 	int					fd_pipe[2];
 	int					prev_fd_pipe[2];
 	int					should_pipe;
+	int					has_subshell;
 	t_conditional_op	conditional_operator;
 	int					should_exec_next;
 	t_stdin_out			stdin_out;
