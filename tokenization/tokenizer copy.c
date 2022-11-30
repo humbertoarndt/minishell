@@ -1,56 +1,115 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*   tokenizer copy.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 22:12:20 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/10/26 20:34:17 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/29 23:21:38 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minishell.h"
 
-
-int	ft_keep_literal_string(char *line, char quoting_char, int *index)
+void	ft_build_token_list(t_ms *ms, t_token **head)
 {
-	int i;
-	int	found_quoting_char;
+	t_token *token;
 
-	i = *index;
-	found_quoting_char = FALSE;
-	if (line[i] == quoting_char)
-	{
-		line[i] = SENTINEL_CHAR;
-		while (line[i] && line[i] != quoting_char)
-			i++;
-		line[i] = SENTINEL_CHAR;
-		found_quoting_char = TRUE;
-	}
-	*index = i;
-	return (found_quoting_char);
+	token = NULL;
+	if (ft_open_close_parenthesis_quoting(ms->buffer))
+		token = ft_open_close_parenthesis_tokenizer(ms);
+	else if (ft_found_redirection(ms->buffer))
+		token = ft_io_file_tokenizer(ms);
+	else if (ft_found_operator(ms->buffer))
+		token = ft_operator_tokenizer(ms);
+	else if (ft_found_heredoc(ms->buffer))
+		token = ft_heredoc_tokenizer(ms);
+	else if (ft_found_command(ms->buffer))
+		token = ft_command_tokenizer(ms);
+	if (token)
+		ft_addback_token(head, token);
 }
 
-void	ft_replace_whitespace_by_sentinel_char(char *line, char *delimiters)
+t_token	*ft_token_builder(t_ms *ms)
 {
-	int		i;
+	t_token	*head;
 
-	i = 0;
-	while (line[i])
+	head = NULL;
+	while (ms->buffer && *ms->buffer)
 	{
-		ft_keep_literal_string(line, SINGLE_QUOTE_CHAR, &i);
-		ft_keep_literal_string(line, DOUBLE_QUOTE_CHAR, &i);
-		if (ft_strchr(delimiters, line[i]))
-			line[i]= SENTINEL_CHAR;
-		i++;
+		ft_build_token_list(ms, &head);
+		if (ms->buffer && *ms->buffer)
+			ms->buffer++;
+	}
+	return (head);
+}
+
+t_token *ft_create_subshell_token(t_ms *ms_sub, t_token *token)
+{
+	t_token	*subshell_token;
+
+	subshell_token = NULL;
+	if (token->type == PARENTHESIS)
+	{
+		ms_sub->buffer = token->token;
+		ms_sub->buffer_start = token->token;
+		subshell_token = ft_token_builder(ms_sub);
+	}
+	return (subshell_token);
+}
+
+void	ft_build_subshell_token_list(t_token **head, int has_subshell)
+{
+	t_token	*token_l;
+	t_ms	ms_sub;
+	t_token	*subshell_token;
+	t_token	*tmp;
+
+	if (!head || !*head || has_subshell == FALSE)
+		return ;
+	token_l = ft_find_last_token(*head);
+	if (token_l == *head)
+	{
+		subshell_token = ft_create_subshell_token(&ms_sub, *head);
+		ft_clear_tokens(head);
+		*head = subshell_token;
+		return ;
+	}
+	while (token_l)
+	{
+		subshell_token = ft_create_subshell_token(&ms_sub, token_l);
+		if (subshell_token)
+		{
+			tmp = token_l->prev;
+			if (tmp && !ft_has_operator(tmp->type))
+				exit(1); //implementar error handler, syntax error
+			if (!tmp)
+			{
+				token_l->type = SUBSHELL;
+				ft_add_front_subshell(token_l, subshell_token);
+			}
+			else
+			{
+				tmp->next = token_l->next;
+				if (token_l->next)
+					token_l->next->prev =  tmp;
+				//ft_add_front_subshell(token_l->subshell, subshell_token);
+				ft_delete_token(token_l, TRUE);
+				ft_add_front_subshell(tmp, subshell_token);
+				token_l = tmp;
+			}
+		}
+		token_l = token_l->prev;
+		//implement logic if token list has multiple tokens
 	}
 }
 
-char	**ft_tokenizer(char *line)
+
+int	ft_tokenizer(t_ms *ms)
 {
-	char	**split_line;
-	ft_replace_whitespace_by_sentinel_char(line, WHITE_SPACE);
-	split_line = ft_split(line, SENTINEL_CHAR);
-	return (split_line);
+	ms->tokens = ft_token_builder(ms);
+	ft_build_subshell_token_list(&ms->tokens, ms->has_subshell);
+	ft_find_variable_expression_and_replace(ms);
+	return (SUCCESS_CODE);
 }

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/28 23:36:35 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/29 23:21:38 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef enum e_token_type
 	PARENTHESIS,
 	SINGLE_QUOTE,
 	DOUBLE_QUOTE,
+	SUBSHELL,
 }	t_token_type;
 
 typedef	enum e_conditional_op
@@ -69,7 +70,7 @@ typedef struct s_token
 	int				should_expand;
 	struct s_token	*prev;
 	struct s_token	*next;
-	struct s_token	*subshell;
+	int				subshell_id;
 }				t_token;
 
 typedef	struct s_hash_item

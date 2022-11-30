@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 22:12:20 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/28 23:38:16 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/29 23:28:52 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@ t_token	*ft_token_builder(t_ms *ms)
 	return (head);
 }
 
-t_token *ft_create_subshell_token(t_ms *ms_sub, t_token *token)
+t_token *ft_create_subshell_token(t_ms *ms_sub, t_token *token, size_t index)
 {
 	t_token	*subshell_token;
+	t_token	*tmp;
 
 	subshell_token = NULL;
 	if (token->type == PARENTHESIS)
@@ -55,36 +56,99 @@ t_token *ft_create_subshell_token(t_ms *ms_sub, t_token *token)
 		ms_sub->buffer = token->token;
 		ms_sub->buffer_start = token->token;
 		subshell_token = ft_token_builder(ms_sub);
+		tmp = subshell_token;
+		while (tmp)
+		{
+			tmp->subshell_id = index;
+			tmp = tmp->next;
+		}
 	}
 	return (subshell_token);
 }
 
+// void	ft_build_subshell_token_list(t_token **head, int has_subshell)
+// {
+// 	t_token	*token_l;
+// 	t_ms	ms_sub;
+// 	t_token	*subshell_token;
+// 	t_token	*tmp;
+
+// 	if (!head || !*head || has_subshell == FALSE)
+// 		return ;
+// 	token_l = ft_find_last_token(*head);
+// 	if (token_l == *head)
+// 	{
+// 		subshell_token = ft_create_subshell_token(&ms_sub, *head);
+// 		ft_clear_tokens(head);
+// 		*head = subshell_token;
+// 		return ;
+// 	}
+// 	while (token_l)
+// 	{
+// 		subshell_token = ft_create_subshell_token(&ms_sub, token_l);
+// 		if (subshell_token)
+// 		{
+// 			tmp = token_l->prev;
+// 			if (tmp && !ft_has_operator(tmp->type))
+// 				exit(1); //implementar error handler, syntax error
+// 			if (!tmp)
+// 			{
+// 				token_l->type = SUBSHELL;
+// 				ft_add_front_subshell(token_l, subshell_token);
+// 			}
+// 			else
+// 			{
+// 				tmp->next = token_l->next;
+// 				if (token_l->next)
+// 					token_l->next->prev =  tmp;
+// 				//ft_add_front_subshell(token_l->subshell, subshell_token);
+// 				ft_delete_token(token_l, TRUE);
+// 				ft_add_front_subshell(tmp, subshell_token);
+// 				token_l = tmp;
+// 			}
+// 		}
+// 		token_l = token_l->prev;
+// 		//implement logic if token list has multiple tokens
+// 	}
+// }
 void	ft_build_subshell_token_list(t_token **head, int has_subshell)
 {
+	t_token	*subshell_token_l;
 	t_token	*token_l;
 	t_ms	ms_sub;
-	t_token	*subshell_token;
+	size_t	index;
 
-	if (!head || !*head)
+	if (!head || !*head || has_subshell == FALSE)
 		return ;
-	if (has_subshell == FALSE)
-		return ;
-	token_l = ft_find_last_token(*head);
-	if (token_l == *head)
-	{
-		subshell_token = ft_create_subshell_token(&ms_sub, *head);
-		ft_clear_tokens(head);
-		*head = subshell_token;
-		return ;
-	}
-	subshell_token = NULL;
+	index = 0;
+	token_l = *head;
 	while (token_l)
 	{
-		token_l = token_l->prev;
-		//implement logic if token list has multiple tokens
+		subshell_token_l = ft_create_subshell_token(&ms_sub, token_l, index);
+		if (subshell_token_l)
+		{
+			if (token_l->prev && !ft_has_operator(token_l->prev->type))
+ 				exit(1);
+			if (token_l->prev)
+			{
+				token_l->prev->next = subshell_token_l;
+			}
+			else
+				*head = subshell_token_l;
+			subshell_token_l->prev = token_l->prev;
+			subshell_token_l = ft_find_last_token(subshell_token_l);
+			if (token_l->next)
+			{
+				token_l->next->prev = subshell_token_l;
+			}
+			subshell_token_l->next = token_l->next;
+			ft_delete_token(token_l);
+			index++;
+			token_l = subshell_token_l->prev;
+		}
+		token_l = token_l->next;
 	}
 }
-
 
 int	ft_tokenizer(t_ms *ms)
 {

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_list.c                                       :+:      :+:    :+:   */
+/*   token_list copy 2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 18:58:01 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/29 23:06:46 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/29 23:21:38 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,42 @@ void	ft_addback_token(t_token **head, t_token *new_token)
 	new_token->prev = last_token;
 }
 
-void	ft_delete_token(t_token *token)
+void	ft_add_front_subshell(t_token *token, t_token *subshell_token)
+{
+	if (!(token)->subshell)
+		token->subshell = subshell_token;
+	else
+	{
+		subshell_token->subshell = token->subshell;
+		token->subshell = subshell_token;
+	}
+}
+
+
+void	ft_delete_subshells_token(t_token **token_head)
+{
+	t_token	*last_subshell;
+	t_token	*tmp;
+
+	if (!token_head || !*token_head)
+		return ;
+	last_subshell = (*token_head)->subshell;
+	while (last_subshell)
+	{
+		tmp = last_subshell->subshell;
+		ft_clear_tokens(&last_subshell);
+		last_subshell = tmp;
+	}
+}
+
+void	ft_delete_token(t_token *token, int delete_shubshell)
 {
 	if (token && token->token)
 	{
 		ft_free_ptr((void **)&(token->token));
 		ft_free_ptr((void **)&(token));
+		if (delete_shubshell)
+			ft_delete_subshells_token(&token);
 		token = NULL;
 	}
 }
@@ -71,12 +101,12 @@ void	ft_clear_tokens(t_token **token_head)
 	{
 		if (!(*token_head)->next)
 		{
-			ft_delete_token(*token_head);
+			ft_delete_token(*token_head, TRUE);
 			break ;
 		}
 		token_tmp = (*token_head)->next;
 		token_tmp->prev = NULL;
-		ft_delete_token(*token_head);
+		ft_delete_token(*token_head, TRUE);
 		(*token_head) = token_tmp;
 	}
 	token_head = NULL;
