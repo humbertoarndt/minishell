@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:27:30 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/27 15:28:59 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/01 23:26:06 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ t_executor	*ft_init_tree(void)
 	executor->left = NULL;
 	executor->right = NULL;
 	executor->root = NULL;
+	executor->subshell = NULL;
 	executor->cmds = ft_init_cmds();
+	executor->is_subshell = FALSE;
 	return (executor);
 }

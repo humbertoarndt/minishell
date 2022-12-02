@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 20:48:56 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/29 21:33:17 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/01 23:15:23 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_init_ms(t_ms *ms)
 	ms->should_exec_next = TRUE;
 	ms->has_subshell = FALSE;
 	ms->conditional_operator = FALSE;
+	ms->ctr.subshell_count = 0;
 }
 
 void	ft_init_env(t_ms *ms, char *envp[])

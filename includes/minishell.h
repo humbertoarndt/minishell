@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/29 23:05:55 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/30 22:04:17 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void			ft_init_fd_pipes(t_ms *ms);
 int				ft_tokenizer(t_ms *ms);
 t_token			*ft_find_last_token(t_token *head);
 void			ft_build_token_list(t_ms *ms, t_token **head);
+t_token			*ft_create_subshell_token(t_ms *ms_sub, t_token *token,
+					size_t index);
 //token list
 void			ft_delete_token(t_token *token);
 void			ft_addback_token(t_token **head, t_token *new_token);

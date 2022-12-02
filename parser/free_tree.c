@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 22:05:39 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/12 14:25:12 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/01 20:00:54 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ void	ft_free_cmds(t_cmd **cmds)
 
 void	ft_free_tree(t_executor **exec)
 {
+	t_executor	*exec_subshell;
+	t_executor	*exec_tmp;
+
 	if (*exec)
 	{
 		if ((*exec)->left)
@@ -38,6 +41,13 @@ void	ft_free_tree(t_executor **exec)
 			free((*exec)->operator);
 		ft_lstclear(&(*exec)->files, free);
 		ft_free_cmds(&(*exec)->cmds);
+		exec_subshell = (*exec)->subshell;
+		while (exec_subshell)
+		{
+			exec_tmp = exec_subshell->subshell;
+			ft_free_tree(&exec_subshell);
+			exec_subshell = exec_tmp;
+		}
 		free(*exec);
 		*exec = NULL;
 	}

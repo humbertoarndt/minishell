@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:20:01 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/27 19:30:24 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/01 18:29:52 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	ft_exec_cmds(t_ms *ms, t_executor *exec_tree)
 {
 	pid_t		*pid;
 
-	if (!exec_tree || ms->should_exec_next == FALSE)
+	if (!exec_tree || ms->should_exec_next == FALSE
+		|| exec_tree->cmds->cmd_index < 0)
 		return ;
 	ft_build_cmds(exec_tree->cmds, ms->env.path);
 	ft_init_pipes(ms, exec_tree);
@@ -69,8 +70,15 @@ void	ft_execute_and_or(t_ms *ms, t_executor *exec_tree, t_conditional_op op)
 
 void	ft_execute_tree(t_ms *ms, t_executor *exec_tree)
 {
+	t_executor *current_subshell;
 	if (!exec_tree)
 		return ;
+	current_subshell = exec_tree->subshell;
+	while (current_subshell)
+	{
+		ft_execute_tree(ms, current_subshell);
+		current_subshell = current_subshell->subshell;
+	}
 	if (exec_tree->operator
 		&& ft_strcmp(exec_tree->operator, PIPE) == 0)
 		ft_execute_pipe(ms, exec_tree);

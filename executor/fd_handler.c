@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 22:52:46 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/27 19:34:20 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/01 23:23:47 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,39 @@ void	ft_handle_pipes(t_ms *ms)
 	}
 }
 
+int	ft_subshell_has_pipe(t_ms *ms, t_executor *exec)
+{
+	t_executor	*exec_root;
+	size_t		index;
+
+
+	if (ms->ctr.subshell_count <= 0 || exec->is_subshell == FALSE)
+		return (FALSE);
+	ms->ctr.subshell_count--;
+	exec_root = exec->root;
+	index = 2;
+	while (index)
+	{
+		if (!exec_root)
+			break;
+		exec_root = exec_root->root;
+		index--;
+	}
+	if (index == 0 && exec_root)
+		return (ft_strcmp(exec_root->operator, PIPE) == 0);
+	return (FALSE);
+}	
+
 void	ft_init_pipes(t_ms *ms, t_executor *exec_tree)
 {
 	if (ms->should_exec_next == FALSE)
 		return ;
-	if (ms->should_pipe && ft_strcmp(exec_tree->root->operator, PIPE) == 0)
+	if (ms->should_pipe && (ft_strcmp(exec_tree->root->operator, PIPE) == 0 
+	|| (ft_subshell_has_pipe(ms, exec_tree))))
 	{
 		ms->ctr.pipe_start++;
 		ft_close_pipe_fds(ms->prev_fd_pipe);
-		if (ms->ctr.pipe_start == ms->ctr.pipe_count)
+		if (ms->ctr.pipe_start >= ms->ctr.pipe_count)
 			return ;
 		ft_copy_fds_pipe_to_previous(ms->fd_pipe, ms->prev_fd_pipe);
 		if (pipe(ms->fd_pipe) == ERROR_CODE_FUNCTION)

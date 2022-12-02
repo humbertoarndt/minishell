@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/29 23:21:38 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/01 23:16:16 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,9 @@ typedef struct s_executor
 	struct s_executor	*left;
 	struct s_executor	*right;
 	struct s_executor	*root;
+	struct s_executor	*subshell;
+	struct s_executor	*subshell_root;
+	int					is_subshell;
 }	t_executor;
 
 typedef struct s_stdin_out
@@ -138,6 +141,7 @@ typedef struct s_counter
 	int		pipe_count;
 	int		pipe_start;
 	int		cmds_count;
+	int		subshell_count;
 	int		index;
 
 }	t_counter;

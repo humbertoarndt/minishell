@@ -6,11 +6,13 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 19:29:45 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/27 19:20:30 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/01 23:29:53 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_executor	*ft_parser(t_ms *ms);
 
 void	ft_add_file(t_executor *current_tree, t_token *token_head)
 {
@@ -36,6 +38,42 @@ void	ft_add_command_list(t_executor *current_tree, t_token *token_head,
 	if (current_tree->cmds->argv_list && 
 		current_tree->cmds->argv_list->next == NULL)
 		current_tree->cmds->cmd_index = ms->ctr.index++;
+}
+
+void	ft_set_is_subshell(t_executor *exec_tree)
+{
+	if (!exec_tree)
+		return ;
+	exec_tree->is_subshell = TRUE;
+	ft_set_is_subshell(exec_tree->left);
+	ft_set_is_subshell(exec_tree->right);
+}
+
+void	ft_add_subshell(t_executor *current_tree, t_token *token_head, t_ms *ms)
+{
+	t_ms		ms_sub;
+	t_token		*subshell_token_l;
+	t_executor	*subshell_tree;
+	size_t		index;
+
+	if (!current_tree || !token_head)
+		return ;
+	index = 0;
+	ms->ctr.subshell_count++;
+	ms_sub.ctr.index = 0;
+	subshell_token_l = ft_create_subshell_token(&ms_sub, token_head, index);
+	ms_sub.tokens = subshell_token_l;
+	subshell_tree = ft_parser(&ms_sub);
+	subshell_tree->root = current_tree;
+	ft_set_is_subshell(subshell_tree);
+	if (!current_tree->subshell)
+	{
+		current_tree->subshell = subshell_tree;
+		return ;
+	}
+	subshell_tree->subshell = current_tree->subshell;
+	current_tree->subshell = subshell_tree;
+	subshell_tree->subshell = NULL;
 }
 
 t_executor	*ft_set_executor(t_token *tokens,
@@ -67,8 +105,27 @@ void	ft_build_commands_and_fds_tree(t_token *token_head,
 {
 	if (ft_has_redirect(token_head->type))
 		ft_add_file(current_tree, token_head);
+	else if (token_head->type == PARENTHESIS)
+		ft_add_subshell(current_tree, token_head, ms);
 	else
 		ft_add_command_list(current_tree, token_head, ms);
+}
+
+void	ft_add_subshell_root(t_executor *final_tree)
+{
+	t_executor	*last_subshell;
+
+	if (!final_tree)
+		return ;
+	last_subshell = final_tree->subshell;
+	while (last_subshell && last_subshell->subshell)
+	{
+		last_subshell = last_subshell->subshell;
+	}
+	if (last_subshell)
+		last_subshell->subshell_root = final_tree->root;
+	ft_add_subshell_root(final_tree->left);
+	ft_add_subshell_root(final_tree->right);
 }
 
 t_executor	*ft_parser(t_ms *ms)
@@ -90,5 +147,6 @@ t_executor	*ft_parser(t_ms *ms)
 		token_head = token_head->next;
 	}
 	ft_cmds_counter(ms, final_tree);
+	//ft_add_subshell_root(final_tree);
 	return (final_tree);
 }
