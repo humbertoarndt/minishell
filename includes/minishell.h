@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/30 22:04:17 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/05 19:58:05 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ void			print_custom_arg_error(char *arg, char *message);
 void			ft_print_custom_error_and_exit(t_ms *ms, char *argv, char *message,
 					int exit_code);
 void			ft_print_error_and_exit(t_ms *ms, char *arg_err,int exit_code);
+void			ft_print_custom_error_and_exit2(t_ms *ms, char *argv[2],
+					char *message, int exit_code);
 char			*ft_syntax_error_message(char *tok);
 void			ft_print_syntax_error(t_ms *ms);
 // =============================================================================

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 22:52:46 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/01 23:23:47 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/05 23:00:30 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,32 +38,47 @@ void	ft_handle_pipes(t_ms *ms)
 int	ft_subshell_has_pipe(t_ms *ms, t_executor *exec)
 {
 	t_executor	*exec_root;
-	size_t		index;
+	t_executor	*most_left_exec;
 
-
-	if (ms->ctr.subshell_count <= 0 || exec->is_subshell == FALSE)
+	if (exec->is_subshell == FALSE)
 		return (FALSE);
 	ms->ctr.subshell_count--;
 	exec_root = exec->root;
-	index = 2;
-	while (index)
+	while (exec_root)
 	{
-		if (!exec_root)
+		if (exec_root->operator == NULL && exec->root->cmds->cmd_index == -2)
 			break;
 		exec_root = exec_root->root;
-		index--;
 	}
-	if (index == 0 && exec_root)
-		return (ft_strcmp(exec_root->operator, PIPE) == 0);
+	most_left_exec = exec_root->subshell;
+	while (most_left_exec)
+	{
+		if (most_left_exec == exec)
+			break;
+		most_left_exec = most_left_exec->left;
+	}
+	if (exec_root && exec_root->root && most_left_exec == exec)
+		return (ft_strcmp(exec_root->root->operator, PIPE) == 0);
 	return (FALSE);
-}	
+}
+
+int	ft_should_pipe(t_ms *ms, t_executor *exec_tree)
+{
+	int	should_pipe;
+
+	should_pipe = (exec_tree->root && ft_strcmp(exec_tree->root->operator, PIPE) == 0)
+	|| (exec_tree->root && exec_tree->root->root && exec_tree->root->right == exec_tree
+	 && ft_strcmp(exec_tree->root->root->operator, PIPE) == 0) 
+	|| (ft_subshell_has_pipe(ms, exec_tree));
+	return (should_pipe);
+}
 
 void	ft_init_pipes(t_ms *ms, t_executor *exec_tree)
 {
 	if (ms->should_exec_next == FALSE)
 		return ;
-	if (ms->should_pipe && (ft_strcmp(exec_tree->root->operator, PIPE) == 0 
-	|| (ft_subshell_has_pipe(ms, exec_tree))))
+	ms->should_pipe = ft_should_pipe(ms, exec_tree);
+	if (ms->should_pipe)
 	{
 		ms->ctr.pipe_start++;
 		ft_close_pipe_fds(ms->prev_fd_pipe);

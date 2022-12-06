@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/01 23:16:16 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/03 18:50:18 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ typedef struct s_executor
 	char				*operator;
 	t_list				*files;
 	t_cmd				*cmds;
+	int					should_pipe;
 	struct s_executor	*left;
 	struct s_executor	*right;
 	struct s_executor	*root;

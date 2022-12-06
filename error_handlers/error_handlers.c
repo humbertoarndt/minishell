@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 18:28:39 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/23 23:07:18 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/05 20:38:07 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,19 @@ void	ft_print_custom_error_and_exit(t_ms *ms, char *argv, char *message,
 {
 	ft_restore_stdin_out(ms);
 	print_custom_arg_error(argv, message);
+	ft_free_all_ms(ms);
+	exit(exit_code); // trocar pelo próprio exit
+}
+
+void	ft_print_custom_error_and_exit2(t_ms *ms, char *argv[2], char *message,
+			int exit_code)
+{
+	char	*concat_argv;
+
+	concat_argv = ft_strjoin(argv[0], argv[1]);
+	ft_restore_stdin_out(ms);
+	print_custom_arg_error(concat_argv, message);
+	ft_free_ptr((void **)&concat_argv);
 	ft_free_all_ms(ms);
 	exit(exit_code); // trocar pelo próprio exit
 }

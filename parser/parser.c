@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 19:29:45 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/01 23:29:53 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/05 22:36:47 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,9 @@ void	ft_add_subshell(t_executor *current_tree, t_token *token_head, t_ms *ms)
 		return ;
 	index = 0;
 	ms->ctr.subshell_count++;
-	ms_sub.ctr.index = 0;
+	ft_init_ms(&ms_sub);
 	subshell_token_l = ft_create_subshell_token(&ms_sub, token_head, index);
+	ms->ctr.pipe_count += ms_sub.ctr.pipe_count;
 	ms_sub.tokens = subshell_token_l;
 	subshell_tree = ft_parser(&ms_sub);
 	subshell_tree->root = current_tree;
@@ -92,7 +93,6 @@ t_executor	*ft_set_executor(t_token *tokens,
 		(*current_tree)->root = parent_tree;
 		parent_tree->left = *current_tree;
 	}
-	(*current_tree)->root = parent_tree;
 	parent_tree->operator = ft_strdup(tokens->token);
 	parent_tree->right = ft_init_tree();
 	parent_tree->right->root = parent_tree;
@@ -111,19 +111,31 @@ void	ft_build_commands_and_fds_tree(t_token *token_head,
 		ft_add_command_list(current_tree, token_head, ms);
 }
 
+void	ft_set_subshell_root(t_executor *subshell, t_executor *subshell_root)
+{
+	if (!subshell)
+		return ;
+	subshell->subshell_root = subshell_root;
+	ft_set_subshell_root(subshell->left, subshell_root);
+	ft_set_subshell_root(subshell->right, subshell_root);
+}
+
 void	ft_add_subshell_root(t_executor *final_tree)
 {
-	t_executor	*last_subshell;
+	t_executor	*subshell_root;
+	t_executor	*subshell;
 
 	if (!final_tree)
 		return ;
-	last_subshell = final_tree->subshell;
-	while (last_subshell && last_subshell->subshell)
+	subshell_root = final_tree->subshell;
+	while (subshell_root && subshell_root->operator)
 	{
-		last_subshell = last_subshell->subshell;
+		if (subshell_root->cmds == NULL)
+			break ;
+		subshell_root = subshell_root->root;
 	}
-	if (last_subshell)
-		last_subshell->subshell_root = final_tree->root;
+	subshell = final_tree->subshell;
+	ft_set_subshell_root(subshell, subshell_root);
 	ft_add_subshell_root(final_tree->left);
 	ft_add_subshell_root(final_tree->right);
 }
