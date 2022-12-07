@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/23 20:43:56 by harndt            #+#    #+#              #
-#    Updated: 2022/11/16 21:50:23 by bbonaldi         ###   ########.fr        #
+#    Updated: 2022/11/30 14:19:36 by harndt           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,7 @@ SRCS	+=	ft_atol.c	ft_lstat.c	ft_lstdup_int.c	ft_lstsort.c	\
 
 SRCS	+=	ft_free_ptr.c	ft_lstclear_not_free_content.c	ft_free_matrix.c \
 			ft_strjoin_free.c	ft_strcmp.c	ft_strchr_pos.c	ft_replace_str.c \
-			ft_count_char.c
+			ft_count_char.c	ft_atoll.c
 
 # ==============================================================================
 # COLORS

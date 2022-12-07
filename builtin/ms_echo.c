@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ms_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 19:02:25 by harndt            #+#    #+#             */
-/*   Updated: 2022/12/07 15:17:20 by harndt           ###   ########.fr       */
+/*   Created: 2022/12/05 21:57:49 by harndt            #+#    #+#             */
+/*   Updated: 2022/12/05 22:37:43 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-size_t	ft_strlen(const char *str)
+t_bool	ms_echo(t_ms *ms, char **argv, t_bool is_child)
 {
-	size_t	size;
+	size_t	i;
+	t_bool	nl;
 
-	size = 0;
-	while (str[size])
-		size++;
-	return (size);
+	i = 1;
+	nl = TRUE;
+	if (argv[i] && !ft_strcmp(argv[i], "-n"))
+	{
+		nl = FALSE;
+		i++;
+	}
+	while (argv[i])
+		ft_putstr_fd(argv[i++], STDOUT);
+	if (nl)
+		ft_putendl_fd("",STDOUT );
+	kill_child(ms, is_child, 0); // TODO Definir valor de exit_code
+	return (TRUE);
 }

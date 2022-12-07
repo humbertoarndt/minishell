@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:18:19 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/21 19:06:22 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/05 20:07:49 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@
 # define COMMAND_NOT_FOUND_ERROR_CODE 127
 # define COMMAND_NOT_FOUND_ERROR_MSG "command not found"
 # define FILE_NOT_FOUND_ERROR_MSG "no such file or directory!"
+# define NUMERIC_ARGUMENT_REQUIRED "numeric argument required"
+# define EXIT_TOO_MANY_ARGUMENTS "too many arguments"
 
 # define PIPE_CREATION_ERROR_MSG "Error on creating pipe!"
 # define FORK_CREATION_ERROR_MSG "Error on initing fork!"
@@ -104,5 +106,10 @@
 
 //HASH_TABLE
 # define HASH_TABLE_SIZE 907
+
+//MIN AND MAX LONG LONG RANGE
+# define MAX_LLONG "9223372036854775807"
+# define MAX_LLONG_S "+9223372036854775807"
+# define MIN_LLONG "-9223372036854775807"
 
 #endif

@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ms_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 19:02:25 by harndt            #+#    #+#             */
-/*   Updated: 2022/12/07 15:17:20 by harndt           ###   ########.fr       */
+/*   Created: 2022/12/05 21:58:12 by harndt            #+#    #+#             */
+/*   Updated: 2022/12/05 22:37:57 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-size_t	ft_strlen(const char *str)
+t_bool	ms_unset(t_ms *ms, char **argv, t_bool is_child)
 {
-	size_t	size;
+	size_t	i;
 
-	size = 0;
-	while (str[size])
-		size++;
-	return (size);
+	i = -1;
+	while (argv[++i])
+		ft_delete_hash_item_by_key(ms->env.var, argv[i]);
+	kill_child(ms, is_child, 0); // TODO Definir valor de exit_code
+	return (TRUE);
 }

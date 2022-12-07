@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:20:01 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/21 20:58:42 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/05 22:29:38 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,18 @@ void	ft_exec_child(t_ms *ms, t_executor *exec_tree)
 
 	ft_handle_pipes(ms, exec_tree);
 	ft_set_redirection_fds(ms, exec_tree);
-	envp = ft_rebuild_envp(ms->env.var);
-	if (!exec_tree->cmds->cmd)
+	if (!is_builtin(ms, exec_tree, TRUE))
 	{
- 		ft_free_matrix((void ***)&(envp));
-		ft_print_custom_error_and_exit(ms, exec_tree->cmds->argv[0],
-			COMMAND_NOT_FOUND_ERROR_MSG, COMMAND_NOT_FOUND_ERROR_CODE);
+		envp = ft_rebuild_envp(ms->env.var);
+		if (!exec_tree->cmds->cmd)
+		{
+			ft_free_matrix((void ***)&(envp));
+			ft_print_custom_error_and_exit(ms, exec_tree->cmds->argv[0],
+				COMMAND_NOT_FOUND_ERROR_MSG, COMMAND_NOT_FOUND_ERROR_CODE);
+		}
+		execve(exec_tree->cmds->cmd, exec_tree->cmds->argv, envp);
+		ft_free_matrix((void ***)&(envp));	
 	}
-	execve(exec_tree->cmds->cmd, exec_tree->cmds->argv, envp);
-	ft_free_matrix((void ***)&(envp));
 }
 
 void	ft_exec_cmds(t_ms *ms, t_executor *exec_tree)
@@ -39,7 +42,16 @@ void	ft_exec_cmds(t_ms *ms, t_executor *exec_tree)
 	if (!exec_tree)
 		return ;
 	ft_build_cmds(exec_tree->cmds, ms->env.path);
+	
+	// TODO
+	// Checar se linha de comando possui pipe |
+	// Se verdadeiro obrigatório forkar; se falso usar o pai
+	
+	if (ms->should_pipe == FALSE && is_builtin(ms, exec_tree, FALSE))
+		return ;
+	
 	ft_init_pipes(ms, exec_tree);
+		
 	pid = (pid_t *)malloc(sizeof(pid_t));
 	*pid = fork();
 	if (*pid == ERROR_CODE_FUNCTION)

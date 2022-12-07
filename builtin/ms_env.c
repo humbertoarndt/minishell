@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ms_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 19:02:25 by harndt            #+#    #+#             */
-/*   Updated: 2022/12/07 15:17:20 by harndt           ###   ########.fr       */
+/*   Created: 2022/12/05 21:57:34 by harndt            #+#    #+#             */
+/*   Updated: 2022/12/05 22:37:45 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-size_t	ft_strlen(const char *str)
+t_bool	ms_env(t_ms *ms, t_bool is_child)
 {
-	size_t	size;
-
-	size = 0;
-	while (str[size])
-		size++;
-	return (size);
+	ft_print_hash_table(ms->env.var);
+	kill_child(ms, is_child, 0); // TODO Definir valor de exit_code
+	return (TRUE);
 }

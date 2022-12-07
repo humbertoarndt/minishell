@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 21:42:28 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/16 22:34:32 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/30 14:18:09 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -689,5 +689,9 @@ int			ft_count_char(char *str, char c);
  * @return void
 **/
 void		ft_free_matrix(void ***matrix);
+
+typedef long long t_llong;
+
+t_llong	ft_atoll(const char *str);
 
 #endif

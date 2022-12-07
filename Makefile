@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 18:20:52 by harndt            #+#    #+#              #
-#    Updated: 2022/11/15 20:51:31 by bbonaldi         ###   ########.fr        #
+#    Updated: 2022/12/05 22:45:41 by harndt           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ DEBUG			:= debug
 ENV				:= env
 PARSER			:= parser
 EXECUTOR		:= executor
+BUILTIN			:= builtin
 
 # ==============================================================================
 # VARIABLES
@@ -54,6 +55,9 @@ SRCS	:=	minishell.c \
 			$(EXECUTOR)/executor.c $(EXECUTOR)/commands_builder.c \
 			$(EXECUTOR)/fd_handler.c $(EXECUTOR)/fd_handler_utils.c \
 			$(EXECUTOR)/heredoc_handler.c \
+			$(BUILTIN)/ms_cd.c	$(BUILTIN)/ms_echo.c	$(BUILTIN)/ms_env.c \
+			$(BUILTIN)/ms_exit.c	$(BUILTIN)/ms_export.c	$(BUILTIN)/ms_pwd.c \
+			$(BUILTIN)/ms_unset.c	$(BUILTIN)/ms_utils.c	\
 			#$(SIGNAL)/signal.c \
 			
 OBJS	:=	$(SRCS:.c=.o)
