@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:20:01 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/05 20:38:14 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/06 21:27:41 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_exec_cmds(t_ms *ms, t_executor *exec_tree)
 		ft_exec_child(ms, exec_tree);
 	}
 	else
-		ft_parent_wait(ms, pid);
+		ft_parent_wait(ms, pid, exec_tree);
 }
 
 void	ft_execute_pipe(t_ms *ms, t_executor *exec_tree)

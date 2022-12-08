@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 22:12:20 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/03 18:49:51 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/06 22:33:18 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,12 @@ void	ft_build_subshell_token_list(t_token **head, int has_subshell)
 	}
 }
 
+
 int	ft_tokenizer(t_ms *ms)
 {
 	ms->tokens = ft_token_builder(ms);
 	//ft_build_subshell_token_list(&ms->tokens, ms->has_subshell);
 	ft_find_variable_expression_and_replace(ms);
+	ft_find_wildcard_and_replace(ms);
 	return (SUCCESS_CODE);
 }
