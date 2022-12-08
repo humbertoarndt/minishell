@@ -6,7 +6,7 @@
 /*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/30 14:17:16 by harndt           ###   ########.fr       */
+/*   Updated: 2022/12/07 21:06:51 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef struct s_pipes_fd
 typedef struct s_counter
 {
 	int		pipe_count;
+	int		pipe_start;
 	int		cmds_count;
 	int		index;
 
@@ -138,6 +139,7 @@ typedef struct s_ms
 {
 	char				*buffer;
 	char				*buffer_start;
+	char				*prompt_str;
 	t_env				env;
 	t_error_type		invalid_program;
 	int					exit_code;

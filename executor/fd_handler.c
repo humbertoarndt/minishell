@@ -6,45 +6,43 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 22:52:46 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/21 22:10:38 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/11/27 19:46:24 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_handle_pipes(t_ms *ms, t_executor *exec_tree)
+void	ft_handle_pipes(t_ms *ms)
 {
-	if (ms->ctr.pipe_count == 0)
+	if (ms->ctr.pipe_count == 0 || ms->ctr.pipe_start < 0)
 		return ;
-	if (exec_tree->cmds->cmd_index == 0)
+	if (ms->ctr.pipe_start == 0)
 	{
 		ft_close_fd(ms->fd_pipe[READ_FD]);
 		ft_dup2_and_close(ms->fd_pipe[WRITE_FD], STDOUT_FILENO);
 	}
-	else if (exec_tree->cmds->cmd_index != ms->ctr.cmds_count - 1)
+	else if (ms->ctr.pipe_start != ms->ctr.pipe_count)
 	{
 		ft_close_fd(ms->prev_fd_pipe[WRITE_FD]);
 		ft_close_fd(ms->fd_pipe[READ_FD]);
 		ft_dup2_and_close(ms->prev_fd_pipe[READ_FD], STDIN_FILENO);
 		ft_dup2_and_close(ms->fd_pipe[WRITE_FD], STDOUT_FILENO);
 	}
-	else if (exec_tree->cmds->cmd_index == ms->ctr.cmds_count - 1)
+	else if (ms->ctr.pipe_start == ms->ctr.pipe_count)
 	{
 		ft_close_fd(ms->fd_pipe[WRITE_FD]);
 		ft_dup2_and_close(ms->fd_pipe[READ_FD], STDIN_FILENO);
 	}
 }
 
-void	ft_init_pipes(t_ms *ms, t_executor *exec_tree)
+void	ft_init_pipes(t_ms *ms)
 {
-	if (exec_tree->cmds->cmd_index == ms->ctr.cmds_count - 1)
-	{
-		ms->should_pipe = FALSE;
-		ft_close_pipe_fds(ms->prev_fd_pipe);
-	}
 	if (ms->should_pipe)
 	{
+		ms->ctr.pipe_start++;
 		ft_close_pipe_fds(ms->prev_fd_pipe);
+		if (ms->ctr.pipe_start == ms->ctr.pipe_count)
+			return ;
 		ft_copy_fds_pipe_to_previous(ms->fd_pipe, ms->prev_fd_pipe);
 		if (pipe(ms->fd_pipe) == ERROR_CODE_FUNCTION)
 			exit(1);//implementar error handler

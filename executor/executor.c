@@ -6,7 +6,7 @@
 /*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:20:01 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/05 22:29:38 by harndt           ###   ########.fr       */
+/*   Updated: 2022/12/07 21:08:52 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_exec_child(t_ms *ms, t_executor *exec_tree)
 {
 	char		**envp;
 
-	ft_handle_pipes(ms, exec_tree);
+	ft_handle_pipes(ms);
 	ft_set_redirection_fds(ms, exec_tree);
 	if (!is_builtin(ms, exec_tree, TRUE))
 	{
@@ -50,7 +50,7 @@ void	ft_exec_cmds(t_ms *ms, t_executor *exec_tree)
 	if (ms->should_pipe == FALSE && is_builtin(ms, exec_tree, FALSE))
 		return ;
 	
-	ft_init_pipes(ms, exec_tree);
+	ft_init_pipes(ms);
 		
 	pid = (pid_t *)malloc(sizeof(pid_t));
 	*pid = fork();
@@ -84,21 +84,6 @@ void	ft_execute_tree(t_ms *ms, t_executor *exec_tree)
 		ft_execute_pipe(ms, exec_tree);
 	else
 		ft_exec_cmds(ms, exec_tree);
-}
-
-
-int	ft_wait_childs(t_list *pids)
-{
-	int	exit_code;
-
-	while (pids)
-	{
-		waitpid((*(pid_t *)pids->content), &exit_code, 0);
-		if (WIFEXITED(exit_code))
-			exit_code = WEXITSTATUS(exit_code);
-		pids = pids->next;
-	}
-	return (exit_code);
 }
 
 int	ft_execute(t_ms *ms)

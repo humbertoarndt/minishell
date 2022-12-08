@@ -6,7 +6,7 @@
 /*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/12/07 15:07:55 by harndt           ###   ########.fr       */
+/*   Updated: 2022/12/07 21:05:44 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void			ft_print_custom_error_and_exit2(t_ms *ms, char *argv[2], char *message,
 					int exit_code);
 void			ft_print_error_and_exit(t_ms *ms, char *arg_err,int exit_code);
 char			*ft_syntax_error_message(char *tok);
+void			ft_print_syntax_error(t_ms *ms);
 // =============================================================================
 // debug
 // =============================================================================
@@ -165,10 +166,12 @@ void			ft_dup_stdin_out(t_ms *ms);
 void			ft_restore_stdin_out(t_ms *ms);
 void			ft_dup2_and_close(int fd_to_close, int fd_to_dup);
 void			ft_copy_fds_pipe_to_previous(int fd[2], int prev_fd[2]);
-void			ft_init_pipes(t_ms *ms, t_executor *exec_tree);
-void			ft_handle_pipes(t_ms *ms, t_executor *exec_tree);
+void			ft_init_pipes(t_ms *ms);
+void			ft_handle_pipes(t_ms *ms);
 void			ft_set_redirection_fds(t_ms *ms, t_executor *exec_tree);
 void			ft_heredoc_handler(t_ms *ms, t_file *file);
+int				ft_wait_child(pid_t pid);
+int				ft_wait_childs(t_list *pids);
 
 // =============================================================================
 // Signals

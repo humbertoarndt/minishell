@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   error_handlers.c								   :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: harndt <humberto.arndt@gmail.com>		  +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2022/10/28 18:28:39 by bbonaldi		  #+#	#+#			 */
-/*   Updated: 2022/12/05 20:01:23 by harndt		   ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_handlers.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/28 18:28:39 by bbonaldi          #+#    #+#             */
+/*   Updated: 2022/12/07 21:11:45 by harndt           ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -51,4 +51,15 @@ void	ft_print_error_and_exit(t_ms *ms, char *arg_err, int exit_code)
 	print_custom_arg_error(arg_err, strerror(exit_code));
 	ft_free_all_ms(ms);
 	exit(ms->exit_code); // trocar pelo próprio exit
+}
+
+
+void	ft_print_syntax_error(t_ms *ms)
+{
+	char	*error_message;
+
+	error_message = ft_syntax_error_message(ms->buffer);
+	print_custom_arg_error(NULL, error_message);
+	ft_free_ptr((void **)&error_message);
+	ft_free_all_ms(ms); // mudar para free_ms (não precisa sair do programa, so começar de novo)
 }
