@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 19:29:45 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/12 14:51:32 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/07 22:09:33 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	ft_add_command_list(t_executor *current_tree, t_token *token_head,
 	token = ft_strdup(token_head->token);
 	list_argv = ft_lstnew(token);
 	ft_lstadd_back(&current_tree->cmds->argv_list, list_argv);
-	if (current_tree->cmds->argv_list && 
-		current_tree->cmds->argv_list->next == NULL)
+	if (current_tree->cmds->argv_list
+		&& current_tree->cmds->argv_list->next == NULL)
 		current_tree->cmds->cmd_index = ms->ctr.index++;
 }
 

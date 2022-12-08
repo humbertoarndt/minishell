@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 23:09:44 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/10 21:08:53 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/07 21:44:30 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	**ft_split_env(char *envp)
 {
 	int		index;
 	char	**split_env;
+
 	index = ft_strchr_pos(envp, EQUAL_CHAR);
 	if (index == -1)
 		return (NULL);
@@ -35,15 +36,6 @@ void	ft_free_split_env(char ***split_envp)
 	ft_free_ptr((void **)(*split_envp));
 	ft_free_ptr((void **)&(*split_envp));
 }
-
-void	ft_add_path(t_ms *ms)
-{
-	t_hash_item *path;
-	
-	path = ft_search_item_by_key(ms->env.var, PATH);
-	ms->env.path = ft_split(path->value, COMMA_CHAR);
-}
-
 
 void	ft_recreate_key_value_pair_env(t_hash_item *hash_item,
 			char **env_result_str)

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 22:53:47 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/15 22:55:21 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/07 22:35:18 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_token_type	ft_found_heredoc(char *buffer)
 	return (NOT_FOUND);
 }
 
-t_token		*ft_heredoc_tokenizer(t_ms *ms)
+t_token	*ft_heredoc_tokenizer(t_ms *ms)
 {
 	t_token			*heredoc;
 	char			*tok;

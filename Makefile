@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+         #
+#    By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 18:20:52 by harndt            #+#    #+#              #
-#    Updated: 2022/12/07 21:02:27 by harndt           ###   ########.fr        #
+#    Updated: 2022/12/07 21:54:16 by bbonaldi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRCS	:=	minishell.c \
 			$(PARSER)/parser_utils.c \
 			$(EXECUTOR)/executor.c $(EXECUTOR)/commands_builder.c \
 			$(EXECUTOR)/fd_handler.c $(EXECUTOR)/fd_handler_utils.c \
+			$(EXECUTOR)/pipe_handler.c $(EXECUTOR)/pipe_handler_utils.c \
 			$(EXECUTOR)/heredoc_handler.c $(EXECUTOR)/wait.c \
 			$(BUILTIN)/ms_cd.c	$(BUILTIN)/ms_echo.c	$(BUILTIN)/ms_env.c \
 			$(BUILTIN)/ms_exit.c	$(BUILTIN)/ms_export.c	$(BUILTIN)/ms_pwd.c \

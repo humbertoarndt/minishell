@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 21:58:02 by harndt            #+#    #+#             */
-/*   Updated: 2022/12/05 22:37:49 by harndt           ###   ########.fr       */
+/*   Updated: 2022/12/07 21:38:25 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ void	ms_exit(t_ms *ms, char **argv)
 	{
 		if (!check_llong(argv[1]) || !ft_isnum(argv[1]))
 		{
-			ft_print_custom_error_and_exit2(ms, (char *[2]){"exit: ", argv[1]}, NUMERIC_ARGUMENT_REQUIRED, 2);
+			ft_print_custom_error_and_exit2(ms, (char *[2]){"exit: ", argv[1]},
+				NUMERIC_ARGUMENT_REQUIRED, 2);
 		}
 		else if (argv[2])
 		{
-			ft_print_custom_error_and_exit(ms, argv[0], EXIT_TOO_MANY_ARGUMENTS, 1);
+			ft_print_custom_error_and_exit(ms, argv[0],
+				EXIT_TOO_MANY_ARGUMENTS, 1);
 		}
 		else
 			exit_code = ft_atoll(argv[1]);

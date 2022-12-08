@@ -6,15 +6,15 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 22:12:20 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/15 20:27:15 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/07 22:20:45 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
 void	ft_build_token_list(t_ms *ms)
 {
-	t_token *token;
+	t_token	*token;
 
 	token = NULL;
 	if (ft_found_quoting(ms->buffer))

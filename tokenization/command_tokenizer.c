@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 17:26:52 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/07 20:37:12 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/07 22:23:59 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,21 @@ t_token_type	ft_found_command(char *buffer)
 	return (NOT_FOUND);
 }
 
-t_token		*ft_command_tokenizer(t_ms *ms)
+t_token	*ft_command_tokenizer(t_ms *ms)
 {
 	t_token			*command;
 	char			*tok;
 	t_token_type	type;
 	size_t			len;
-	
+
 	len = 0;
 	if (ft_strchr(OPERATORS, *ms->buffer))
 	{
 		ms->invalid_program = SYNTAX_ERR;
 		return (NULL);
 	}
-	while (!ft_strchr(WHITE_SPACE, *ms->buffer) && 
-		!ft_strchr(OPERATORS, *ms->buffer))
+	while (!ft_strchr(WHITE_SPACE, *ms->buffer)
+		&& !ft_strchr(OPERATORS, *ms->buffer))
 	{
 		len++;
 		ms->buffer++;

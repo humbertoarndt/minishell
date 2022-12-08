@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:27:30 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/14 12:20:06 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/07 22:10:03 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ t_file	*ft_init_file(t_redir_type type, char *name)
 	return (file);
 }
 
-t_cmd *ft_init_cmds()
+t_cmd	*ft_init_cmds(void)
 {
-	t_cmd *cmds;
+	t_cmd	*cmds;
 
 	cmds = (t_cmd *)malloc(sizeof(t_cmd));
 	cmds->cmd = NULL;

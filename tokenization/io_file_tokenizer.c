@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 20:28:38 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/23 23:06:31 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/07 22:23:08 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ t_token_type	ft_found_redirection(char *buffer)
 	if (ft_strncmp(buffer, GREAT, ft_strlen(GREAT)) == 0
 		&& ft_strncmp(buffer, DGREAT, ft_strlen(DGREAT)))
 		return (IO_FILE_TRUNCATE);
-	else if(ft_strncmp(buffer, LESS, ft_strlen(LESS)) == 0
-			&& ft_strncmp(buffer, DLESS, ft_strlen(DLESS)))
+	else if (ft_strncmp(buffer, LESS, ft_strlen(LESS)) == 0
+		&& ft_strncmp(buffer, DLESS, ft_strlen(DLESS)))
 		return (IO_FILE_INFILE);
 	else if (ft_strncmp(buffer, DGREAT, ft_strlen(DGREAT)) == 0)
 		return (IO_FILE_APPEND);
@@ -50,7 +50,7 @@ int	ft_is_invalid_file(t_ms *ms)
 t_token	*ft_create_io_file_token_with_quote(t_ms *ms, t_token_type type)
 {
 	t_token			*io_file;
-	
+
 	io_file = ft_quoting_tokenizer(ms);
 	if (!io_file)
 		return (NULL);
@@ -58,21 +58,20 @@ t_token	*ft_create_io_file_token_with_quote(t_ms *ms, t_token_type type)
 	return (io_file);
 }
 
-
 t_token	*ft_io_file_tokenizer(t_ms *ms)
 {
 	t_token			*io_file;
 	t_token_type	type;
 	char			*tok;
 	size_t			len;
-	
+
 	io_file = NULL;
 	len = 0;
 	type = ft_found_redirection(ms->buffer);
 	ft_advance_after_io_symbol(&ms->buffer, type);
 	ft_advance_ptr_after_white_space(&ms->buffer);
 	if (ft_is_invalid_file(ms))
-			return (NULL);
+		return (NULL);
 	while (!ft_strchr(WHITE_SPACE, *ms->buffer))
 	{
 		if (ft_is_invalid_file(ms))

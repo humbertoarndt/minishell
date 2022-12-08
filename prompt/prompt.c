@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:56:49 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/27 14:47:27 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/07 22:15:49 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_get_key_for_prompt(t_hash_table *env, char *key)
 	return (hash_item->value);
 }
 
-char	*ft_get_hostname()
+char	*ft_get_hostname(void)
 {
 	int		fd;
 	char	*hostname;
@@ -46,8 +46,8 @@ char	*ft_get_cwd(t_hash_table *env)
 {
 	char	*cwd;
 	char	*home;
-	//usar pwd function
-	cwd = NULL;
+
+	cwd = getcwd(NULL, 0);
 	if (!cwd)
 		cwd = ft_get_key_for_prompt(env, PWD_KEY);
 	if (!cwd)
@@ -59,7 +59,6 @@ char	*ft_get_cwd(t_hash_table *env)
 		cwd = ft_strdup(cwd);
 	return (cwd);
 }
-
 
 void	ft_create_prompt_str(t_ms *ms, t_hash_table *env)
 {
@@ -90,19 +89,15 @@ void	ft_create_prompt_str(t_ms *ms, t_hash_table *env)
 	ft_free_ptr((void **)&cwd);
 }
 
-
 int	ft_prompt(t_ms *ms)
 {
 	ms->exit_code = SUCCESS_CODE;
 	while (TRUE)
 	{
 		ft_init_ms(ms);
-		//set_signals();
 		ft_create_prompt_str(ms, ms->env.var);
 		ms->buffer = readline(ms->prompt_str);
-		// if (ms->buffer == NULL) 
-		// 	return (SUCCESS_CODE);
-		if (ms->buffer == NULL) //isso aqui resolve o Cntrl+D???
+		if (ms->buffer == NULL)
 		{
 			ft_putstr("hey\n");
 			exit(0);
@@ -115,11 +110,8 @@ int	ft_prompt(t_ms *ms)
 			exit(SUCCESS_CODE);
 		}
 		ft_tokenizer(ms);
-		//ft_print_tokens_list(ms->tokens);
 		ms->executor = ft_parser(ms);
-		//ft_print_tree_recursive(ms->executor, "root", 0, TRUE);
 		ms->exit_code = ft_execute(ms);
-		//printf("%s\n", ms->buffer_start);
 		ft_free_ms(ms);
 	}
 	return (ms->exit_code);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:18:34 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/30 14:19:51 by harndt           ###   ########.fr       */
+/*   Updated: 2022/12/07 21:29:39 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_llong	ft_atoll(const char *str)
 {
-	t_llong	res;
+	t_llong		res;
 	int			sign;
 
 	res = 0;

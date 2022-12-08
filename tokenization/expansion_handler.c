@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 22:22:34 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/15 23:09:21 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/07 22:35:53 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,22 @@ char	*ft_extract_variable_and_replace(t_ms *ms, char *str,
 	return (replace_str);
 }
 
+void	ft_advance_str_ptr(char **str, char *start_var_expression,
+			size_t len[2])
+{
+	while (*str != start_var_expression)
+	{
+		(*str)++;
+		len[0]++;
+	}
+	while (str && (!ft_strchr(WHITE_SPACE, **str)
+			&& !ft_strchr(SYMBOLS, **str)))
+	{	
+		(*str)++;
+		len[1]++;
+	}
+}
+
 char	*ft_replace_variable_expression(t_ms *ms, char *str)
 {
 	size_t		len[2];
@@ -50,19 +66,10 @@ char	*ft_replace_variable_expression(t_ms *ms, char *str)
 	start_var_expression = ft_strchr(str, VARIABLE_EXPRESSION[0]);
 	if (!start_var_expression)
 		return (NULL);
-	while (str != start_var_expression)
-	{
-		str++;
-		len[0]++;
-	}
-	while (str && (!ft_strchr(WHITE_SPACE, *str) && !ft_strchr(SYMBOLS, *str)))
-	{	
-		str++;
-		len[1]++;
-	}
+	ft_advance_str_ptr(&str, start_var_expression, len);
 	var_expression = ft_substr(str - len[1], 0, len[1]);
 	replace_str = ft_extract_variable_and_replace(ms, str - len[0] - len[1],
-		var_expression);
+			var_expression);
 	ft_free_ptr((void **)&(var_expression));
 	return (replace_str);
 }

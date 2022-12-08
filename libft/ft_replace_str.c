@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 22:30:39 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/07 20:19:10 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/07 21:31:35 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*ft_replace_str(char *s, char *to_find, char *to_replace)
 			ft_advance_ptr(&s, lens[1]);
 			ft_copy_str(&new_str, &to_replace);
 			if (!*s)
-				break;
+				break ;
 		}
 		ft_copy_char(&new_str, &s);
 	}

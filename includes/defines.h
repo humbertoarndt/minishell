@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:18:19 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/07 21:27:13 by harndt           ###   ########.fr       */
+/*   Updated: 2022/12/07 22:06:01 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@
 # define FORK_CREATION_ERROR_MSG "Error on initing fork!"
 # define PERMISSION_DENIED_ERROR_CODE 126
 # define PERMISSION_DENIED_ERROR_MSG "Permission denied"
-
 
 # define FILE_DOES_NOT_EXIST -1
 # define PERMISSION_NOT_ALLOWED 1

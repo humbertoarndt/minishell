@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handlers_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 18:32:05 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/07 21:09:47 by harndt           ###   ########.fr       */
+/*   Updated: 2022/12/07 21:45:07 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,3 @@ void	print_custom_arg_error2(char *argv[2], char *message)
 	ft_free_ptr((void **)&(concat_minishell_with_arg));
 	close(fd_std_out);
 }
-

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 20:37:21 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/17 20:28:57 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/07 22:18:52 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ size_t	ft_advance_ptr_until_quote(char **buf, char quote)
 	size_t	len;
 
 	len = 0;
-	while(**buf && **buf != quote)
+	while (**buf && **buf != quote)
 	{
 		(*buf)++;
 		len++;
@@ -36,7 +36,7 @@ size_t	ft_advance_ptr_until_quote(char **buf, char quote)
 
 void	ft_deal_unclosed_quote(t_ms *ms, char quote)
 {
-	char 	*line;
+	char	*line;
 	char	*line_acc;
 	size_t	index;
 
@@ -76,7 +76,7 @@ char	*ft_quote_handler(t_ms *ms, char quote)
 
 t_token	*ft_quoting_tokenizer(t_ms *ms)
 {
-	t_token 		*quote;
+	t_token			*quote;
 	char			*tok;
 	t_token_type	type;
 	int				should_expand;
@@ -100,4 +100,3 @@ t_token	*ft_quoting_tokenizer(t_ms *ms)
 	quote->should_expand = should_expand;
 	return (quote);
 }
-

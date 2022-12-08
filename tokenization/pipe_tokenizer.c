@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 22:22:30 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/12 00:11:35 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/07 22:17:17 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_token_type	ft_found_pipe(char *buffer)
 	return (NOT_FOUND);
 }
 
-t_token			*ft_pipe_tokenizer(t_ms *ms)
+t_token	*ft_pipe_tokenizer(t_ms *ms)
 {
 	t_token			*pipe;
 

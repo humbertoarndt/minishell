@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 22:00:23 by harndt            #+#    #+#             */
-/*   Updated: 2022/12/05 22:37:51 by harndt           ###   ########.fr       */
+/*   Updated: 2022/12/07 21:39:18 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ t_bool	ms_export(t_ms *ms, t_bool is_child)
 		}
 		index++;
 	}
-	kill_child(ms, is_child, 1); // TODO Definir valor de exit_code
+	kill_child(ms, is_child, 1);
 	return (TRUE);
 }
