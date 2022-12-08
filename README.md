@@ -43,8 +43,8 @@ Once the tokenization is over the shell checks the syntax of each token. Should 
 ## 4 - Expander
 
 ## 5 - Signals
-Signals are a way of communication between process and the OS kernel, is the way the OS knows an event has occured. A signal may be sended by another process or by itself. A very common example is `SIGINT`, which is teh signal that is sent out when you hit `Ctrl-C` to exit a program.
-
+Signals are a way of communication between process and the OS kernel, it is the way the OS knows an event has occured. A signal may be sended by another process or by itself. A very common example is `SIGINT`, which is the signal that is sent out when you hit `Ctrl-C` to exit a program.
+The project asks the implementation of two signals, `SIGINT` and `SIGQUIT`. Where the first must end a process and displays the prompt in a new line, and the second must do nothing. The subject also asks to handle the `Ctrl-D` command, that sends an `EOF` to the program, and must end its execution.
 
 
 
