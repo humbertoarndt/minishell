@@ -6,7 +6,7 @@
 /*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:18:19 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/07 21:14:10 by harndt           ###   ########.fr       */
+/*   Updated: 2022/12/07 21:27:13 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,9 @@
 # define AT "@"
 # define COMMA ":"
 # define PROMPT_START "$ "
+
+# define MAX_LLONG "9223372036854775807"
+# define MAX_LLONG_S "+9223372036854775807"
+# define MIN_LLONG "-9223372036854775807"
 
 #endif
