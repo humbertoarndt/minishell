@@ -6,7 +6,7 @@
 /*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/07 21:06:51 by harndt           ###   ########.fr       */
+/*   Updated: 2022/12/08 17:22:08 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef struct s_status
 	t_bool	paused;
 	int		e_code;
 }			t_status;
+
+t_status	g_status;
 
 typedef enum e_error_type
 {

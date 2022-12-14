@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:56:49 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/27 14:47:27 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/08 17:18:29 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,16 +97,11 @@ int	ft_prompt(t_ms *ms)
 	while (TRUE)
 	{
 		ft_init_ms(ms);
-		//set_signals();
+		set_signals();
 		ft_create_prompt_str(ms, ms->env.var);
 		ms->buffer = readline(ms->prompt_str);
-		// if (ms->buffer == NULL) 
-		// 	return (SUCCESS_CODE);
 		if (ms->buffer == NULL) //isso aqui resolve o Cntrl+D???
-		{
-			ft_putstr("hey\n");
 			exit(0);
-		}
 		ms->buffer_start = ms->buffer;
 		add_history(ms->buffer);
 		if (ft_strncmp(ms->buffer, "quit", strlen("quit")) == 0)

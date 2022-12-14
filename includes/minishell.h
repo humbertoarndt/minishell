@@ -6,7 +6,7 @@
 /*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/12/07 21:05:44 by harndt           ###   ########.fr       */
+/*   Updated: 2022/12/08 17:09:40 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,8 +177,8 @@ int				ft_wait_childs(t_list *pids);
 // Signals
 // =============================================================================
 
-// void			set_signals(void);
-// void			sigint_handler(int sig);
+void			set_signals(void);
+void			sigint_handler(int sig);
 // void			sigquit_handler(int sig);
 
 // =============================================================================

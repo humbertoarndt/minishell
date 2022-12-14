@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 12:46:45 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/07 23:48:27 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/08 17:15:46 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	sigint_handler(int sig)
 		rl_redisplay();
 		g_status.e_code = 1;
 	}
-	ft_printf("SIGINT |%d| capturado\n", sig);
 }
 
 // void	sigquit_handler(int sig)
