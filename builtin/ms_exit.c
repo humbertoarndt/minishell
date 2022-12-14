@@ -6,7 +6,7 @@
 /*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 21:58:02 by harndt            #+#    #+#             */
-/*   Updated: 2022/12/05 22:37:49 by harndt           ###   ########.fr       */
+/*   Updated: 2022/12/13 22:07:49 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ms_exit(t_ms *ms, char **argv)
 {
 	t_llong	exit_code;
 
+	exit_code = SUCCESS_CODE;
 	if (argv && argv[1])
 	{
 		if (!check_llong(argv[1]) || !ft_isnum(argv[1]))
@@ -30,5 +31,6 @@ void	ms_exit(t_ms *ms, char **argv)
 			exit_code = ft_atoll(argv[1]);
 	}
 	ft_free_all_ms(ms);
+	ft_printf("exit\n");
 	exit(exit_code);
 }

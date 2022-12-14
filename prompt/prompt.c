@@ -6,7 +6,7 @@
 /*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:56:49 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/08 17:18:29 by harndt           ###   ########.fr       */
+/*   Updated: 2022/12/13 22:01:28 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ft_get_cwd(t_hash_table *env)
 	char	*cwd;
 	char	*home;
 	//usar pwd function
-	cwd = NULL;
+	cwd = getcwd(NULL, 0);
 	if (!cwd)
 		cwd = ft_get_key_for_prompt(env, PWD_KEY);
 	if (!cwd)
@@ -59,7 +59,6 @@ char	*ft_get_cwd(t_hash_table *env)
 		cwd = ft_strdup(cwd);
 	return (cwd);
 }
-
 
 void	ft_create_prompt_str(t_ms *ms, t_hash_table *env)
 {
@@ -100,15 +99,13 @@ int	ft_prompt(t_ms *ms)
 		set_signals();
 		ft_create_prompt_str(ms, ms->env.var);
 		ms->buffer = readline(ms->prompt_str);
-		if (ms->buffer == NULL) //isso aqui resolve o Cntrl+D???
-			exit(0);
-		ms->buffer_start = ms->buffer;
-		add_history(ms->buffer);
-		if (ft_strncmp(ms->buffer, "quit", strlen("quit")) == 0)
+		if (ms->buffer == NULL)
 		{
 			ft_free_all_ms(ms);
-			exit(SUCCESS_CODE);
+			exit(0);
 		}
+		ms->buffer_start = ms->buffer;
+		add_history(ms->buffer);
 		ft_tokenizer(ms);
 		//ft_print_tokens_list(ms->tokens);
 		ms->executor = ft_parser(ms);
