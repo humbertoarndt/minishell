@@ -22,8 +22,6 @@ typedef struct s_status
 	int		e_code;
 }			t_status;
 
-t_status	g_status;
-
 typedef enum e_error_type
 {
 	QUOTING_ERR = TRUE,

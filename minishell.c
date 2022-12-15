@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+t_status	g_status;
+
 int main(int argc, char *argv[], char *envp[])
 {
 	t_ms	ms;
