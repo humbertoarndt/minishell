@@ -49,8 +49,10 @@ int	is_word(char *str)
 	index = 1;
 	while (str[index])
 	{
-		if (!ft_isalnum(str[index]) && str[index] != '_')
+		if (!ft_isalnum(str[index]) && str[index] != '_'
+			&& str[index] != EQUAL_CHAR)
 			return (FALSE);
+		index++;
 	}
 	return (TRUE);
 }
@@ -61,7 +63,7 @@ void	print_export_with_args(t_ms *ms, char **argvs)
 	char	*word;
 	char	**split_argv;
 
-	index = 0;
+	index = 1;
 	while (argvs[index])
 	{
 		word = argvs[index];
