@@ -25,7 +25,7 @@ t_bool	is_builtin(t_ms *ms, t_executor *exec_tree, t_bool is_child)
 	else if (ft_strcmp(exec_tree->cmds->argv[0], "exit") == 0)
 		ms_exit(ms, exec_tree->cmds->argv);
 	else if (ft_strcmp(exec_tree->cmds->argv[0], "export") == 0)
-		return (ms_export(ms, is_child));
+		return (ms_export(ms, exec_tree->cmds, is_child));
 	else if (ft_strcmp(exec_tree->cmds->argv[0], "pwd") == 0)
 		return (ms_pwd(ms, is_child));
 	else if (ft_strcmp(exec_tree->cmds->argv[0], "unset") == 0)

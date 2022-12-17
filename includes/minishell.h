@@ -139,6 +139,8 @@ void			ft_print_hash_item(t_hash_item *hash_item);
 void			ft_print_hash_table(t_hash_table *hash_table);
 void			ft_print_hash_table_as_env(t_hash_table *hash_table);
 char			**ft_rebuild_envp(t_hash_table *env);
+char			**ft_split_env(char *envp);
+void			ft_free_split_env(char ***split_envp);
 // =============================================================================
 // parser
 // =============================================================================
@@ -190,7 +192,7 @@ t_bool			ms_cd(t_ms *ms, char **argv, t_bool is_child);
 t_bool			ms_echo(t_ms *ms, char **argv, t_bool is_child);
 t_bool			ms_env(t_ms *ms, t_bool is_child);
 void			ms_exit(t_ms *ms, char **argv);
-t_bool			ms_export(t_ms *ms, t_bool is_child);
+t_bool			ms_export(t_ms *ms, t_cmd *cmds,t_bool is_child);
 t_bool			ms_pwd(t_ms *ms, t_bool is_child);
 t_bool			ms_unset(t_ms *ms, char **argv, t_bool is_child);
 t_bool			is_builtin(t_ms *ms, t_executor *exec_tree, t_bool is_child);

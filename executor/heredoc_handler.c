@@ -6,7 +6,7 @@
 /*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 20:49:48 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/17 16:14:38 by harndt           ###   ########.fr       */
+/*   Updated: 2022/12/17 16:30:50 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,11 @@ void	ft_heredoc_handler(t_ms *ms, t_file *file)
 		}
 		else if (!line)
 		{
-			// TODO
-			// imprimir mensagem de erro e concatenar com o delimitador
-			// fechar arquivo fd
-			// liberar memórias
-			// exit - sucesso
-			ft_printf("warning: here-document at line 4 delimited by end-of-file (wanted '%s')\n", file->delimeter);
+			ft_printf("minishell: warning here-document delimited by" \
+			" end-of-file (wanted `%s')\n", file->delimeter);
 			ft_free_ptr((void **)&(line_acc));
 			ft_free_all_ms(ms, FALSE);
-			exit(EXIT_SUCCESS); // trocar pelo próprio exit
-			
+			exit(EXIT_SUCCESS);
 		}
 		line_acc = ft_strjoin_free(line_acc, line);
 		line_acc_with_nl = ft_strjoin_free(line_acc, ft_strdup("\n"));

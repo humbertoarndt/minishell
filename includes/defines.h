@@ -69,6 +69,7 @@
 # define FILE_NOT_FOUND_ERROR_MSG "no such file or directory!"
 # define NUMERIC_ARGUMENT_REQUIRED "numeric argument required"
 # define EXIT_TOO_MANY_ARGUMENTS "too many arguments"
+# define INVALID_IDENTIFIER "not a valid identifier"
 
 # define PIPE_CREATION_ERROR_MSG "Error on creating pipe!"
 # define FORK_CREATION_ERROR_MSG "Error on initing fork!"
