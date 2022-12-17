@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   _minishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/10 15:01:37 by harndt           ###   ########.fr       */
+/*   Updated: 2022/12/17 16:57:09 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void			ft_find_variable_expression_and_replace(t_ms *ms);
 void			ft_perror_formmated(char *message);
 int				ft_check_argc_argc(int argc, char *argv[]);
 void			print_custom_arg_error(char *arg, char *message);
+void			ft_print_syntax_error_no_exit(t_ms *ms, char *token_error,
+					int exit_code, t_error_type error_type);
 // =============================================================================
 // debug
 // =============================================================================
@@ -142,7 +144,7 @@ t_executor		*ft_parser(t_ms *ms);
 // free
 // =============================================================================
 void			ft_free_ms(t_ms *ms);
-void			ft_free_all_ms(t_ms *ms);
+void			ft_free_all_ms(t_ms *ms, t_bool free_env);
 
 // void			set_signals(void);
 // void			sigint_handler(int sig);

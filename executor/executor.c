@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:20:01 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/07 21:08:52 by harndt           ###   ########.fr       */
+/*   Updated: 2022/12/17 16:31:29 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	ft_execute_pipe(t_ms *ms, t_executor *exec_tree)
 
 void	ft_execute_tree(t_ms *ms, t_executor *exec_tree)
 {
-	if (!exec_tree)
+	if (!exec_tree || ms->invalid_program)
 		return ;
 	if (exec_tree->operator
 		&& ft_strncmp(exec_tree->operator, PIPE, ft_strlen(PIPE)) == 0)

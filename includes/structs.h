@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/08 17:22:08 by harndt           ###   ########.fr       */
+/*   Updated: 2022/12/17 15:32:38 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ typedef struct s_status
 
 typedef enum e_error_type
 {
-	QUOTING_ERR = TRUE,
-	MISSING_FILE_ERR,
+	MISSING_FILE_ERR = TRUE,
 	SYNTAX_ERR
 }			t_error_type;
 

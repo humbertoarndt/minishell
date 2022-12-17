@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 20:28:38 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/23 23:06:31 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/17 16:58:11 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ int	ft_is_invalid_file(t_ms *ms)
 {
 	if (ft_strchr(SYMBOLS, *ms->buffer) || !*ms->buffer)
 	{
-		ms->invalid_program = MISSING_FILE_ERR;
-		ft_print_syntax_error(ms);
-		exit(2);
+		ft_print_syntax_error_no_exit(ms, NULL, 2, MISSING_FILE_ERR);
 		return (TRUE);
 	}
 	return (FALSE);
