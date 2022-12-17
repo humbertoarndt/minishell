@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/12/17 16:57:47 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/17 17:06:36 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,8 +183,9 @@ int				ft_wait_childs(t_list *pids);
 // =============================================================================
 
 void			set_signals(void);
+void			set_heredoc_signals(int child_pid);
 void			sigint_handler(int sig);
-// void			sigquit_handler(int sig);
+void			sigquit_handler(int sig);
 
 // =============================================================================
 // Builtins

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/17 15:32:38 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/17 17:05:48 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ typedef struct s_status
 	t_bool	paused;
 	int		e_code;
 }			t_status;
+
+t_status					g_status;
+// extern t_status				g_status;
+typedef struct sigaction	t_sigaction;
 
 typedef enum e_error_type
 {
@@ -151,8 +155,5 @@ typedef struct s_ms
 	t_token				*tokens;
 	t_counter			ctr;
 }				t_ms;
-
-extern t_status				g_status;
-typedef struct sigaction	t_sigaction;
 
 #endif

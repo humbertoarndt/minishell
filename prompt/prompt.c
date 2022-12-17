@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:56:49 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/17 16:14:33 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/17 17:05:35 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,3 +124,25 @@ int	ft_prompt(t_ms *ms)
 	}
 	return (ms->exit_code);
 }
+
+// char    *ft_get_cwd(t_hash_table *env)
+// {
+//     char    *cwd;
+//     char    *cwd_tmp;
+//     char    *home;
+//     //usar pwd function
+//     cwd = getcwd(NULL, 0);
+//     if (!cwd)
+//         cwd = ft_get_key_for_prompt(env, PWD_KEY);
+//     if (!cwd)
+//         return (ft_strdup("unknown"));
+//     home = ft_get_key_for_prompt(env, "HOME");
+//     if (home)
+//     {
+//         cwd_tmp = ft_replace_str(cwd, home, "~");
+//         ft_free_ptr((void **)&cwd);
+//         cwd = cwd_tmp;
+
+//     }
+//     return (cwd);
+// }
