@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
+/*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/12/08 17:09:40 by harndt           ###   ########.fr       */
+/*   Updated: 2022/12/17 16:13:48 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void			ft_cmds_counter(t_ms *ms, t_executor *exec);
 // free
 // =============================================================================
 void			ft_free_ms(t_ms *ms);
-void			ft_free_all_ms(t_ms *ms);
+void			ft_free_all_ms(t_ms *ms, t_bool free_env);
 // =============================================================================
 // executor
 // =============================================================================
@@ -178,8 +178,9 @@ int				ft_wait_childs(t_list *pids);
 // =============================================================================
 
 void			set_signals(void);
+void			set_heredoc_signals(int child_pid);
 void			sigint_handler(int sig);
-// void			sigquit_handler(int sig);
+void			sigquit_handler(int sig);
 
 // =============================================================================
 // Builtins

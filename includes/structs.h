@@ -6,7 +6,7 @@
 /*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/08 17:22:08 by harndt           ###   ########.fr       */
+/*   Updated: 2022/12/13 22:47:58 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ typedef struct s_status
 	int		e_code;
 }			t_status;
 
-t_status	g_status;
+t_status					g_status;
+// extern t_status				g_status;
+typedef struct sigaction	t_sigaction;
 
 typedef enum e_error_type
 {
@@ -154,8 +156,5 @@ typedef struct s_ms
 	t_token				*tokens;
 	t_counter			ctr;
 }				t_ms;
-
-extern t_status				g_status;
-typedef struct sigaction	t_sigaction;
 
 #endif

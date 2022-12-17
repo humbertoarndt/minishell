@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
+/*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:20:01 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/07 21:08:52 by harndt           ###   ########.fr       */
+/*   Updated: 2022/12/17 16:00:01 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_exec_child(t_ms *ms, t_executor *exec_tree)
 {
 	char		**envp;
 
+	// set_heredoc_signals();
 	ft_handle_pipes(ms);
 	ft_set_redirection_fds(ms, exec_tree);
 	if (!is_builtin(ms, exec_tree, TRUE))
@@ -54,6 +55,7 @@ void	ft_exec_cmds(t_ms *ms, t_executor *exec_tree)
 		
 	pid = (pid_t *)malloc(sizeof(pid_t));
 	*pid = fork();
+	// set_heredoc_signals(*pid);
 	if (*pid == ERROR_CODE_FUNCTION)
 		exit(1);//implementar error handler
 	if (*pid == CHILD_PROCESS)

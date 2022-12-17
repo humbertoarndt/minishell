@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 20:49:48 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/16 23:12:37 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/12/17 16:14:38 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_heredoc_handler(t_ms *ms, t_file *file)
 	char	*line;
 	char	*line_acc;
 	char	*line_acc_with_nl;
-
+	
 	line_acc = ft_strdup("");
 	file->fd = open(file->file, O_TRUNC | O_CREAT | O_RDWR, DEFAULT_PERMISSION);
 	while (TRUE)
@@ -54,6 +54,19 @@ void	ft_heredoc_handler(t_ms *ms, t_file *file)
 		{
 			ft_free_ptr((void **)&(line));
 			break ;
+		}
+		else if (!line)
+		{
+			// TODO
+			// imprimir mensagem de erro e concatenar com o delimitador
+			// fechar arquivo fd
+			// liberar memórias
+			// exit - sucesso
+			ft_printf("warning: here-document at line 4 delimited by end-of-file (wanted '%s')\n", file->delimeter);
+			ft_free_ptr((void **)&(line_acc));
+			ft_free_all_ms(ms, FALSE);
+			exit(EXIT_SUCCESS); // trocar pelo próprio exit
+			
 		}
 		line_acc = ft_strjoin_free(line_acc, line);
 		line_acc_with_nl = ft_strjoin_free(line_acc, ft_strdup("\n"));

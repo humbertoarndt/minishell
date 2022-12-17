@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
+/*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 19:22:26 by harndt            #+#    #+#             */
-/*   Updated: 2022/12/07 20:09:47 by harndt           ###   ########.fr       */
+/*   Updated: 2022/12/17 16:18:29 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	kill_child(t_ms *ms, t_bool is_child, int exit_code)
 {
 	if (is_child)
 	{
-		ft_free_all_ms(ms);
+		ft_free_all_ms(ms, TRUE);
 		exit (exit_code);
 	}
 }
