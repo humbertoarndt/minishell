@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 20:49:48 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/01/04 21:19:36 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/04 23:41:06 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,18 @@ void	ft_heredoc_handler(t_ms *ms, t_file *file)
 	char	*line_acc;
 	char	*line_acc_with_nl;
 
-	set_heredoc_signals(ms);
+	set_heredoc_signals();
 	line_acc = ft_strdup("");
 	file->fd = open(file->file, O_TRUNC | O_CREAT | O_RDWR, DEFAULT_PERMISSION);
 	while (TRUE)
 	{
+		if (g_status.paused == TRUE)
+		{
+			ft_free_ptr((void **)&(line_acc));
+			ft_close_fd(file->fd);
+			g_status.paused = FALSE;
+			return ;
+		}
 		line = readline(HEREDOC_START);
 		if (ft_strcmp(line, file->delimeter) == 0 || !line)
 		{

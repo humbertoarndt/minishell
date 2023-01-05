@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handlers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 18:28:39 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/01/04 21:57:59 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/04 22:05:19 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,22 +64,9 @@ void	ft_print_syntax_error(t_ms *ms)
 	ft_free_all_ms(ms, FALSE); // mudar para free_ms (não precisa sair do programa, so começar de novo)
 }
 
-
 void	ft_print_syntax_error_no_exit(t_ms *ms, char *token_error,
 			int exit_code, t_error_type error_type)
 {
-	
-
-	if (token_error)
-		ms->buffer = token_error;
-	ms->exit_code = exit_code;
-	ms->invalid_program = error_type;
-	ft_print_syntax_error(ms);
-}
-void	ft_print_syntax_error_no_exit(t_ms *ms, char *token_error,
-			int exit_code, t_error_type error_type)
-{
-
 	if (token_error)
 		ms->buffer = token_error;
 	ms->exit_code = exit_code;
