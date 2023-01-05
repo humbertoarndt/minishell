@@ -6,54 +6,76 @@
 /*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 12:46:45 by harndt            #+#    #+#             */
-/*   Updated: 2022/12/15 15:45:51 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/04 21:22:22 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// https://discord.com/channels/706206701598277681/805218563194355732/1033103735880159352
-
-void	sigint_handler(int sig)
+static void	handle_sigint(int sig)
 {
-	if (sig != SIGINT)
-		return ;
-	g_status.paused = TRUE;
-	if (g_status.pid)
-	{
-		ft_putstr("^C\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		g_status.e_code = 130;
-	}
-	else
-	{
-		ft_putchar('\n');
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
-		g_status.e_code = 1;
-	}
+	(void)sig;
+	ft_putstr_fd("\n", STDOUT_FILENO);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 }
 
-void	sigquit_handler(int sig)
+// static void	handle_sigint2(int sig, t_ms *ms)
+// {
+// 	(void)sig;
+// 	ms->invalid_program = SYNTAX_ERR;
+// 	ft_putstr_fd("\n", STDOUT_FILENO);
+// 	rl_on_new_line();
+// 	rl_replace_line("", 0);
+// 	rl_redisplay();
+// }
+
+void	set_execute_signals(int child_pid)
 {
-	if (sig != SIGQUIT)
-		return;
-	g_status.paused = TRUE;
-	if (g_status.pid)
-	{
-		ft_putstr("\\^Quit:\n");
-		rl_redisplay();
-		g_status.e_code = 131;
-	}
+	struct sigaction	sa;
+
+	sa.sa_flags = 0;
+	sigemptyset(&sa.sa_mask);
+	if (child_pid == 0)
+		sa.sa_handler = SIG_DFL;
 	else
-		ft_putstr(rl_line_buffer);
+		sa.sa_handler = SIG_IGN;
+	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGQUIT, &sa, NULL);
+}
+
+void	set_heredoc_signals(t_ms *ms)
+{
+	struct sigaction	sa_sigint;
+	// struct sigaction	sa_sigquit;
+
+	sa_sigint.sa_flags = 0;
+	sa_sigint.sa_handler = SIG_DFL;
+	ms->invalid_program = SYNTAX_ERR;
+	sigemptyset(&sa_sigint.sa_mask);
+	// if (child_pid == 0)
+	// 	sa_sigint.sa_handler = SIG_DFL;
+	// else
+	// 	sa_sigint.sa_handler = SIG_IGN;
+	sigaction(SIGINT, &sa_sigint, NULL);
+	// sa_sigquit.sa_flags = 0;
+	// sigemptyset(&sa_sigquit.sa_mask);
+	// sa_sigquit.sa_handler = SIG_IGN;
+	// sigaction(SIGQUIT, &sa_sigquit, NULL);
 }
 
 void	set_signals(void)
 {
-	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, sigquit_handler);
-	signal(SIGSEGV, SIG_IGN);
+	struct sigaction	sa_sigint; // ctrl + c
+	struct sigaction	sa_sigquit; // ctrl + /
+
+	sa_sigint.sa_handler = &handle_sigint;
+	sa_sigint.sa_flags = 0;
+	sigemptyset(&sa_sigint.sa_mask);
+	sigaction(SIGINT, &sa_sigint, NULL);
+	sa_sigquit.sa_handler = SIG_IGN;
+	sa_sigquit.sa_flags = 0;
+	sigemptyset(&sa_sigquit.sa_mask);
+	sigaction(SIGQUIT, &sa_sigquit, NULL);
 }

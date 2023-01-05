@@ -6,7 +6,7 @@
 /*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:56:49 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/17 16:15:44 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/04 21:35:25 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	*ft_get_hostname()
 char	*ft_get_cwd(t_hash_table *env)
 {
 	char	*cwd;
+	char	*cwd_tmp;
 	char	*home;
 	//usar pwd function
 	cwd = getcwd(NULL, 0);
@@ -54,9 +55,12 @@ char	*ft_get_cwd(t_hash_table *env)
 		return (ft_strdup("unknown"));
 	home = ft_get_key_for_prompt(env, "HOME");
 	if (home)
-		cwd = ft_replace_str(cwd, home, "~");
-	else
-		cwd = ft_strdup(cwd);
+	{
+		cwd_tmp = ft_replace_str(cwd, home, "~");
+		ft_free_ptr((void **)&cwd);
+		cwd = cwd_tmp;
+
+	}
 	return (cwd);
 }
 
@@ -102,17 +106,18 @@ int	ft_prompt(t_ms *ms)
 		if (ms->buffer == NULL)
 		{
 			ft_free_all_ms(ms, TRUE);
+			ft_printf("exit\n");
 			exit(0);
 		}
-		ms->buffer_start = ms->buffer;
-		add_history(ms->buffer);
-		ft_tokenizer(ms);
-		//ft_print_tokens_list(ms->tokens);
-		ms->executor = ft_parser(ms);
-		//ft_print_tree_recursive(ms->executor, "root", 0, TRUE);
-		ms->exit_code = ft_execute(ms);
-		//printf("%s\n", ms->buffer_start);
-		ft_free_ms(ms);
+		if (!ms->invalid_program)
+		{
+			//ft_print_tokens_list(ms->tokens);
+			ms->executor = ft_parser(ms);
+			//ft_print_tree_recursive(ms->executor, "root", 0, TRUE);
+			ms->exit_code = ft_execute(ms);
+			//printf("%s\n", ms->buffer_start);
+			ft_free_ms(ms);
+		}
 	}
 	return (ms->exit_code);
 }

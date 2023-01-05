@@ -6,7 +6,7 @@
 /*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:20:01 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/17 16:00:01 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/04 21:30:46 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	ft_exec_child(t_ms *ms, t_executor *exec_tree)
 {
 	char		**envp;
 
-	// set_heredoc_signals();
 	ft_handle_pipes(ms);
 	ft_set_redirection_fds(ms, exec_tree);
 	if (!is_builtin(ms, exec_tree, TRUE))
@@ -54,8 +53,9 @@ void	ft_exec_cmds(t_ms *ms, t_executor *exec_tree)
 	ft_init_pipes(ms);
 		
 	pid = (pid_t *)malloc(sizeof(pid_t));
-	*pid = fork();
-	// set_heredoc_signals(*pid);
+	// *pid = fork();
+	g_status.pid = fork();
+	*pid = g_status.pid;
 	if (*pid == ERROR_CODE_FUNCTION)
 		exit(1);//implementar error handler
 	if (*pid == CHILD_PROCESS)
@@ -79,7 +79,7 @@ void	ft_execute_pipe(t_ms *ms, t_executor *exec_tree)
 
 void	ft_execute_tree(t_ms *ms, t_executor *exec_tree)
 {
-	if (!exec_tree)
+	if (!exec_tree || ms->invalid_program)
 		return ;
 	if (exec_tree->operator
 		&& ft_strncmp(exec_tree->operator, PIPE, ft_strlen(PIPE)) == 0)

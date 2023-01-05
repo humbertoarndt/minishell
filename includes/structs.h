@@ -6,7 +6,7 @@
 /*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/17 16:25:50 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/04 21:33:00 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@ typedef struct s_status
 	int		e_code;
 }			t_status;
 
-t_status					g_status;
+extern t_status					g_status;
 // extern t_status				g_status;
-typedef struct sigaction	t_sigaction;
+// typedef struct sigaction	t_sigaction;
 
 typedef enum e_error_type
 {
-	QUOTING_ERR = TRUE,
-	MISSING_FILE_ERR,
+	MISSING_FILE_ERR = TRUE,
 	SYNTAX_ERR
 }			t_error_type;
 

@@ -6,7 +6,7 @@
 /*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2022/12/17 16:13:48 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/04 21:45:04 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void			ft_init_fd_pipes(t_ms *ms);
 int				ft_tokenizer(t_ms *ms);
 void			ft_build_token_list(t_ms *ms);
 //token list
+t_token 		*ft_find_last_token(t_token *head);
 void			ft_addback_token(t_token **head, t_token *new_token);
 t_token			*ft_create_token_node(char *token, t_token_type type);
 void			ft_clear_tokens(t_token **token_head);
@@ -99,6 +100,8 @@ void			ft_print_custom_error_and_exit2(t_ms *ms, char *argv[2], char *message,
 void			ft_print_error_and_exit(t_ms *ms, char *arg_err,int exit_code);
 char			*ft_syntax_error_message(char *tok);
 void			ft_print_syntax_error(t_ms *ms);
+void			ft_print_syntax_error_no_exit(t_ms *ms, char *token_error,
+					int exit_code, t_error_type error_type);
 // =============================================================================
 // debug
 // =============================================================================
@@ -179,10 +182,9 @@ int				ft_wait_childs(t_list *pids);
 // Signals
 // =============================================================================
 
-void			set_signals(void);
-void			set_heredoc_signals(int child_pid);
-void			sigint_handler(int sig);
-void			sigquit_handler(int sig);
+void		set_execute_signals(int child_pid);
+void	set_heredoc_signals(t_ms *ms);
+void		set_signals(void);
 
 // =============================================================================
 // Builtins

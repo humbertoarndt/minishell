@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+         #
+#    By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 18:20:52 by harndt            #+#    #+#              #
-#    Updated: 2022/12/14 15:04:37 by harndt           ###   ########.fr        #
+#    Updated: 2022/12/22 17:38:04 by harndt           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ SRCS	:=	minishell.c \
 			$(BUILTIN)/ms_cd.c	$(BUILTIN)/ms_echo.c	$(BUILTIN)/ms_env.c \
 			$(BUILTIN)/ms_exit.c	$(BUILTIN)/ms_export.c	$(BUILTIN)/ms_pwd.c \
 			$(BUILTIN)/ms_unset.c	$(BUILTIN)/ms_utils.c	\
-			$(SIGNAL)/signal.c 	$(SIGNAL)/heredoc_signal.c\
+			$(SIGNAL)/signal.c
 			
 OBJS	:=	$(SRCS:.c=.o)
 VGSUPRESS	:= --suppressions=readline.supp

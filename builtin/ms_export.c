@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 22:00:23 by harndt            #+#    #+#             */
-/*   Updated: 2022/12/15 02:02:08 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/01/04 21:28:41 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	print_export_with_args(t_ms *ms, char **argvs)
 		{
 			ft_print_export_error(word);
 			ms->invalid_program = SYNTAX_ERR;
+			ms->exit_code = 1;
 			return ;
 		}
 		split_argv = ft_split_env(word);
