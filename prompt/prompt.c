@@ -6,7 +6,7 @@
 /*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:56:49 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/01/04 21:35:25 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/04 22:01:46 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,15 +109,19 @@ int	ft_prompt(t_ms *ms)
 			ft_printf("exit\n");
 			exit(0);
 		}
+		ms->buffer_start = ms->buffer;
+		add_history(ms->buffer);
+		ft_tokenizer(ms);
 		if (!ms->invalid_program)
 		{
-			//ft_print_tokens_list(ms->tokens);
+				//ft_print_tokens_list(ms->tokens);
 			ms->executor = ft_parser(ms);
 			//ft_print_tree_recursive(ms->executor, "root", 0, TRUE);
 			ms->exit_code = ft_execute(ms);
 			//printf("%s\n", ms->buffer_start);
 			ft_free_ms(ms);
 		}
+		
 	}
 	return (ms->exit_code);
 }
