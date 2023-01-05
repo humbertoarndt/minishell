@@ -6,7 +6,7 @@
 /*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2023/01/04 23:45:48 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/05 17:28:47 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ int				ft_wait_childs(t_list *pids);
 // =============================================================================
 
 void		set_execute_signals(int child_pid);
-void	set_heredoc_signals(t_ms *ms);
+void	set_heredoc_signals(void);
 void		set_signals(void);
 
 // =============================================================================

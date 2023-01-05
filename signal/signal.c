@@ -6,7 +6,7 @@
 /*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 12:46:45 by harndt            #+#    #+#             */
-/*   Updated: 2023/01/04 23:46:41 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/05 17:28:55 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	set_execute_signals(int child_pid)
 	sigaction(SIGQUIT, &sa, NULL);
 }
 
-void	set_heredoc_signals(t_ms *ms)
+void	set_heredoc_signals(void)
 {
 	struct sigaction	sa_sigint;
 	// struct sigaction	sa_sigquit;a
