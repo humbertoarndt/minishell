@@ -6,7 +6,7 @@
 /*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2023/01/04 22:00:09 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/04 22:46:18 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int				ft_advance_ptr_after_white_space(char **buffer);
 // expansion
 char			*ft_replace_variable_expression(t_ms *ms, char *str);
 void			ft_find_variable_expression_and_replace(t_ms *ms);
+t_token			*ft_find_last_token(t_token *head);
 // =============================================================================
 // errors handlers
 // =============================================================================
@@ -182,7 +183,7 @@ int				ft_wait_childs(t_list *pids);
 // =============================================================================
 
 void		set_execute_signals(int child_pid);
-void	set_heredoc_signals(t_ms *ms);
+void	set_heredoc_signals(void);
 void		set_signals(void);
 
 // =============================================================================
