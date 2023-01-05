@@ -6,7 +6,7 @@
 /*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 12:46:45 by harndt            #+#    #+#             */
-/*   Updated: 2023/01/04 22:53:49 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/04 23:46:41 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ static void	handle_sigint2(int sig)
 {
 	if (sig == SIGINT)
 	{
-		g_status.paused = 1;
+		g_status.paused = TRUE;
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		rl_replace_line("", 0);
 		rl_on_new_line();
-		// rl_redisplay();	
 	}
 }
 
@@ -47,18 +46,18 @@ void	set_execute_signals(int child_pid)
 	sigaction(SIGQUIT, &sa, NULL);
 }
 
-void	set_heredoc_signals(void)
+void	set_heredoc_signals(t_ms *ms)
 {
 	struct sigaction	sa_sigint;
-
+	// struct sigaction	sa_sigquit;a
 	sa_sigint.sa_flags = 0;
 	sa_sigint.sa_handler = &handle_sigint2;
 	sigemptyset(&sa_sigint.sa_mask);
-	// if (child_pid == 0)
-	// 	sa_sigint.sa_handler = SIG_DFL;
-	// else
-	// 	sa_sigint.sa_handler = SIG_IGN;
 	sigaction(SIGINT, &sa_sigint, NULL);
+	// sa_sigquit.sa_flags = 0;
+	// sigemptyset(&sa_sigquit.sa_mask);
+	// sa_sigquit.sa_handler = SIG_IGN;
+	// sigaction(SIGQUIT, &sa_sigquit, NULL);
 }
 
 void	set_signals(void)

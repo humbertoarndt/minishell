@@ -6,7 +6,7 @@
 /*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2023/01/04 22:46:18 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/04 23:45:48 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void			ft_build_token_list(t_ms *ms);
 //token list
 void			ft_addback_token(t_token **head, t_token *new_token);
 t_token			*ft_create_token_node(char *token, t_token_type type);
+t_token			*ft_find_last_token(t_token *head);
 void			ft_clear_tokens(t_token **token_head);
 // quoting tokenizer
 char			*ft_quote_handler(t_ms *ms, char quote);
@@ -183,7 +184,7 @@ int				ft_wait_childs(t_list *pids);
 // =============================================================================
 
 void		set_execute_signals(int child_pid);
-void	set_heredoc_signals(void);
+void	set_heredoc_signals(t_ms *ms);
 void		set_signals(void);
 
 // =============================================================================
