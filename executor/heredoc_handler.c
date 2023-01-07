@@ -6,7 +6,7 @@
 /*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 20:49:48 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/01/04 23:45:15 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/07 16:07:18 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,34 +44,51 @@ void	ft_heredoc_handler(t_ms *ms, t_file *file)
 	char	*line;
 	char	*line_acc;
 	char	*line_acc_with_nl;
+	int		exit_status;
 
-	set_heredoc_signals();
 	line_acc = ft_strdup("");
-	file->fd = open(file->file, O_TRUNC | O_CREAT | O_RDWR, DEFAULT_PERMISSION);
-	while (TRUE)
+	//novo
+	pid_t pid_child = fork();
+	
+	if (pid_child == 0)
 	{
-		if (g_status.paused == TRUE)
+		set_heredoc_signals(pid_child);
+		file->fd = open(file->file, O_TRUNC | O_CREAT | O_RDWR, DEFAULT_PERMISSION);
+		while (TRUE)
 		{
-			ft_free_ptr((void **)&(line_acc));
-			ft_close_fd(file->fd);
-			g_status.paused = FALSE;
-			return ;
+			if (g_status.paused == TRUE)
+			{
+				g_status.paused = FALSE;
+				ft_free_ptr((void **)&(line_acc));
+				ft_close_fd(file->fd);
+				return ;
+			}
+			line = readline(HEREDOC_START);
+			if (ft_strcmp(line, file->delimeter) == 0 || !line)
+			{
+				if (!line)
+					ft_printf("minishell: warning here-document delimited by" \
+				" end-of-file (wanted `%s')\n", file->delimeter);
+				ft_free_ptr((void **)&(line));
+				break ;
+			}
+			line_acc = ft_strjoin_free(line_acc, line);
+			line_acc_with_nl = ft_strjoin_free(line_acc, ft_strdup("\n"));
+			line_acc = ft_deal_expansion_heredoc(ms, line_acc_with_nl);
+			ft_free_ptr((void **)&(line_acc_with_nl));
 		}
-		line = readline(HEREDOC_START);
-		if (ft_strcmp(line, file->delimeter) == 0 || !line || g_status.paused == 1)
-		{
-			if (!line)
-				ft_printf("minishell: warning here-document delimited by" \
-			" end-of-file (wanted `%s')\n", file->delimeter);
-			ft_free_ptr((void **)&(line));
-			break ;
-		}
-		line_acc = ft_strjoin_free(line_acc, line);
-		line_acc_with_nl = ft_strjoin_free(line_acc, ft_strdup("\n"));
-		line_acc = ft_deal_expansion_heredoc(ms, line_acc_with_nl);
-		ft_free_ptr((void **)&(line_acc_with_nl));
+		ft_putstr_fd(line_acc, file->fd);
+		ft_close_fd(file->fd);
+		ft_free_ptr((void **)&(line_acc));
+		exit_status = EXIT_SUCCESS;
+		exit(0);
 	}
-	ft_putstr_fd(line_acc, file->fd);
-	ft_close_fd(file->fd);
-	ft_free_ptr((void **)&(line_acc));
+	else
+	{
+		exit_status = ft_wait_child(pid_child);
+		if (exit_status == 130)
+		{
+			ms->invalid_program = 2;
+		}
+	}
 }

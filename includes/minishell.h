@@ -6,7 +6,7 @@
 /*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2023/01/05 17:28:47 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/07 16:07:12 by harndt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,13 +178,14 @@ void			ft_set_redirection_fds(t_ms *ms, t_executor *exec_tree);
 void			ft_heredoc_handler(t_ms *ms, t_file *file);
 int				ft_wait_child(pid_t pid);
 int				ft_wait_childs(t_list *pids);
+int				ft_wait_child2(pid_t pid, int *sig);
 
 // =============================================================================
 // Signals
 // =============================================================================
 
 void		set_execute_signals(int child_pid);
-void	set_heredoc_signals(void);
+void	set_heredoc_signals(int child_pid);
 void		set_signals(void);
 
 // =============================================================================
