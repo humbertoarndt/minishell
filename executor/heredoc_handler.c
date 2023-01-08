@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 20:49:48 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/01/04 23:45:15 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/08 20:21:23 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,35 +43,36 @@ void	ft_heredoc_handler(t_ms *ms, t_file *file)
 {
 	char	*line;
 	char	*line_acc;
-	char	*line_acc_with_nl;
+	char	*delimeter_with_nl;
 
 	set_heredoc_signals();
 	line_acc = ft_strdup("");
 	file->fd = open(file->file, O_TRUNC | O_CREAT | O_RDWR, DEFAULT_PERMISSION);
+	delimeter_with_nl = ft_strjoin(file->delimeter, "\n");
 	while (TRUE)
 	{
-		if (g_status.paused == TRUE)
+		ft_printf(HEREDOC_START);
+		line = ft_get_next_line(0);
+		if (ft_strcmp(line, delimeter_with_nl) == 0 || !line || g_status.paused == TRUE)
 		{
-			ft_free_ptr((void **)&(line_acc));
-			ft_close_fd(file->fd);
-			g_status.paused = FALSE;
-			return ;
-		}
-		line = readline(HEREDOC_START);
-		if (ft_strcmp(line, file->delimeter) == 0 || !line || g_status.paused == 1)
-		{
-			if (!line)
+			if (!line && g_status.paused == FALSE)
 				ft_printf("minishell: warning here-document delimited by" \
 			" end-of-file (wanted `%s')\n", file->delimeter);
 			ft_free_ptr((void **)&(line));
+			if (g_status.paused == TRUE)
+			{
+				g_status.paused = FALSE;
+				ms->exit_code = 130;
+				ms->invalid_program = 2;
+				return ;
+			}
 			break ;
 		}
 		line_acc = ft_strjoin_free(line_acc, line);
-		line_acc_with_nl = ft_strjoin_free(line_acc, ft_strdup("\n"));
-		line_acc = ft_deal_expansion_heredoc(ms, line_acc_with_nl);
-		ft_free_ptr((void **)&(line_acc_with_nl));
+		line_acc = ft_deal_expansion_heredoc(ms, line_acc);
 	}
 	ft_putstr_fd(line_acc, file->fd);
 	ft_close_fd(file->fd);
 	ft_free_ptr((void **)&(line_acc));
+	ft_free_ptr((void **)&(delimeter_with_nl));
 }
