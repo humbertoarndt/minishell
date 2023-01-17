@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:28:32 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/01/04 22:01:06 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/16 22:37:35 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef unsigned int t_uint;
+typedef unsigned int	t_uint;
 
 typedef struct s_status
 {
@@ -22,9 +22,7 @@ typedef struct s_status
 	int		e_code;
 }			t_status;
 
-extern t_status					g_status;
-// extern t_status				g_status;
-// typedef struct sigaction	t_sigaction;
+extern t_status			g_status;
 
 typedef enum e_error_type
 {
@@ -51,7 +49,6 @@ typedef enum e_token_type
 	DOUBLE_QUOTE,
 }	t_token_type;
 
-
 typedef enum e_redir_type
 {
 	NOT_FOUND_REDIR,
@@ -59,7 +56,7 @@ typedef enum e_redir_type
 	APPEND,
 	INFILE,
 	HEREDOC,
-} t_redir_type;
+}	t_redir_type;
 
 typedef struct s_token
 {
@@ -70,7 +67,7 @@ typedef struct s_token
 	struct s_token	*next;
 }				t_token;
 
-typedef	struct s_hash_item
+typedef struct s_hash_item
 {
 	char				*key;
 	char				*value;
@@ -85,13 +82,12 @@ typedef struct s_hash_table
 	size_t		size;
 }	t_hash_table;
 
-
 typedef struct s_env
 {
 	char			**envp;
 	t_hash_table	*var;
 	char			**path;
-} t_env;
+}	t_env;
 
 typedef struct t_file
 {
@@ -99,7 +95,6 @@ typedef struct t_file
 	char			*file;
 	t_redir_type	type;
 	char			*delimeter;
-	
 }	t_file;
 typedef struct s_cmd
 {
@@ -154,6 +149,6 @@ typedef struct s_ms
 	t_list				*pids;
 	t_token				*tokens;
 	t_counter			ctr;
-}				t_ms;
+}	t_ms;
 
 #endif

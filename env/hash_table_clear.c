@@ -6,11 +6,11 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 22:10:43 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/01 21:22:47 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/01/16 21:37:06 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
 void	ft_clear_hash_item(t_hash_item *hash_item)
 {

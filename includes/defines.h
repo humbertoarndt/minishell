@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 21:18:19 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/07 21:27:13 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/16 22:35:04 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@
 # define PERMISSION_DENIED_ERROR_CODE 126
 # define PERMISSION_DENIED_ERROR_MSG "Permission denied"
 
-
 # define FILE_DOES_NOT_EXIST -1
 # define PERMISSION_NOT_ALLOWED 1
 # define PERMISSION_OK 0
@@ -99,7 +98,6 @@
 //VARIABLE EXPRESSION
 # define VARIABLE_EXPRESSION "$"
 # define QUOTATION_MARKS '?'
-//
 # define WHITE_SPACE " \t\r\n\v"
 # define QUOTING	"\"'"
 # define OPERATORS "<>&|"

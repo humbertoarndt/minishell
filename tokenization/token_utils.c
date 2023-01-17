@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 20:16:52 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/17 23:19:35 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/01/16 22:46:17 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ int	has_closing_char(t_ms *ms, char quote)
 	char	*buff_ptr;
 
 	buff_ptr = ms->buffer;
-	has_closed_quote = *buff_ptr == quote 
-		&& ft_strchr(++buff_ptr, quote);
+	has_closed_quote = (*buff_ptr == quote && ft_strchr(++buff_ptr, quote));
 	return (has_closed_quote);
 }
 
@@ -31,12 +30,11 @@ char	*ft_create_token_string(t_ms *ms, size_t len)
 	return (tok);
 }
 
-
-t_token		*ft_return_simple_token(t_ms *ms, char *token_string,
+t_token	*ft_return_simple_token(t_ms *ms, char *token_string,
 				t_token_type token_type)
 {
-	t_token			*token;
-	
+	t_token	*token;
+
 	ms->buffer++;
 	token = ft_create_token_node(token_string, token_type);
 	return (token);

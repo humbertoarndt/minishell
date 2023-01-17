@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   error_handlers_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 21:19:38 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/10/25 22:05:29 by bbonaldi         ###   ########.fr       */
+/*   Created: 2022/10/28 18:28:39 by bbonaldi          #+#    #+#             */
+/*   Updated: 2023/01/16 23:18:42 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*ft_lexer(char *s)
+void	ft_print_syntax_error_no_exit(t_ms *ms, char *token_error,
+			int exit_code, t_error_type error_type)
 {
-	
+	if (token_error)
+		ms->buffer = token_error;
+	ft_set_syntax_error_and_exit_code(ms, error_type, exit_code);
+	ft_print_syntax_error(ms);
 }

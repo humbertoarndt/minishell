@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 22:00:23 by harndt            #+#    #+#             */
-/*   Updated: 2023/01/04 21:55:21 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/16 21:48:54 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	ft_print_export_error(char *argv)
 
 	argv_syntax_error = ft_strjoin_free(ft_strdup("`"), argv);
 	argv_syntax_error = ft_strjoin_free(argv_syntax_error, ft_strdup("'"));
-	print_custom_arg_error2((char *[2]){"export: ", argv_syntax_error}, INVALID_IDENTIFIER);
+	print_custom_arg_error2((char *[2]){"export: ", argv_syntax_error},
+		INVALID_IDENTIFIER);
 }
 
 int	is_word(char *str)
@@ -70,8 +71,7 @@ void	print_export_with_args(t_ms *ms, char **argvs)
 		if (!is_word(word))
 		{
 			ft_print_export_error(word);
-			ms->invalid_program = SYNTAX_ERR;
-			ms->exit_code = 1;
+			ft_set_syntax_error_and_exit_code(ms, SYNTAX_ERR, 1);
 			return ;
 		}
 		split_argv = ft_split_env(word);
@@ -80,7 +80,8 @@ void	print_export_with_args(t_ms *ms, char **argvs)
 			index++;
 			continue ;
 		}
-		ft_insert_or_update_hash_item(ms->env.var, split_argv[0], split_argv[1]);
+		ft_insert_or_update_hash_item(ms->env.var, split_argv[0],
+			split_argv[1]);
 		ft_free_split_env(&split_argv);
 		index++;
 	}
@@ -90,11 +91,11 @@ t_bool	ms_export(t_ms *ms, t_cmd *cmds, t_bool is_child)
 {
 	int	count_of_argvs;
 
-	count_of_argvs = ft_lstsize(cmds->argv_list);	
+	count_of_argvs = ft_lstsize(cmds->argv_list);
 	if (count_of_argvs == 1)
 		print_export_no_argvs(ms->env.var);
 	else
 		print_export_with_args(ms, cmds->argv);
-	kill_child(ms, is_child, 1); // TODO Definir valor de exit_code
+	kill_child(ms, is_child, 1);
 	return (TRUE);
 }

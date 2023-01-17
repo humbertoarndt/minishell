@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 12:46:45 by harndt            #+#    #+#             */
-/*   Updated: 2023/01/08 20:10:45 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/01/16 22:05:01 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,17 @@ void	set_execute_signals(int child_pid)
 void	set_heredoc_signals(void)
 {
 	struct sigaction	sa_sigint;
-	// struct sigaction	sa_sigquit;a
+
 	sa_sigint.sa_flags = 0;
 	sa_sigint.sa_handler = &handle_sigint2;
 	sigemptyset(&sa_sigint.sa_mask);
 	sigaction(SIGINT, &sa_sigint, NULL);
-	// sa_sigquit.sa_flags = 0;
-	// sigemptyset(&sa_sigquit.sa_mask);
-	// sa_sigquit.sa_handler = SIG_IGN;
-	// sigaction(SIGQUIT, &sa_sigquit, NULL);
 }
 
 void	set_signals(void)
 {
-	struct sigaction	sa_sigint; // ctrl + c
-	struct sigaction	sa_sigquit; // ctrl + /
+	struct sigaction	sa_sigint;
+	struct sigaction	sa_sigquit;
 
 	sa_sigint.sa_handler = &handle_sigint;
 	sa_sigint.sa_flags = 0;

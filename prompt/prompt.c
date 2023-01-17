@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:56:49 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/01/08 20:22:01 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/01/16 23:18:25 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_get_key_for_prompt(t_hash_table *env, char *key)
 	return (hash_item->value);
 }
 
-char	*ft_get_hostname()
+char	*ft_get_hostname(void)
 {
 	int		fd;
 	char	*hostname;
@@ -47,7 +47,7 @@ char	*ft_get_cwd(t_hash_table *env)
 	char	*cwd;
 	char	*cwd_tmp;
 	char	*home;
-	//usar pwd function
+
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 		cwd = ft_get_key_for_prompt(env, PWD_KEY);
@@ -59,7 +59,6 @@ char	*ft_get_cwd(t_hash_table *env)
 		cwd_tmp = ft_replace_str(cwd, home, "~");
 		ft_free_ptr((void **)&cwd);
 		cwd = cwd_tmp;
-
 	}
 	return (cwd);
 }
@@ -93,7 +92,6 @@ void	ft_create_prompt_str(t_ms *ms, t_hash_table *env)
 	ft_free_ptr((void **)&cwd);
 }
 
-
 int	ft_prompt(t_ms *ms)
 {
 	ms->exit_code = SUCCESS_CODE;
@@ -114,36 +112,10 @@ int	ft_prompt(t_ms *ms)
 		ft_tokenizer(ms);
 		if (!ms->invalid_program)
 		{
-				//ft_print_tokens_list(ms->tokens);
 			ms->executor = ft_parser(ms);
-			//ft_print_tree_recursive(ms->executor, "root", 0, TRUE);
 			ms->exit_code = ft_execute(ms);
-			//printf("%s\n", ms->buffer_start);
 		}
 		ft_free_ms(ms);
-		
 	}
 	return (ms->exit_code);
 }
-
-// char    *ft_get_cwd(t_hash_table *env)
-// {
-//     char    *cwd;
-//     char    *cwd_tmp;
-//     char    *home;
-//     //usar pwd function
-//     cwd = getcwd(NULL, 0);
-//     if (!cwd)
-//         cwd = ft_get_key_for_prompt(env, PWD_KEY);
-//     if (!cwd)
-//         return (ft_strdup("unknown"));
-//     home = ft_get_key_for_prompt(env, "HOME");
-//     if (home)
-//     {
-//         cwd_tmp = ft_replace_str(cwd, home, "~");
-//         ft_free_ptr((void **)&cwd);
-//         cwd = cwd_tmp;
-
-//     }
-//     return (cwd);
-// }

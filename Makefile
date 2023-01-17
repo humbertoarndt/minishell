@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+         #
+#    By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 18:20:52 by harndt            #+#    #+#              #
-#    Updated: 2022/12/22 17:38:04 by harndt           ###   ########.fr        #
+#    Updated: 2023/01/16 21:56:14 by bbonaldi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,17 +43,19 @@ SRCS	:=	minishell.c \
 			$(TOKENIZATION)/heredoc_tokenizer.c $(TOKENIZATION)/command_tokenizer.c \
 			$(TOKENIZATION)/expansion_handler.c \
 			$(ERROR_HANDLERS)/error_handlers.c $(ERROR_HANDLERS)/error_handlers_utils.c \
+			$(ERROR_HANDLERS)/error_handlers_2.c \
 			$(INIT_MS)/init_ms.c \
 			$(FREE_MS)/free_ms.c \
 			$(DEBUG)/debug.c $(DEBUG)/debug_utils.c \
 			$(ENV)/hash_table.c $(ENV)/hash_table_utils.c \
 			$(ENV)/hash_table_clear.c $(ENV)/hash_table_init.c \
 			$(ENV)/hash_table_delete.c $(ENV)/hash_table_insert.c \
-			$(ENV)/env.c \
+			$(ENV)/env.c $(ENV)/env_2.c \
 			$(PARSER)/parser.c $(PARSER)/init_tree.c $(PARSER)/free_tree.c \
 			$(PARSER)/parser_utils.c \
 			$(EXECUTOR)/executor.c $(EXECUTOR)/commands_builder.c \
-			$(EXECUTOR)/fd_handler.c $(EXECUTOR)/fd_handler_utils.c \
+			$(EXECUTOR)/fd_handler_pipe.c $(EXECUTOR)/fd_handler_utils.c \
+			$(EXECUTOR)/fd_handler_redirection.c $(EXECUTOR)/fd_handler_redirection_utils.c \
 			$(EXECUTOR)/heredoc_handler.c $(EXECUTOR)/wait.c \
 			$(BUILTIN)/ms_cd.c	$(BUILTIN)/ms_echo.c	$(BUILTIN)/ms_env.c \
 			$(BUILTIN)/ms_exit.c	$(BUILTIN)/ms_export.c	$(BUILTIN)/ms_pwd.c \

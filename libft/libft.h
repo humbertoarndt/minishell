@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 21:42:28 by harndt            #+#    #+#             */
-/*   Updated: 2022/11/30 14:18:09 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/16 21:58:14 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -447,7 +447,7 @@ size_t		ft_cpyline(char *dst, const char *src, size_t len);
 /**
  * @brief A type that receives a va_list.
  */
-typedef int	(*t_specifier)(va_list);
+typedef int			(*t_specifier)(va_list);
 
 /**
  * @brief The functions sends formatted output to stdout.
@@ -561,7 +561,7 @@ int			ft_abs(int x);
 # define TRUE 1
 # define FALSE 0
 
-typedef int	t_bool;
+typedef int			t_bool;
 
 /**
  * @brief Checks if the str is a number.
@@ -690,8 +690,8 @@ int			ft_count_char(char *str, char c);
 **/
 void		ft_free_matrix(void ***matrix);
 
-typedef long long t_llong;
+typedef long long	t_llong;
 
-t_llong	ft_atoll(const char *str);
+t_llong		ft_atoll(const char *str);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_tokenizer.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 22:53:47 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/15 16:08:39 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/16 22:06:53 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_token_type	ft_found_heredoc(char *buffer)
 	return (NOT_FOUND);
 }
 
-t_token		*ft_heredoc_tokenizer(t_ms *ms)
+t_token	*ft_heredoc_tokenizer(t_ms *ms)
 {
 	t_token			*heredoc;
 	char			*tok;

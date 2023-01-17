@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:20:01 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/01/04 21:58:22 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/16 23:18:24 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_exec_child(t_ms *ms, t_executor *exec_tree)
 				COMMAND_NOT_FOUND_ERROR_MSG, COMMAND_NOT_FOUND_ERROR_CODE);
 		}
 		execve(exec_tree->cmds->cmd, exec_tree->cmds->argv, envp);
-		ft_free_matrix((void ***)&(envp));	
+		ft_free_matrix((void ***)&(envp));
 	}
 }
 
@@ -42,22 +42,14 @@ void	ft_exec_cmds(t_ms *ms, t_executor *exec_tree)
 	if (!exec_tree)
 		return ;
 	ft_build_cmds(exec_tree->cmds, ms->env.path);
-	
-	// TODO
-	// Checar se linha de comando possui pipe |
-	// Se verdadeiro obrigatório forkar; se falso usar o pai
-	
 	if (ms->should_pipe == FALSE && is_builtin(ms, exec_tree, FALSE))
 		return ;
-	
 	ft_init_pipes(ms);
-		
 	pid = (pid_t *)malloc(sizeof(pid_t));
-	// *pid = fork();
 	g_status.pid = fork();
 	*pid = g_status.pid;
 	if (*pid == ERROR_CODE_FUNCTION)
-		exit(1);//implementar error handler
+		exit(1);
 	if (*pid == CHILD_PROCESS)
 	{
 		ft_free_ptr((void **)&pid);

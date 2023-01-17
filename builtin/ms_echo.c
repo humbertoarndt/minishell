@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <humberto.arndt@gmail.com>          +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 21:57:49 by harndt            #+#    #+#             */
-/*   Updated: 2022/12/05 22:37:43 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/16 21:38:15 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_bool	ms_echo(t_ms *ms, char **argv, t_bool is_child)
 	while (argv[i])
 		ft_putstr_fd(argv[i++], STDOUT);
 	if (nl)
-		ft_putendl_fd("",STDOUT );
-	kill_child(ms, is_child, 0); // TODO Definir valor de exit_code
+		ft_putendl_fd("", STDOUT);
+	kill_child(ms, is_child, 0);
 	return (TRUE);
 }

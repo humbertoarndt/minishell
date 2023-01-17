@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handlers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 18:28:39 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/01/04 23:44:56 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/16 23:18:49 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	ft_print_custom_error_and_exit(t_ms *ms, char *argv, char *message,
 	ft_restore_stdin_out(ms);
 	print_custom_arg_error(argv, message);
 	ft_free_all_ms(ms, TRUE);
-	exit(exit_code); // trocar pelo próprio exit
+	exit(exit_code);
 }
-	
+
 void	ft_print_custom_error_and_exit2(t_ms *ms, char *argv[2], char *message,
 			int exit_code)
 {
@@ -42,7 +42,7 @@ void	ft_print_custom_error_and_exit2(t_ms *ms, char *argv[2], char *message,
 	print_custom_arg_error(concat_argv, message);
 	ft_free_ptr((void **)&concat_argv);
 	ft_free_all_ms(ms, TRUE);
-	exit(exit_code); // trocar pelo próprio exit
+	exit(exit_code);
 }
 
 void	ft_print_error_and_exit(t_ms *ms, char *arg_err, int exit_code)
@@ -50,9 +50,8 @@ void	ft_print_error_and_exit(t_ms *ms, char *arg_err, int exit_code)
 	ft_restore_stdin_out(ms);
 	print_custom_arg_error(arg_err, strerror(exit_code));
 	ft_free_all_ms(ms, TRUE);
-	exit(ms->exit_code); // trocar pelo próprio exit
+	exit(ms->exit_code);
 }
-
 
 void	ft_print_syntax_error(t_ms *ms)
 {
@@ -61,15 +60,4 @@ void	ft_print_syntax_error(t_ms *ms)
 	error_message = ft_syntax_error_message(ms->buffer);
 	print_custom_arg_error(NULL, error_message);
 	ft_free_ptr((void **)&error_message);
-	ft_free_all_ms(ms, FALSE); // mudar para free_ms (não precisa sair do programa, so começar de novo)
-}
-
-void	ft_print_syntax_error_no_exit(t_ms *ms, char *token_error,
-			int exit_code, t_error_type error_type)
-{
-	if (token_error)
-		ms->buffer = token_error;
-	ms->exit_code = exit_code;
-	ms->invalid_program = error_type;
-	ft_print_syntax_error(ms);
 }

@@ -6,11 +6,11 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 22:05:14 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/10 20:19:50 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/01/16 21:43:02 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
 t_uint	ft_hash(char *key, size_t size)
 {

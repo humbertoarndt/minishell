@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:26:03 by harndt            #+#    #+#             */
-/*   Updated: 2023/01/05 17:28:47 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/16 22:47:44 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,17 @@ void			ft_perror_formmated(char *message);
 int				ft_check_argc_argc(int argc, char *argv[]);
 void			print_custom_arg_error(char *arg, char *message);
 void			print_custom_arg_error2(char *argv[2], char *message);
-void			ft_print_custom_error_and_exit(t_ms *ms, char *argv, char *message,
-					int exit_code);
-void			ft_print_custom_error_and_exit2(t_ms *ms, char *argv[2], char *message,
-					int exit_code);
-void			ft_print_error_and_exit(t_ms *ms, char *arg_err,int exit_code);
+void			ft_print_custom_error_and_exit(t_ms *ms, char *argv,
+					char *message, int exit_code);
+void			ft_print_custom_error_and_exit2(t_ms *ms, char *argv[2],
+					char *message, int exit_code);
+void			ft_print_error_and_exit(t_ms *ms, char *arg_err, int exit_code);
 char			*ft_syntax_error_message(char *tok);
 void			ft_print_syntax_error(t_ms *ms);
 void			ft_print_syntax_error_no_exit(t_ms *ms, char *token_error,
 					int exit_code, t_error_type error_type);
+void			ft_set_syntax_error_and_exit_code(t_ms *ms,
+					t_error_type error_type, int exit_code);
 // =============================================================================
 // debug
 // =============================================================================
@@ -124,7 +126,7 @@ int				ft_update_hash_item(t_hash_table *hash_table, char *key,
 					char *value);
 void			ft_insert_or_update_hash_item(t_hash_table *hash_table,
 					char *key, char *value);
-t_hash_item		*ft_search_item_by_key(t_hash_table *hash_table,char *key);
+t_hash_item		*ft_search_item_by_key(t_hash_table *hash_table, char *key);
 void			ft_insert_hash_item(t_hash_table *hash_table, char *key,
 					char *value);
 size_t			ft_count_items_in_bucket(t_hash_item *hash_head);
@@ -148,7 +150,7 @@ void			ft_free_split_env(char ***split_envp);
 // =============================================================================
 // parser
 // =============================================================================
-t_executor		*ft_init_tree();
+t_executor		*ft_init_tree(void);
 t_file			*ft_init_file(t_redir_type type, char *name);
 void			ft_free_tree(t_executor **exec);
 int				ft_has_operator(t_token_type type);
@@ -178,14 +180,15 @@ void			ft_set_redirection_fds(t_ms *ms, t_executor *exec_tree);
 void			ft_heredoc_handler(t_ms *ms, t_file *file);
 int				ft_wait_child(pid_t pid);
 int				ft_wait_childs(t_list *pids);
-
+int				ft_init_redirection_fds(t_ms *ms, t_file *file);
+int				ft_set_file_flags(t_redir_type redir_type);
 // =============================================================================
 // Signals
 // =============================================================================
 
-void		set_execute_signals(int child_pid);
-void	set_heredoc_signals(void);
-void		set_signals(void);
+void			set_execute_signals(int child_pid);
+void			set_heredoc_signals(void);
+void			set_signals(void);
 
 // =============================================================================
 // Builtins
@@ -195,7 +198,7 @@ t_bool			ms_cd(t_ms *ms, char **argv, t_bool is_child);
 t_bool			ms_echo(t_ms *ms, char **argv, t_bool is_child);
 t_bool			ms_env(t_ms *ms, t_bool is_child);
 void			ms_exit(t_ms *ms, char **argv);
-t_bool			ms_export(t_ms *ms, t_cmd *cmds,t_bool is_child);
+t_bool			ms_export(t_ms *ms, t_cmd *cmds, t_bool is_child);
 t_bool			ms_pwd(t_ms *ms, t_bool is_child);
 t_bool			ms_unset(t_ms *ms, char **argv, t_bool is_child);
 t_bool			is_builtin(t_ms *ms, t_executor *exec_tree, t_bool is_child);

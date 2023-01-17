@@ -6,18 +6,11 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 22:52:46 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/16 23:17:51 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/01/16 21:56:26 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ft_close_fd(int fd)
-{
-	if (fd < 0)
-		return ;
-	close(fd);
-}
 
 void	ft_close_pipe_fds(int fd[2])
 {

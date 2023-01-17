@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_ms.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:52:41 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/01/04 21:59:57 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/16 21:52:30 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	ft_free_ms(t_ms *ms)
 	if (ft_lstsize(ms->pids) > 0)
 		ft_lstclear(&ms->pids, free);
 	ft_free_ptr((void **)&ms->prompt_str);
-	//ft_free_ptr((void **)&(ms->fd_pipes));
 }
 
 void	ft_free_path(t_ms *ms)

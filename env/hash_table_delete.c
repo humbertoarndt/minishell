@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 22:42:37 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/11/01 21:29:49 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/01/16 21:45:18 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_delete_hash_item_by_key(t_hash_table *hash_table, char *key)
 	count_items = ft_count_items_in_bucket(found_hash_item);
 	while (found_hash_item)
 	{
-		if (found_hash_item 
+		if (found_hash_item
 			&& ft_strncmp(found_hash_item->key, key, ft_strlen(key)) == 0)
 			break ;
 		found_hash_item = found_hash_item->next;

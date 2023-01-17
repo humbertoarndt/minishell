@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 18:32:05 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/12/17 16:57:31 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/01/16 21:51:14 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,11 @@ void	print_custom_arg_error2(char *argv[2], char *message)
 	dup2(fd_std_out, STDOUT_FILENO);
 	ft_free_ptr((void **)&(concat_minishell_with_arg));
 	close(fd_std_out);
+}
+
+void	ft_set_syntax_error_and_exit_code(t_ms *ms, t_error_type error_type,
+			int exit_code)
+{
+	ms->invalid_program = error_type;
+	ms->exit_code = exit_code;
 }

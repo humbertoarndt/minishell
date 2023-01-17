@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harndt <harndt@student.42sp.org.br>        +#+  +:+       +#+        */
+/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 19:22:26 by harndt            #+#    #+#             */
-/*   Updated: 2022/12/17 16:18:29 by harndt           ###   ########.fr       */
+/*   Updated: 2023/01/16 21:49:59 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	kill_child(t_ms *ms, t_bool is_child, int exit_code)
 {
 	if (is_child)
 	{
+		ms->exit_code = exit_code;
 		ft_free_all_ms(ms, TRUE);
 		exit (exit_code);
 	}
@@ -59,4 +60,3 @@ t_bool	check_llong(char *str)
 		return (FALSE);
 	return (TRUE);
 }
-
