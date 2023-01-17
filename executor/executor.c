@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:20:01 by bbonaldi          #+#    #+#             */
-/*   Updated: 2023/01/16 23:18:24 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2023/01/16 23:31:03 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	ft_exec_cmds(t_ms *ms, t_executor *exec_tree)
 	if (!exec_tree)
 		return ;
 	ft_build_cmds(exec_tree->cmds, ms->env.path);
-	if (ms->should_pipe == FALSE && is_builtin(ms, exec_tree, FALSE))
+	if ((ms->should_pipe == FALSE && is_builtin(ms, exec_tree, FALSE))
+		|| !exec_tree->cmds->argv[0])
 		return ;
 	ft_init_pipes(ms);
 	pid = (pid_t *)malloc(sizeof(pid_t));
