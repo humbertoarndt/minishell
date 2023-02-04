@@ -3,7 +3,9 @@
 This is project ask us to code our own shell. A program capable of parsing a prompt and launching executables with arguments, along with a few built-in function.
 
 <div align="center>
+
 ![Exibição do projeto](https://github.com/42sp/42labs-selection-process-v4-humbertoarndt/blob/master/imgs/minishell.gif)  
+
 </div>
 
 ## How to use it
