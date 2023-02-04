@@ -4,7 +4,7 @@ This is project ask us to code our own shell. A program capable of parsing a pro
 
 <div align="center>
 
-![Exibição do projeto](https://github.com/humbertoarndt/minishell/blob/master/imgs/minishell.gif)  
+![Exibição do projeto](https://github.com/humbertoarndt/minishell/tree/master/imgs/minishell.gif)  
 
 </div>
 
