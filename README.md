@@ -1,6 +1,6 @@
 # minishell
 
-This is project ask us to code our own shell. A program capable of parsing a prompt and launching executables with arguments, along with a few built-in function.
+This is project ask us to code our own shell. A program capable of parsing a prompt and launching executables with arguments, along with a few built-in function.  
 
 <div align="center">
 
