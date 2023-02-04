@@ -2,7 +2,7 @@
 
 This is project ask us to code our own shell. A program capable of parsing a prompt and launching executables with arguments, along with a few built-in function.
 
-<div align="center>
+<div align="center">
 
 ![Exibição do projeto](https://github.com/humbertoarndt/minishell/tree/master/imgs/minishell.gif)  
 
